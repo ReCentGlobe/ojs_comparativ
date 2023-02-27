@@ -1,0 +1,179 @@
+@import "common/variables";
+@import "~bulma/bulma.sass";
+@import "~bulma-extensions/extensions.sass";
+@import "~bulma-extensions/bulma-pricingtable/pricing-table.sass";
+@import "~bulma-extensions/bulma-divider/divider.sass";
+@import "~bulma-extensions/bulma-quickview/quickview.sass";
+@import "~font-awesome/scss/font-awesome.scss";
+
+@font-face {
+  font-family: 'Gidole';
+  src: url('../fonts/subset-Gidole-Regular.eot');
+  src:
+          url('../fonts/subset-Gidole-Regular.eot?#iefix') format('embedded-opentype'),
+          url('../fonts/subset-Gidole-Regular.woff') format('woff'),
+          url('../fonts/subset-Gidole-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*
+body {
+  font-family: "Gidole", BlinkMacSystemFont, -apple-system, "Segoe UI", "Ubuntu", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+*/
+
+.com-accessibility {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #052d49;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+
+  & ul {
+    display: inherit;
+  }
+}
+
+/**
+WELCOME
+ */
+
+.welcome-content {
+//  margin-left: auto;
+  margin-right: auto;
+  max-width: 640px;
+}
+
+.additionalcontent {
+  padding: 75px 0 75px 0 !important;
+  margin: 0 auto;
+
+  & p {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    text-align: left;
+  }
+}
+
+.announcement {
+  & .summary {
+    padding: 0 0 10px 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .welcome-content {
+    max-width: 440px;
+  }
+
+  .additionalcontent {
+    & p {
+      text-align: justify;
+    }
+  }
+}
+
+/**
+REGSITRATION
+ */
+
+form {
+  &.registration, &.login, &.lost_password, &.purchase_subscription {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 500px;
+  }
+}
+
+/**
+ISSUE OVERVIEW
+ */
+
+.issue_details {
+  border-left: 1px solid #ddd;
+
+  & .issue {
+    padding: 20px;
+    word-wrap: break-word;
+
+    & .label {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.54);
+    }
+  }
+}
+
+.toc_section {
+  & h5,
+  .pagenumber {
+    color: rgba(0,0,0,0.54);
+  }
+
+  &:not(:first-child) {
+    margin-top: 5rem;
+  }
+}
+
+/**
+SEARCH BAR
+ */
+
+.search-button {
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+.search-holder {
+  opacity: 0;
+  background: #fff;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 0px;
+  height: 100%;
+  overflow: hidden;
+  z-index: 100;
+  background: #FFF;
+  -webkit-transition: all 0.2s ease-in-out, left 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out, left 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out, left 0.2s ease-in-out, opacity 0.2s ease-in-out;
+
+  &.active {
+    width: 100%;
+    opacity: 1;
+  }
+
+  & form {
+    width: 100%;
+  }
+
+  & .search-input {
+    padding: 0px 50px 0 50px;
+    width: 100%;
+    border: none;
+    font-size: 22px;
+    line-height: 28px;
+    outline: none;
+    background: transparent;
+  }
+
+  & .close {
+    position: absolute;
+    width: 30px;
+    top: 33%;
+    right: 50px;
+    cursor: pointer;
+  }
+}

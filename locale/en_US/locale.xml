@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE locale SYSTEM "../../../../../lib/pkp/dtd/locale.dtd">
+
+<locale name="en_US" full_name="U.S. English">
+	<message key="plugins.themes.comparativ.name">Comparativ (comparativ child theme)</message>
+	<message key="plugins.themes.comparativ.description">Comparativ Theme</message>
+	<message key="plugins.themes.comparativ.option.typography.montserrat_notoSerif">Montserrat/Noto Serif</message>
+	<message key="plugins.themes.comparativ.option.accentColour.label">Accent Colour</message>
+	<message key="plugins.themes.comparativ.accessible_menu.label">Quick jump to page content</message>
+	<message key="plugins.themes.comparativ.accessible_menu.main_navigation">Main Navigation</message>
+	<message key="plugins.themes.comparativ.accessible_menu.main_content">Main Content</message>
+	<message key="plugins.themes.comparativ.accessible_menu.sidebar">Sidebar</message>
+	<message key="plugins.themes.comparativ.article.sidebar">Article Sidebar</message>
+	<message key="plugins.themes.comparativ.article.main">Main Article Content</message>
+	<message key="plugins.themes.comparativ.article.details">Article Details</message>
+</locale>

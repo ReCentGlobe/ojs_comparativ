@@ -1,0 +1,26 @@
+$fa-font-path: "~font-awesome/fonts";
+
+/** Colors */
+$primary: rgb(22, 51, 90);
+$navbar-background-color: rgb(197, 200, 214);
+$link: rgb(133, 44, 60);
+//$breadcrumb-item-color: #fff;
+//$breadcrumb-item-separator-color: #fff;
+//$breadcrumb-item-active-color: hsl(0, 0, 96%);
+$menu-item-active-background-color: $primary;
+
+/* Typography */
+$family-primary: 'Gidole', sans-serif;
+$title-size: 2.25rem;
+
+/*
+$info: $cyan;
+$success: $green;
+$warning: $yellow;
+$danger: $red;
+$dark: $grey-darker;
+$text: $grey-dark;
+*/
+
+/** Box Model  */
+$spacer:                2rem;
