@@ -41,5 +41,6 @@
     "watch-poll": "mix watch -- --watch-options-poll=1000",
     "hot": "mix watch --hot",
     "production": "mix --production"
-  }
+  },
+  "version": "1.0.0"
 }
