@@ -1,9 +1,8 @@
 @import "common/variables";
 @import "~bulma/bulma.sass";
-@import "~bulma-extensions/extensions.sass";
-@import "~bulma-extensions/bulma-pricingtable/pricing-table.sass";
-@import "~bulma-extensions/bulma-divider/divider.sass";
-@import "~bulma-extensions/bulma-quickview/quickview.sass";
+@import "~bulma-pricingtable";
+@import "~@creativebulma/bulma-divider";
+@import "~bulma-quickview";
 @import "~font-awesome/scss/font-awesome.scss";
 
 @font-face {

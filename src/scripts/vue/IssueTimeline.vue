@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import Vue from 'vue'
+    import Vue from '@vue/compat'
     import axios from 'axios'
     import GetPostsByYear from './GetPostsByYear.vue'
 

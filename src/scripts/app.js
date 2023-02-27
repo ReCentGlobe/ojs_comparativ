@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from '@vue/compat'
 import 'stickUp';
 import IssueTimeline from './vue//IssueTimeline.vue'
 window._ = require('underscore');
