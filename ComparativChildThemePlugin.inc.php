@@ -14,7 +14,7 @@ class ComparativChildThemePlugin extends ThemePlugin {
         // Initialize the parent theme
         $this->setParent('defaultthemeplugin');
 
-        $this->addStyle('comparativ','dist/styles/main.css' );
+        $this->addStyle('comparativ','dist/styles/app.bundle.css' );
 
         // Remove Default Scripts
         $this->removeScript('popper', 'js/lib/popper/popper.js');
@@ -25,11 +25,9 @@ class ComparativChildThemePlugin extends ThemePlugin {
         // Add Polyfills
 
         // Load Vendor
-        $this->addScript('Manifest', 'dist/scripts/manifest.js');
-        // Load Vendor
-        $this->addScript('Vendor', 'dist/scripts/vendor.js');
+        $this->addScript('Vendor', 'dist/scripts/vendor.bundle.js');
         // Load App
-        $this->addScript('App', 'dist/scripts/app.js');
+        $this->addScript('App', 'dist/scripts/app.bundle.js');
 
         // Add navigation menu areas for this theme
         $this->addMenuArea(array('primary', 'user', 'footer'));

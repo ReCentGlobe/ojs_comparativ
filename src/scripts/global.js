@@ -1,5 +1,5 @@
 export function searchToggle() {
-    var searchHolder = $('.search-holder');
+    const searchHolder = $('.search-holder');
 
     if(searchHolder.hasClass('active')){
         searchHolder.removeClass('active');
