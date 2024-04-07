@@ -83,7 +83,7 @@ devDependencies:
     specifier: ^12.6.0
     version: 12.6.0(sass@1.71.1)(webpack@5.91.0)
   vite:
-    specifier: ^4.5.3
+    specifier: ^4.4.11
     version: 4.5.3(sass@1.71.1)
   vue-loader:
     specifier: ^16.8.3
@@ -1819,10 +1819,6 @@ packages:
     resolution: {integrity: sha512-RcyM00BFTQQ5oFv88APJu4VFnm6xwtLEUiy2Z+lM8lay2NVwVAFetr1Koop1DNnwX+ZGKUgU4v8eZS8MsBEttg==}
     dependencies:
       '@types/node': 20.8.5
-    dev: true
-
-  /@types/json-schema@7.0.13:
-    resolution: {integrity: sha512-RbSSoHliUbnXj3ny0CNFOoxrIDV6SUGyStHsvDqosw6CkdPV8TtWGlfecuK4ToyMEAql6pzNxgCFKanovUzlgQ==}
     dev: true
 
   /@types/json-schema@7.0.15:
@@ -5444,7 +5440,7 @@ packages:
     resolution: {integrity: sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==}
     engines: {node: '>= 8.9.0'}
     dependencies:
-      '@types/json-schema': 7.0.13
+      '@types/json-schema': 7.0.15
       ajv: 6.12.6
       ajv-keywords: 3.5.2(ajv@6.12.6)
     dev: true
@@ -5453,7 +5449,7 @@ packages:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/json-schema': 7.0.13
+      '@types/json-schema': 7.0.15
       ajv: 6.12.6
       ajv-keywords: 3.5.2(ajv@6.12.6)
     dev: true
@@ -5462,7 +5458,7 @@ packages:
     resolution: {integrity: sha512-L0jRsrPpjdckP3oPug3/VxNKt2trR8TcabrM6FOAAlvC/9Phcmm+cuAgTlxBqdBR1WJx7Naj9WHw+aOmheSVbw==}
     engines: {node: '>= 12.13.0'}
     dependencies:
-      '@types/json-schema': 7.0.13
+      '@types/json-schema': 7.0.15
       ajv: 8.12.0
       ajv-formats: 2.1.1(ajv@8.12.0)
       ajv-keywords: 5.1.0(ajv@8.12.0)
@@ -6217,8 +6213,8 @@ packages:
       webpack-merge: 5.10.0
     dev: true
 
-  /webpack-dev-middleware@5.3.3(webpack@5.91.0):
-    resolution: {integrity: sha512-hj5CYrY0bZLB+eTO+x/j67Pkrquiy7kWepMHmUMoPsmcUaeEnQJqFzHJOyxgWlq746/wUuA64p9ta34Kyb01pA==}
+  /webpack-dev-middleware@5.3.4(webpack@5.91.0):
+    resolution: {integrity: sha512-BVdTqhhs+0IfoeAf7EoH5WE+exCmqGerHfDM0IL096Px60Tq2Mn9MAbnaGUe6HiMa41KMCYF19gyzZmBcq/o4Q==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
@@ -6274,7 +6270,7 @@ packages:
       spdy: 4.0.2
       webpack: 5.91.0(webpack-cli@4.10.0)
       webpack-cli: 4.10.0(webpack@5.91.0)
-      webpack-dev-middleware: 5.3.3(webpack@5.91.0)
+      webpack-dev-middleware: 5.3.4(webpack@5.91.0)
       ws: 8.14.2
     transitivePeerDependencies:
       - bufferutil
