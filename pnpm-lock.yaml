@@ -15,8 +15,8 @@ importers:
         specifier: 5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
       bulma:
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^1.0.0
+        version: 1.0.2
       bulma-pricingtable:
         specifier: ^0.2.0
         version: 0.2.0
@@ -79,7 +79,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
       sass:
-        specifier: ^1.80.3
+        specifier: ^1.69.3
         version: 1.80.3
       sass-loader:
         specifier: ^12.6.0
@@ -1408,8 +1408,8 @@ packages:
   bulma-quickview@2.0.0:
     resolution: {integrity: sha512-EJq9XYcJ+pG94FIYgw9AI2NoRDRjQX/Iua0H3iIJq4C3D+4sVOCg/Y+I7gd/G0v7fez/qvKX/S+91UZqaTmXSQ==}
 
-  bulma@0.9.4:
-    resolution: {integrity: sha512-86FlT5+1GrsgKbPLRRY7cGDg8fsJiP/jzTqXXVqiUZZ2aZT8uemEOHlU1CDU+TxklPEZ11HZNNWclRBBecP4CQ==}
+  bulma@1.0.2:
+    resolution: {integrity: sha512-D7GnDuF6seb6HkcnRMM9E739QpEY9chDzzeFrHMyEns/EXyDJuQ0XA0KxbBl/B2NTsKSoDomW61jFGFaAxhK5A==}
 
   bytes@3.0.0:
     resolution: {integrity: sha512-pMhOfFDPiv9t5jjIXkHosWmkSyQbvsgEVNkz0ERHbuLh2T/7j4Mqqpz523Fe8MVY89KC6Sh/QfS2sM+SjgFDcw==}
@@ -5183,7 +5183,7 @@ snapshots:
 
   bulma-quickview@2.0.0: {}
 
-  bulma@0.9.4: {}
+  bulma@1.0.2: {}
 
   bytes@3.0.0: {}
 
