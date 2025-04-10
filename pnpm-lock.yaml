@@ -42,8 +42,8 @@ importers:
         specifier: ^2.3.1
         version: 2.3.1
       uikit:
-        specifier: ^3.23.5
-        version: 3.23.5
+        specifier: ^3.23.6
+        version: 3.23.6
       underscore:
         specifier: ^1.13.6
         version: 1.13.7
@@ -85,8 +85,8 @@ importers:
         specifier: ^12.6.0
         version: 12.6.0(sass@1.86.3)(webpack@5.91.0)
       vite:
-        specifier: ^4.4.11
-        version: 4.5.12(@types/node@20.8.5)(sass@1.86.3)(terser@5.39.0)
+        specifier: ^4.5.13
+        version: 4.5.13(@types/node@20.8.5)(sass@1.86.3)(terser@5.39.0)
       vue-loader:
         specifier: ^16.8.3
         version: 16.8.3(@vue/compiler-sfc@3.5.13)(vue@3.5.13)(webpack@5.91.0)
@@ -1447,8 +1447,8 @@ packages:
   caniuse-lite@1.0.30001549:
     resolution: {integrity: sha512-qRp48dPYSCYaP+KurZLhDYdVE+yEyht/3NlmcJgVQ2VMGt6JL36ndQ/7rgspdZsJuxDPFIo/OzBT2+GmIJ53BA==}
 
-  caniuse-lite@1.0.30001712:
-    resolution: {integrity: sha512-MBqPpGYYdQ7/hfKiet9SCI+nmN5/hp4ZzveOJubl5DTAMa5oggjAuoi0Z4onBpKPFI2ePGnQuQIzF3VxDjDJig==}
+  caniuse-lite@1.0.30001713:
+    resolution: {integrity: sha512-wCIWIg+A4Xr7NfhTuHdX+/FKh3+Op3LBbSp2N5Pfx6T/LhdQy3GTyoTg48BReaW/MyMNZAkTadsBtai3ldWK0Q==}
 
   chalk@2.4.2:
     resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
@@ -1801,8 +1801,8 @@ packages:
   electron-to-chromium@1.4.553:
     resolution: {integrity: sha512-HiRdtyKS2+VhiXvjhMvvxiMC33FJJqTA5EB2YHgFZW6v7HkK4Q9Ahv2V7O2ZPgAjw+MyCJVMQvigj13H8t+wvA==}
 
-  electron-to-chromium@1.5.134:
-    resolution: {integrity: sha512-zSwzrLg3jNP3bwsLqWHmS5z2nIOQ5ngMnfMZOWWtXnqqQkPVyOipxK98w+1beLw1TB+EImPNcG8wVP/cLVs2Og==}
+  electron-to-chromium@1.5.136:
+    resolution: {integrity: sha512-kL4+wUTD7RSA5FHx5YwWtjDnEEkIIikFgWHR4P6fqjw1PPLlqYkxeOb++wAauAssat0YClCy8Y3C5SxgSkjibQ==}
 
   elliptic@6.5.4:
     resolution: {integrity: sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==}
@@ -3418,8 +3418,8 @@ packages:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
 
-  uikit@3.23.5:
-    resolution: {integrity: sha512-UWcUux4S/p/2ZsV5mz4ql+KSHHMuJRDaswUPnY9h5CM7f8f/ScoQ1I9mM24xwvyYOeSoiJ8mD/1FmFvpVUR8WQ==}
+  uikit@3.23.6:
+    resolution: {integrity: sha512-7VuR+q+gKo6MQK0lJMte6gtyvk22kSrLHV1rgGpB9UvVjkzpQyJb5qEMKvGpokZA3vG6czTOvD88iwTleQLmKA==}
 
   underscore@1.13.7:
     resolution: {integrity: sha512-GMXzWtsc57XAtguZgaQViUOzs0KTkk8ojr3/xAxXLITqf/3EMwxC0inyETfDFjH/Krbhuep0HNbbjI9i/q3F3g==}
@@ -3490,8 +3490,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vite@4.5.12:
-    resolution: {integrity: sha512-qrMwavANtSz91nDy3zEiUHMtL09x0mniQsSMvDkNxuCBM1W5vriJ22hEmwTth6DhLSWsZnHBT0yHFAQXt6efGA==}
+  vite@4.5.13:
+    resolution: {integrity: sha512-Hgp8IF/yZDzKsN1hQWOuQZbrKiaFsbQud+07jJ8h9m9PaHWkpvZ5u55Xw5yYjWRXwRQ4jwFlJvY7T7FUJG9MCA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -5232,8 +5232,8 @@ snapshots:
 
   browserslist@4.24.4:
     dependencies:
-      caniuse-lite: 1.0.30001712
-      electron-to-chromium: 1.5.134
+      caniuse-lite: 1.0.30001713
+      electron-to-chromium: 1.5.136
       node-releases: 2.0.19
       update-browserslist-db: 1.1.3(browserslist@4.24.4)
 
@@ -5285,7 +5285,7 @@ snapshots:
 
   caniuse-lite@1.0.30001549: {}
 
-  caniuse-lite@1.0.30001712: {}
+  caniuse-lite@1.0.30001713: {}
 
   chalk@2.4.2:
     dependencies:
@@ -5683,7 +5683,7 @@ snapshots:
 
   electron-to-chromium@1.4.553: {}
 
-  electron-to-chromium@1.5.134: {}
+  electron-to-chromium@1.5.136: {}
 
   elliptic@6.5.4:
     dependencies:
@@ -7354,7 +7354,7 @@ snapshots:
       media-typer: 0.3.0
       mime-types: 2.1.35
 
-  uikit@3.23.5: {}
+  uikit@3.23.6: {}
 
   underscore@1.13.7: {}
 
@@ -7379,7 +7379,7 @@ snapshots:
     dependencies:
       browserslist: 4.22.1
       escalade: 3.1.1
-      picocolors: 1.1.1
+      picocolors: 1.0.0
 
   update-browserslist-db@1.1.3(browserslist@4.24.4):
     dependencies:
@@ -7412,7 +7412,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite@4.5.12(@types/node@20.8.5)(sass@1.86.3)(terser@5.39.0):
+  vite@4.5.13(@types/node@20.8.5)(sass@1.86.3)(terser@5.39.0):
     dependencies:
       esbuild: 0.18.20
       postcss: 8.5.3
