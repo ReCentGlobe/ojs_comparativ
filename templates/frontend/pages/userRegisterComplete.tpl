@@ -9,38 +9,26 @@
  *}
 {include file="frontend/components/header.tpl"}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-
-	<div class="uk-container">
-		{* Display a message if no current issue exists *}
+<section class="bg-primary py-8">
+	<div class="container mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$pageTitle}
-
-		<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
-			Registration complete
-		</h1>
-
+		<h1 class="text-2xl font-bold text-white mt-0">Registration complete</h1>
 	</div>
-
 </section>
 
-<section class="uk-section-default uk-section uk-section-medium" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:200&#125">
-	<div class="uk-container">
-	<div uk-alert class="uk-alert-success">
-		{translate key="user.login.registrationComplete.instructions"}
-	</div>
-		<div class="uk-margin uk-flex uk-flex-center" uk-grid>
-			<div class="uk-width-1-2">
-				<a class="uk-button uk-button-default" href="{url router=$smarty.const.ROUTE_PAGE page="user" op="profile"}">
-					{translate key="user.editMyProfile"}
-				</a>
-			</div>
-			<div class="uk-width-1-2">
-				<a class="uk-button uk-button-default" href="{url page="index"}">
-					{translate key="user.login.registrationComplete.continueBrowsing"}
-				</a>
-			</div>
+<section class="bg-white py-12">
+	<div class="container mx-auto">
+		<div class="w-full max-w-xl mx-auto bg-green-50 border-l-4 border-green-500 text-green-900 p-6 mb-8 rounded">
+			{translate key="user.login.registrationComplete.instructions"}
 		</div>
-
+		<div class="flex gap-4 justify-center">
+			<a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition w-1/2 text-center" href="{url router=$smarty.const.ROUTE_PAGE page="user" op="profile"}">
+				{translate key="user.editMyProfile"}
+			</a>
+			<a class="inline-block px-4 py-2 border border-gray-400 text-gray-700 rounded hover:bg-gray-200 transition w-1/2 text-center" href="{url page="index"}">
+				{translate key="user.login.registrationComplete.continueBrowsing"}
+			</a>
+		</div>
 	</div>
 </section>
 

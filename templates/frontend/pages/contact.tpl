@@ -20,106 +20,71 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="about.contact"}
 
-<section class="uk-section-primary uk-section uk-section-small">
-	<div class="uk-container animated fadeIn">
+<section class="bg-primary py-8">
+	<div class="container mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.contact"}
-		<h1 class="uk-h2 uk-margin-remove-top">
-			Contact
-		</h1>
+		<h1 class="text-2xl font-bold text-white mt-0">Contact</h1>
 	</div>
 </section>
 
-<section class="uk-section-default uk-section uk-section-medium">
-	<div class="uk-container">
-		<div uk-grid>
-				<div class="uk-width-1-1">
+<section class="bg-white py-12">
+	<div class="container mx-auto">
+		<div class="grid md:grid-cols-3 gap-8">
+			<div class="md:col-span-3 mb-4">
 				{include file="frontend/components/editLink.tpl" page="management" op="settings" path="context" anchor="contact" sectionTitleKey="about.contact"}
+			</div>
+
+			{if $mailingAddress}
+				<div class="contact-address">
+					<h3 class="text-lg font-bold mb-2">Editorial Office</h3>
+					<p class="text-gray-700">{$mailingAddress|nl2br|strip_unsafe_html}</p>
 				</div>
+			{/if}
 
-					{if $mailingAddress}
-						<div class="contact-address uk-width-1-3@s uk-width-1-1">
-							<h3>
-								Editorial Office
-							</h3>
-							<p>{$mailingAddress|nl2br|strip_unsafe_html}</p>
-							<br>
+			{* Primary contact *}
+			{if $contactTitle || $contactName || $contactAffiliation || $contactPhone || $contactEmail}
+				<div class="contact">
+					<h3 class="text-lg font-bold mb-2">{translate key="about.contact.principalContact"}</h3>
+					{if $contactName}
+						<div class="name font-semibold">{$contactTitle|escape} {$contactName|escape}</div>
+					{/if}
+					{if $contactAffiliation}
+						<div class="affiliation text-sm text-gray-700">{$contactAffiliation|strip_unsafe_html}</div>
+					{/if}
+					{if $contactPhone}
+						<div class="phone flex items-center gap-2">
+							<span class="label font-medium">{translate key="about.contact.phone"}</span>
+							<span class="value">{$contactPhone|escape}</span>
 						</div>
 					{/if}
-
-					{* Primary contact *}
-					{if $contactTitle || $contactName || $contactAffiliation || $contactPhone || $contactEmail}
-						<div class="contact uk-width-1-3@s uk-width-1-1">
-							<h3>
-								{translate key="about.contact.principalContact"}
-							</h3>
-
-							{if $contactName}
-								<div class="name">
-									{$contactTitle|escape} {$contactName|escape}
-								</div>
-							{/if}
-
-							{if $contactAffiliation}
-								<div class="affiliation">
-									{$contactAffiliation|strip_unsafe_html}
-								</div>
-							{/if}
-
-							{if $contactPhone}
-								<div class="phone">
-					<span class="label">
-						{translate key="about.contact.phone"}
-					</span>
-									<span class="value">
-						{$contactPhone|escape}
-					</span>
-								</div>
-							{/if}
-
-							{if $contactEmail}
-								<div class="email">
-									<a href="mailto:{$contactEmail|escape}">
-										{$contactEmail|escape}
-									</a>
-								</div>
-							{/if}
+					{if $contactEmail}
+						<div class="email">
+							<a href="mailto:{$contactEmail|escape}" class="text-primary hover:underline">{$contactEmail|escape}</a>
 						</div>
 					{/if}
+				</div>
+			{/if}
 
-					{* Technical contact *}
-					{if $supportName || $supportPhone || $supportEmail}
-						<div class="contact uk-width-1-3@s uk-width-1-1">
-							<h3>
-								{translate key="about.contact.supportContact"}
-							</h3>
-
-							{if $supportName}
-								<div class="name">
-									{$supportName|escape}
-								</div>
-							{/if}
-
-							{if $supportPhone}
-								<div class="phone">
-					<span class="label">
-						{translate key="about.contact.phone"}
-					</span>
-									<span class="value">
-						{$supportPhone|escape}
-					</span>
-								</div>
-							{/if}
-
-							{if $supportEmail}
-								<div class="email">
-									<a href="mailto:{$supportEmail|escape}">
-										{$supportEmail|escape}
-									</a>
-								</div>
-							{/if}
+			{* Technical contact *}
+			{if $supportName || $supportPhone || $supportEmail}
+				<div class="contact">
+					<h3 class="text-lg font-bold mb-2">{translate key="about.contact.supportContact"}</h3>
+					{if $supportName}
+						<div class="name font-semibold">{$supportName|escape}</div>
+					{/if}
+					{if $supportPhone}
+						<div class="phone flex items-center gap-2">
+							<span class="label font-medium">{translate key="about.contact.phone"}</span>
+							<span class="value">{$supportPhone|escape}</span>
 						</div>
 					{/if}
-
+					{if $supportEmail}
+						<div class="email">
+							<a href="mailto:{$supportEmail|escape}" class="text-primary hover:underline">{$supportEmail|escape}</a>
+						</div>
+					{/if}
+				</div>
+			{/if}
 		</div>
 	</div>
 </section><!-- .page -->

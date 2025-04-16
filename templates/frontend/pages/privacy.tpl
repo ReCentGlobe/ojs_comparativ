@@ -11,24 +11,22 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="manager.setup.privacyStatement"}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-
-  <div class="uk-container">
+<section class="bg-primary py-8">
+  <div class="container mx-auto">
     {* Display a message if no current issue exists *}
     {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="manager.setup.privacyStatement"}
 
-    <h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
+    <h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
       Privacy Policy
     </h1>
 
   </div>
-
 </section>
 
-<section class="uk-section-default uk-section uk-section-medium">
-  <div class="uk-container">
-    <div uk-grid>
-      <div class="uk-width-1-1">
+<section class="bg-white py-12">
+  <div class="container mx-auto">
+    <div>
+      <div class="text-gray-700">
         {$currentContext->getLocalizedSetting('privacyStatement')}
       </div>
     </div>

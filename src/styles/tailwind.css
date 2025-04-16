@@ -1,0 +1,7 @@
+@import "tailwindcss" source("../../templates/");
+
+@theme {
+  --color-primary: oklch(0.32 0.0825 255.96);
+  --color-secondary: oklch(0.83 0.02 270);
+  --color-accent: oklch(0.43 0.1219 13.19);
+}

@@ -21,25 +21,25 @@
 			{/if}
 
       	{if empty($navigationMenuItemAssignment->children)}
-					<li class="{$liClass|escape}">
-						<a href="{$navigationMenuItemAssignment->navigationMenuItem->getUrl()}">
-													{$navigationMenuItemAssignment->navigationMenuItem->getLocalizedTitle()}
+					<li class="{$liClass|escape} px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">
+						<a href="{$navigationMenuItemAssignment->navigationMenuItem->getUrl()}" class="block text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-accent">
+							{$navigationMenuItemAssignment->navigationMenuItem->getLocalizedTitle()}
 						</a>
 					</li>
 				{/if}
 
 
 				{if !empty($navigationMenuItemAssignment->children)}
-					<li class="uk-nav-parent {$liClass|escape}">
-						<a href="{$navigationMenuItemAssignment->navigationMenuItem->getUrl()}">
+					<li class="group relative {$liClass|escape} px-4 py-2">
+						<a href="{$navigationMenuItemAssignment->navigationMenuItem->getUrl()}" class="block text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-accent">
 							{$navigationMenuItemAssignment->navigationMenuItem->getLocalizedTitle()}
 						</a>
-						<div class="uk-navbar-dropdown uk-navbar-dropdown-dropbar">
-							<ul class="uk-nav uk-navbar-dropdown-nav">
+						<div class="absolute left-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50 pointer-events-none">
+							<ul class="py-2">
 								{foreach key=childField item=childNavigationMenuItemAssignment from=$navigationMenuItemAssignment->children}
 									{if $childNavigationMenuItemAssignment->navigationMenuItem->getIsDisplayed()}
 											<li>
-												<a href="{$childNavigationMenuItemAssignment->navigationMenuItem->getUrl()}">
+												<a href="{$childNavigationMenuItemAssignment->navigationMenuItem->getUrl()}" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-accent">
 													{$childNavigationMenuItemAssignment->navigationMenuItem->getLocalizedTitle()}
 												</a>
 											</li>

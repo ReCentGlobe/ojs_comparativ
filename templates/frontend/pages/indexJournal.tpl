@@ -1,8 +1,8 @@
 {**
  * templates/frontend/pages/indexJournal.tpl
  *
- * Copyright (c) 2014-2017 Simon Fraser University
- * Copyright (c) 2003-2017 John Willinsky
+ * Copyright (c) 2014-2020 Simon Fraser University
+ * Copyright (c) 2003-2020 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @brief Display the index page for a journal
@@ -15,199 +15,116 @@
  * @uses $numAnnouncementsHomepage int Number of announcements to display on the
  *       homepage
  * @uses $issue Issue Current issue
+ * @uses $issueIdentificationString string issue identification that relies on user's settings
  *}
+
 {include file="frontend/components/header.tpl" pageTitleTranslated=$currentJournal->getLocalizedName()}
 
-<section class="uk-section-primary uk-position-relative uk-light">
-	<!-- Hero head: will stick at the top -->
+<main class="max-w-7xl mx-auto px-4 py-8" id="main">
+	{if $journalDescription or $announcements}
+	<header class="flex flex-col md:flex-row gap-8">
+		{if $homepageImage}
+		<figure class="w-full md:w-1/2 rounded overflow-hidden" style="background-color: {$baseColour};">
+			<img src="{$publicFilesDir}/{$homepageImage.uploadName|escape:'url'}"{if $homepageImage.altText} alt="{$homepageImage.altText|escape}"{/if}
+				class="w-full object-cover mix-blend-luminosity"
+			/>
+			<hr class="my-4 border-t border-gray-300"/>
+		</figure>
+		{/if}
+		{if $journalDescription}
+			<div class="w-full md:w-1/2">
+				<section class="journal-desc">
+					<h2 class="text-lg font-semibold text-gray-700">{$displayPageHeaderTitle|escape}</h2>
+					<article>
+						<h3 class="text-base font-bold mb-2">{translate key="about.aboutContext"}</h3>
+						{$journalDescription|strip_unsafe_html|truncate:450}
+						<p class="mt-4">
+							{capture assign="aboutPageUrl"}{url router=$smarty.const.ROUTE_PAGE page="about"}{/capture}
+							<a href="{$aboutPageUrl}" class="inline-block px-4 py-2 bg-primary text-white rounded hover:bg-accent transition">{translate key="plugins.themes.pragma.more-info"}</a>
+						</p>
+					</article>
+				</section>
+			</div>
+		{/if}
 
-
-	<!-- Hero content: will be in the middle -->
-	<div uk-height-viewport="offset-top: true; offset-bottom: true" class="uk-section uk-section-small uk-flex uk-flex-middle uk-text-center" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:300&#125">
-		<div class="uk-width-1-1">
-
-			<div class="uk-container">
-				<p uk-scrollspy-class>
-					<img width="500" uk-svg class="uk-preserve uk-preserve uk-responsive-width uk-responsive-height" src="{$baseUrl}/plugins/themes/comparativ/dist/images/Comparativ.svg">
-				</p>
-				<p class="uk-margin-medium uk-text-lead" uk-scrollspy-class>
-					{$additionalHomeContent|strip_tags}
-				</p>
-				<div uk-grid="" class="uk-child-width-auto uk-grid-medium uk-flex-inline uk-flex-center uk-grid" uk-scrollspy-class>
-					<div class="uk-first-column">
-						<a href="/v2/about/subscriptions" class="uk-button uk-button-primary tm-button-primary uk-button-large tm-button-large uk-visible@s" >Subscribe</a>
-						<a href="/v2/about/subscriptions" class="uk-button uk-button-primary tm-button-primary uk-hidden@s">Subscribe</a>
-					</div>
-					<div>
-						<a href="/v2/about/submissions" class="uk-button uk-button-default tm-button-default uk-button-large tm-button-large uk-visible@s">Submit</a>
-						<a href="/v2/about/submissions" class="uk-button uk-button-default tm-button-default uk-hidden@s">Submit</a>
-					</div>
+		{if $numAnnouncementsHomepage && $announcements|@count}
+		<div class="w-full md:w-1/2">
+			<aside class="bg-gray-100 p-4 rounded shadow announcement__content_boxed">
+				<h2 class="text-lg font-semibold mb-4">{translate key="announcement.announcements"}</h2>
+				<div class="space-y-6">
+					{foreach name=announcements from=$announcements item=announcement}
+						{if $smarty.foreach.announcements.iteration > $numAnnouncementsHomepage}
+							{break}
+						{/if}
+						<article class="{if $announcement@first}block{else}hidden{/if} announcement-item">
+							<h3 class="font-bold text-base mb-1">{$announcement->getLocalizedData('title')|escape}</h3>
+							<p class="text-xs text-gray-500 mb-2">{$announcement->datePosted|date_format:$dateFormatLong}</p>
+							<p>{$announcement->getLocalizedData('descriptionShort')|strip_unsafe_html}</p>
+							<p class="mt-2">
+								{capture assign="announcementPageUrl"}{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->id}{/capture}
+								<a href="{$announcementPageUrl}" class="inline-block px-3 py-1 bg-primary text-white rounded hover:bg-accent transition">{translate key="common.more"}</a>
+							</p>
+						</article>
+					{/foreach}
 				</div>
-
-				<a href="#issue" class="uk-position-bottom-right uk-padding" uk-scroll uk-icon="icon:chevron-down; ratio: 2;"></a>
-			</div>
-
-		</div>
-	</div>
-</section>
-<section id="issue" class="uk-background-secondary uk-section uk-section-large uk-dark" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:300&#125">
-	<div class="uk-container">
-		<div class="uk-flex-middle uk-grid-margin" uk-grid uk-scrollspy-class>
-			<div class="uk-width-2-3@s">
-				<h2 class="uk-h3 uk-heading-bullet uk-animation-fade" uk-scrollspy>
-					Recent Issue
-				</h2>
-			</div>
-			<div class="uk-width-expand@s">
-				<div class="uk-margin uk-text-right@s uk-animation-fade" uk-scrollspy>
-					<a class="el-content uk-button uk-button-text" href="/v2/issue/archive">
-						Show all issues
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="uk-grid-large uk-flex-middle uk-grid-margin-large uk-grid">
-			<div class="uk-width-1-3@m uk-grid-margin">
-				<div class="uk-margin">
-					{assign var=issueCover value=$issue->getLocalizedCoverImageUrl()}
-					{if $issueCover}
-						<a href="{url op="view" page="issue" path=$issue->getBestIssueId()}" uk-scrollspy-class>
-							<img class="uk-box-shadow-large uk-responsive-width uk-responsive-height" uk-img data-src="{$issueCover|escape}"{if $issue->getLocalizedCoverImageAltText() != ''} alt="{$issue->getLocalizedCoverImageAltText()|escape}"{/if}>
+				{if $numAnnouncementsHomepage > 1 && $announcements|@count > 1}
+					<div class="flex justify-end gap-2 mt-4">
+						<a href="#announcementsCarouselControls" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300" role="button" data-bs-slide="prev">
+							<span aria-hidden="true">←</span>
+							<span class="sr-only">{translate key="help.next"}</span>
 						</a>
-					{/if}
-				</div>
-			</div>
-			<div class="uk-width-expand@m uk-grid-margin">
-				<h2 class="uk-margin-remove-top uk-h2" uk-scrollspy-class="uk-animation-slide-right-medium">
-					{$issue->getIssueIdentification()|strip_unsafe_html}
-				</h2>
-
-				<div class="uk-margin-medium uk-margin-remove-top" uk-scrollspy-class="uk-animation-slide-right-medium">
+						<a href="#announcementsCarouselControls" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300" role="button" data-bs-slide="next">
+							<span aria-hidden="true">→</span>
+							<span class="sr-only">{translate key="help.previous"}</span>
+						</a>
 					</div>
-
-				<ul class="uk-list" uk-scrollspy-class="uk-animation-slide-right-medium">
-					<li class="el-item">
-						<div uk-grid="" class="uk-child-width-expand uk-grid-small uk-grid">
-							<div class="uk-text-break uk-width-small uk-first-column">
-								<h3 class="el-title uk-h5 uk-margin-remove">Number</h3>
-							</div>
-							<div>
-								<div class="el-content">
-									{$issue->getNumber()|strip_unsafe_html}
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="el-item">
-						<div uk-grid="" class="uk-child-width-expand uk-grid-small uk-grid">
-							<div class="uk-text-break uk-width-small uk-first-column">
-								<h3 class="el-title uk-h5 uk-margin-remove">Volume</h3>
-							</div>
-							<div>
-								<div class="el-content">
-									{$issue->getVolume()|strip_unsafe_html}
-								</div>
-							</div>
-						</div>
-
-
-					</li>
-				</ul>
-				<div class="uk-margin-medium" uk-scrollspy-class="uk-animation-slide-right-medium">
-					<a class="el-content uk-button uk-button-text" href="{url op="view" page="issue" path=$issue->getBestIssueId()}">
-						Show Issue
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-{* Additional Homepage Content
-{if $additionalHomeContent}
-	<section class="hero is-light">
-		<div class="hero-body">
-			<div class="container">
-				<div class="additionalcontent">
-					<h2 class="title has-text-centered">{translate key="about.aboutContext"}</h2>
-                    {$additionalHomeContent}
-				</div>
-			</div>
-		</div>
-	</section>
-{/if}
-*}
-
-{* Announcements *}
-{if $numAnnouncementsHomepage && $announcements|@count}
-	<section class="uk-section-muted uk-section uk-section-large" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:300&#125">
-	<div class="uk-container">
-		<div class="uk-flex-middle uk-grid-margin" uk-grid>
-			<div class="uk-width-2-3@s">
-				<h2 class="uk-h3 uk-heading-bullet" uk-scrollspy-class>
-					Press
-				</h2>
-			</div>
-			<div class="uk-width-expand@s">
-				<div class="uk-margin uk-text-right@s" uk-scrollspy-class>
-					<a class="el-content uk-button uk-button-text" href="/allissues">
-						Show all press reviews
-					</a>
-				</div>
-			</div>
-		</div>
-		<div uk-grid class="uk-grid-large uk-grid-margin-large uk-grid uk-grid-match">
-
-
-				{foreach name=announcements from=$announcements item=announcement}
-				{if $smarty.foreach.announcements.iteration > $numAnnouncementsHomepage}
-					{break}
 				{/if}
-				{if $smarty.foreach.announcements.iteration <= 3}
-					{include file="frontend/objects/announcement_front.tpl" heading="h2 class='subtitle'"}
-				  {/if}
-				  {/foreach}
-
+			</aside>
 		</div>
-	</div>
-</section>
-{/if}
+		{/if}
+	</header>
+	{/if}
+	<section class="issue mt-8">
 
+		{call_hook name="Templates::Index::journal"}
 
+		{* Latest issue *}
+		{if $issue}
+			{include file="frontend/objects/issue_toc.tpl"}
+		{/if}
 
-{call_hook name="Templates::Index::journal"}
+	</section>
 
-{**
-<section class="section page_index_journal">
-<div class="container">
+	{* Recent issues *}
+	{if ($recentIssues && !empty($recentIssues))}
+		<hr class="my-8 border-t border-gray-300"/>
+		<section class="recent-issues">
+			<h3 class="text-lg font-semibold mb-4">{translate key="plugins.themes.pragma.issues.recent"}</h3>
+			<div class="flex flex-wrap -mx-2">
+				{foreach from=$recentIssues item=recentIssue}
+					<article class="w-1/2 md:w-1/4 px-2 mb-6 recent-issues__item">
+						<h4 class="font-bold text-base mb-1 recent-issues__issue-title">
+							<a href="{url page='issue' op='view' path=$recentIssue->getBestIssueId()}" class="text-primary hover:underline">{$recentIssue->getIssueIdentification()|strip_unsafe_html}</a>
+						</h4>
+						<p class="text-xs text-gray-500">{$recentIssue->getDatePublished()|date_format:$dateFormatLong}</p>
+					</article>
+				{/foreach}
+			</div>
+		</section>
+	{/if}
 
+	{* Additional Homepage Content *}
+	{if $additionalHomeContent}
+		<hr class="my-8 border-t border-gray-300"/>
+		<section class="additional-content">
+			<div class="flex">
+				<div class="w-full md:w-2/3">
+					{$additionalHomeContent|strip_unsafe_html}
+				</div>
+			</div>
+		</section>
+	{/if}
 
-
-
-{if $homepageImage}
-  <div class="homepage_image">
-    <img src="{$publicFilesDir}/{$homepageImage.uploadName|escape:"url"}" alt="{$homepageImageAltText|escape}">
-  </div>
-{/if}
-
-{if $issue}
-  <div class="current_issue">
-    <h2>
-      {translate key="journal.currentIssue"}
-    </h2>
-    <div class="current_issue_title">
-      {$issue->getIssueIdentification()|strip_unsafe_html}
-    </div>
-    {include file="frontend/objects/issue_toc.tpl"}
-    <a href="{url router=$smarty.const.ROUTE_PAGE page="issue" op="archive"}" class="read_more">
-      {translate key="journal.viewAllIssues"}
-    </a>
-  </div>
-{/if}
-
-
-	</div>
-</section><!-- .page -->
-*}
+</main>
 
 {include file="frontend/components/footer.tpl"}

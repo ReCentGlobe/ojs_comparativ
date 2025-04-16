@@ -14,19 +14,17 @@
 
 
 
-<section class="uk-section-primary uk-section uk-section-small">
-	<div class="uk-container animated fadeIn">
+<section class="bg-primary py-8">
+	<div class="container mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.aboutContext"}
-		<h1 class="uk-h2 uk-margin-remove-top">
-			About
-		</h1>
+		<h1 class="text-2xl font-bold text-white mt-0">About</h1>
 	</div>
 </section>
 
-<section class="uk-section-default uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-	<div class="uk-container">
-		<div uk-grid>
-			<div class="uk-width-1-1" uk-scrollspy-class>
+<section class="bg-white py-8">
+	<div class="container mx-auto">
+		<div class="grid">
+			<div class="col-span-1 animate-fadeIn">
 				{$currentContext->getLocalizedSetting('about')}
 				{include file="frontend/components/editLink.tpl" page="management" op="settings" path="context" anchor="masthead" sectionTitleKey="about.aboutContext"}
 			</div>

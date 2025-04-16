@@ -21,18 +21,18 @@
 
 {include file="frontend/components/header.tpl" pageTitleTranslated=$section->getLocalizedTitle()}
 
-<section class="section page page_section page_section_{$sectionPath|escape}">
-	<div class="container">
-	<h1 class="page_title">
+<section class="page page_section page_section_{$sectionPath|escape} py-8">
+	<div class="container mx-auto">
+	<h1 class="page_title text-2xl font-bold mb-4">
 		{$section->getLocalizedTitle()|escape}
 	</h1>
 
-	<div class="section_description">
+	<div class="section_description text-gray-700 mb-6">
 		{$sectionDescription}
 	</div>
 
 	{if $articles|@count}
-		<ul class="cmp_article_list">
+		<ul class="cmp_article_list space-y-6">
 			{foreach from=$articles item=article}
 				<li>
 					{* TODO remove section=null workaround. article_summary.tpl expects a specific section array. See issue_toc.tpl. *}
@@ -41,19 +41,19 @@
 			{/foreach}
 		</ul>
 	{else}
-		<p class="section_empty">
+		<p class="section_empty text-gray-500 italic">
 			{translate key="plugins.generic.browseBySection.emptySection"}
 		</p>
 	{/if}
 
 	{* TODO Refactor this to use a common pattern for all `cmp_pagination` needs *}
-	<div class="cmp_pagination">
-		{$currentlyShowingStart}-{$currentlyShowingEnd} of {$countMax}
+	<div class="cmp_pagination mt-8 flex items-center gap-4">
+		<span>{$currentlyShowingStart}-{$currentlyShowingEnd} of {$countMax}</span>
 		{if $urlPrevPage}
-			<a href="{$urlPrevPage|escape}">Prev</a>
+			<a href="{$urlPrevPage|escape}" class="text-primary hover:underline">Prev</a>
 		{/if}
 		{if $urlNextPage}
-			<a href="{$urlNextPage|escape}">Next</a>
+			<a href="{$urlNextPage|escape}" class="text-primary hover:underline">Next</a>
 		{/if}
 	</div>
 	</div>

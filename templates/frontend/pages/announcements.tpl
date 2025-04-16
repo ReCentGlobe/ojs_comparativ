@@ -11,23 +11,19 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="announcement.announcements"}
 
-<section class="hero is-primary">
-	<div class="hero-body">
-		<div class="container">
+<section class="bg-primary py-8">
+	<div class="container mx-auto">
       {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="announcement.announcements"}
-			<h1 class="title has-text-weight-light">
-				Press
-			</h1>
-		</div>
+		<h1 class="text-2xl font-light text-white mt-0">Press</h1>
 	</div>
 </section>
 
-<section class="section page page_announcements">
-	<div class="container">
+<section class="py-8 page page_announcements">
+	<div class="container mx-auto">
 
     {include file="frontend/components/editLink.tpl" page="management" op="settings" path="website" anchor="announcements" sectionTitleKey="announcement.announcements"}
 
-		<div uk-grid class="uk-grid-large uk-grid-margin-large uk-grid uk-grid-match">
+		<div class="grid gap-8 mb-12 md:grid-cols-2 lg:grid-cols-3">
 
 
 			{foreach name=announcements from=$announcements item=announcement}

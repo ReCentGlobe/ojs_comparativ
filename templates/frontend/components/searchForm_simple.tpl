@@ -10,39 +10,19 @@
  * @uses $searchQuery string Previously input search query
  *}
 {if !$currentJournal || $currentJournal->getSetting('publishingMode') != $smarty.const.PUBLISHING_MODE_NONE}
-	<div class="nav-overlay uk-navbar-item">
-		<a class="uk-navbar-toggle" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"><span class="uk-search-input">Search</span> </a>
-
-
+	<div class="nav-overlay flex items-center">
+		<a class="text-gray-700 hover:text-primary transition-colors flex items-center gap-2" href="#">
+			<span class="sr-only">Search</span>
+			<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2"/></svg>
+		</a>
 	</div>
 
-	{**
-	<form class="pkp_search navbar-item" action="{url page="search" op="search"}" method="post" role="search">
-
-		<div class="field has-addons">
-			<div class="control">
-				<input class="input" name="query" value="{$searchQuery|escape}" type="text" aria-label="{translate|escape key="common.searchQuery"}">
-			</div>
-			<div class="control">
-				<button type="submit" class="button is-info">
-          {translate key="common.search"}
-				</button>
-			</div>
-			<span class="icon is-large">
-              <i class="fa fa-2x fa-home"></i>
-            </span>
-		</div>
-*}
+	<form class="flex items-center gap-2 mt-2" action="{url page="search" op="search"}" method="post" role="search">
+		<input class="border rounded px-2 py-1 w-48" name="query" value="{$searchQuery|escape}" type="text" aria-label="{translate|escape key="common.searchQuery"}">
+		<button type="submit" class="bg-primary text-white px-3 py-1 rounded hover:bg-accent transition-colors">
+			{translate key="common.search"}
+		</button>
+	</form>
 
 		{csrf}
-{**
-		<div class="search_controls" aria-hidden="true">
-			<a href="{url page="search" op="search"}" class="headerSearchPrompt search_prompt" aria-hidden="true">
-				{translate key="common.search"}
-			</a>
-			<a href="#" class="search_cancel headerSearchCancel" aria-hidden="true"></a>
-			<span class="search_loading" aria-hidden="true"></span>
-		</div>
-	*}
-
 {/if}

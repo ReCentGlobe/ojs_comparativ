@@ -14,7 +14,7 @@
  * @uses $currentTitleKey string Translation key for title of current page.
  *}
 
-<ul class="uk-breadcrumb uk-visible@s" role="navigation" aria-label="{translate key="navigation.breadcrumbLabel"}">
+<ul class="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-300 mb-4" role="navigation" aria-label="{translate key="navigation.breadcrumbLabel"}">
 
 		<li>
 			<a href="{url page="index" router=$smarty.const.ROUTE_PAGE}">
@@ -26,7 +26,7 @@
 				{translate key="navigation.archives"}
 			</a>
 		</li>
-		<li class="is-active">
+		<li class="font-semibold text-primary">
 			<a aria-current="page" href="#">
 				{if $currentTitleKey}
 					{translate key=$currentTitleKey}

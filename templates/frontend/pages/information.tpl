@@ -12,11 +12,11 @@
 	{include file="frontend/components/header.tpl" pageTitle=$pageTitle}
 {/if}
 
-<div class="page page_information">
+<div class="page page_information max-w-3xl mx-auto py-8">
 	{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$pageTitle}
 	{include file="frontend/components/editLink.tpl" page="management" op="settings" path="website" anchor="information" sectionTitleKey="manager.website.information"}
 
-	<div class="description">
+	<div class="description text-gray-700">
 		{$content}
 	</div>
 </div>

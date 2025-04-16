@@ -9,8 +9,8 @@
  *}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$title}
 
-<h1 class="page_title">{$title|escape}</h1>
-<div class="page">
+<h1 class="page_title text-2xl font-bold mb-4">{$title|escape}</h1>
+<div class="page max-w-3xl mx-auto text-gray-700">
     {$content}
 </div>
 

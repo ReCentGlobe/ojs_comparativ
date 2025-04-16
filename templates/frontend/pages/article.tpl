@@ -1,73 +1,74 @@
 {**
  * templates/frontend/pages/article.tpl
  *
- * Copyright (c) 2014-2017 Simon Fraser University
- * Copyright (c) 2003-2017 John Willinsky
- * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ * Copyright (c) 2014-2021 Simon Fraser University
+ * Copyright (c) 2003-2021 John Willinsky
+ * Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
  *
  * @brief Display the page to view an article with all of it's details.
  *
- * @uses $article Article This article
+ * @uses $article Submission This article
+ * @uses $publication Publication The publication being displayed
+ * @uses $firstPublication Publication The first published version of this article
+ * @uses $currentPublication Publication The most recently published version of this article
  * @uses $issue Issue The issue this article is assigned to
  * @uses $section Section The journal section this article is assigned to
  * @uses $journal Journal The journal currently being viewed.
  * @uses $primaryGalleys array List of article galleys that are not supplementary or dependent
  * @uses $supplementaryGalleys array List of article galleys that are supplementary
  *}
-{include file="frontend/components/header.tpl" pageTitleTranslated=$article->getLocalizedTitle()|escape}
+{include file="frontend/components/header.tpl" pageTitleTranslated=$publication->getLocalizedFullTitle(null, 'html')|strip_unsafe_html}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
+<section class="bg-primary py-8">
 
-	<div class="uk-container">
+	<div class="container mx-auto">
 		{if $section}
 			{include file="frontend/components/breadcrumbs_article.tpl" currentTitle=$section->getLocalizedTitle()}
 		{else}
-			{include file="frontend/components/breadcrumbs_article.tpl" currentTitleKey="article.article"}
+			{include file="frontend/components/breadcrumbs_article.tpl" currentTitleKey="common.publication"}
 		{/if}
 
-		<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
-			{$article->getLocalizedTitle()|escape}
+		<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
+			{$publication->getLocalizedFullTitle(null, 'html')|strip_unsafe_html}
 		</h1>
 
-
-		{if $article->getLocalizedSubtitle()}
-			<h2 class="uk-h4 uk-margin" uk-scrollspy-class>
-				{$article->getLocalizedSubtitle()|escape}
+		{if $publication->getLocalizedData('subtitle')}
+			<h2 class="text-lg font-semibold text-white mb-4 animate-fadeIn">
+				{$publication->getLocalizedData('subtitle')|strip_unsafe_html}
 			</h2>
 		{/if}
 
-		{if $article->getAuthors()}
-			<ul class="uk-list item authors" uk-scrollspy-class>
-				{foreach from=$article->getAuthors() item=author}
-					<li class="is-inline">
-							<span class="name">
+		{if $publication->getData('authors')}
+			<ul class="flex flex-wrap gap-4 item authors animate-fadeIn">
+				{foreach from=$publication->getData('authors') item=author}
+					<li class="inline-flex items-center gap-2">
+							<span class="name font-medium">
 								{$author->getFullName()|escape}
 							</span>
 						{if $author->getLocalizedAffiliation()}
-							<span class="affiliation">
-									{$author->getLocalizedAffiliation()|escape}
-								</span>
+							<span class="affiliation text-xs text-gray-200 ml-2">
+								{$author->getLocalizedAffiliation()|escape}
+							</span>
 						{/if}
 						{if $author->getOrcid()}
-							<span class="orcid">
-									{$orcidIcon}
+							<span class="orcid text-xs text-accent ml-2">
+								{$orcidIcon}
 								<a href="{$author->getOrcid()|escape}" target="_blank">
-										{$author->getOrcid()|escape}
-									</a>
-								</span>
+									{$author->getOrcid()|escape}
+								</a>
+							</span>
 						{/if}
 					</li>
 				{/foreach}
 			</ul>
 		{/if}
 
-
 	</div>
 
 </section>
 
 
-<section class="uk-section-default uk-section uk-section-medium" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:200&#125">
+<section class="bg-white py-12">
 
 	{* Show article overview *}
 	{include file="frontend/objects/article_details.tpl"}

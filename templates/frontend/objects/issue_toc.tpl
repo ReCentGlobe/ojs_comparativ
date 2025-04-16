@@ -16,127 +16,115 @@
  *   sorted by section.
  * @uses $primaryGenreIds array List of file genre ids for primary file types
  *}
-<div class="obj_issue_toc uk-container">
-    {iterate from=userInstitutionalSubscriptions item=userInstitutionalSubscription}
+<div class="obj_issue_toc max-w-5xl mx-auto bg-white rounded shadow p-8 my-8">
+    {foreach from=$userInstitutionalSubscriptions item=userInstitutionalSubscription}
     {$userInstitutionalSubscription->getInstitutionName()|escape}
-	{/iterate}
+    {/foreach}
 
-			{* Indicate if this is only a preview *}
-		{if !$issue->getPublished()}
-			<div class="notification">
-				{include file="frontend/components/notification.tpl" type="warning" messageKey="editor.issues.preview"}
-			</div>
-		{/if}
+    {* Indicate if this is only a preview *}
+    {if !$issue->getPublished()}
+        <div class="notification mb-4">
+            {include file="frontend/components/notification.tpl" type="warning" messageKey="editor.issues.preview"}
+        </div>
+    {/if}
 
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        <div class="md:col-span-2">
+            <div class="issue description mb-6">
+                {* Description *}
+                {if $issue->hasDescription()}
+                    <div class="description text-gray-700">
+                        {$issue->getLocalizedDescription()|strip_unsafe_html}
+                    </div>
+                {/if}
+            </div>
+            {* Articles *}
+            <div class="sections space-y-8">
+                {foreach name=sections from=$publishedSubmissions item=section}
+                    <div class="toc_section">
+                        {if $section.articles}
+                            {if $section.title}
+                                <h4 class="text-lg font-semibold border-b border-gray-300 pb-2">
+                                    {$section.title|escape}
+                                </h4>
+                            {/if}
+                            {foreach from=$section.articles item=article}
+                                <article class="bg-gray-100 p-4 rounded shadow">
+                                    {include file="frontend/objects/article_summary.tpl"}
+                                </article>
+                            {/foreach}
+                        {/if}
+                    </div>
+                {/foreach}
+            </div><!-- .sections -->
+        </div>
 
-	<div class="uk-grid-large uk-flex-top uk-grid-margin-large" uk-grid>
+        <div class="md:col-span-1">
+            {* Issue introduction area above articles *}
+            <div class="grid gap-4">
+                <div class="issue cover_image">
+                    {* Issue cover image *}
+                    {assign var=issueCover value=$issue->getLocalizedCoverImageUrl()}
+                    {if $issueCover}
+                        <a href="{url op="view" page="issue" path=$issue->getBestIssueId()}">
+                            <img class="rounded shadow" src="{$issueCover|escape}"{if $issue->getLocalizedCoverImageAltText() != ''} alt="{$issue->getLocalizedCoverImageAltText()|escape}"{/if}>
+                        </a>
+                    {/if}
+                </div>
 
-		<div class="uk-width-2-3@m">
+                <div class="issue galley">
+                    {* Full-issue galleys *}
+                    {if $issueGalleys}
+                        <h4 class="text-lg font-semibold border-b border-gray-300 pb-2">Available Formats</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {foreach from=$issueGalleys item=galley}
+                                <div>
+                                    {include file="frontend/objects/galley_link.tpl" parent=$issue purchaseFee=$currentJournal->getSetting('purchaseIssueFee') purchaseCurrency=$currentJournal->getSetting('currency')}
+                                </div>
+                            {/foreach}
+                        </div>
+                    {/if}
+                </div>
 
-			<div class="issue description" uk-scrollspy-class>
-				{* Description *}
-				{if $issue->hasDescription()}
-					<div class="description">
-						{$issue->getLocalizedDescription()|strip_unsafe_html}
-					</div>
-				{/if}
-			</div>
+                <div class="issue published-date">
+                    {* Published date *}
+                    {if $issue->getDatePublished()}
+                        <div class="published">
+                            <h4 class="text-lg font-semibold border-b border-gray-300 pb-2">{translate key="submissions.published"}</h4>
+                            <span class="value text-gray-700">
+                                {$issue->getDatePublished()|date_format:"%Y"}
+                            </span>
+                        </div>
+                    {/if}
+                </div>
 
-      {* Articles *}
-			<div class="sections">
-        {foreach name=sections from=$publishedSubmissions item=section}
-					<div class="toc_section">
-            			{if $section.articles}
-             				 {if $section.title}
-								<h4 class="uk-h4 uk-margin-large uk-heading-bullet" uk-scrollspy-class>
-									 {$section.title|escape}
-								</h4>
-             				 {/if}
-							{foreach from=$section.articles item=article}
-								<article class="uk-margin-medium uk-margin-remove-top uk-panel uk-article" uk-scrollspy-class>
-									{include file="frontend/objects/article_summary.tpl"}
-									<hr>
-								</article>
-							{/foreach}
-           				 {/if}
-					</div>
-        {/foreach}
-			</div><!-- .sections -->
-		</div>
-
-		<div class="uk-width-expand@m">
-			{* Issue introduction area above articles *}
-				<div uk-grid uk-scrollspy-class>
-					<div class="issue cover_image uk-width-1-2 uk-width-1-1@s">
-						{* Issue cover image *}
-						{assign var=issueCover value=$issue->getLocalizedCoverImageUrl()}
-						{if $issueCover}
-							<a href="{url op="view" page="issue" path=$issue->getBestIssueId()}">
-								<img uk-img data-src="{$issueCover|escape}"{if $issue->getLocalizedCoverImageAltText() != ''} alt="{$issue->getLocalizedCoverImageAltText()|escape}"{/if}>
-							</a>
-						{/if}
-					</div>
-
-					<div class="issue galley uk-width-1-2 uk-width-1-1@s">
-						{* Full-issue galleys *}
-						{if $issueGalleys}
-							<h4 class="uk-heading-divider">Available Formats</h4>
-							<div uk-grid class="galleys_links">
-								{foreach from=$issueGalleys item=galley}
-									<div class="uk-width-1-1 uk-width-1-2@s">
-										{include file="frontend/objects/galley_link.tpl" parent=$issue purchaseFee=$currentJournal->getSetting('purchaseIssueFee') purchaseCurrency=$currentJournal->getSetting('currency')}
-									</div>
-								{/foreach}
-							</div>
-						{/if}
-					</div>
-
-					<div class="issue published-date uk-width-1-2 uk-width-1-1@s">
-						{* Published date *}
-						{if $issue->getDatePublished()}
-							<div class="published">
-								<h4 class="uk-heading-divider">{translate key="submissions.published"}</h4>
-								<span class="value">
-									{$issue->getDatePublished()|date_format:"%Y"}
-								</span>
-							</div>
-						{/if}
-					</div>
-
-					{if $pubId || $doiURL}
-						<div class="issue doi uk-width-1-2 uk-width-1-1@s">
-						{* PUb IDs (eg - DOI) *}
-							<h4 class="uk-heading-divider">DOI</h4>
-						{foreach from=$pubIdPlugins item=pubIdPlugin}
-							{assign var=pubId value=$issue->getStoredPubId($pubIdPlugin->getPubIdType())}
-							{if $pubId}
-								{assign var="doiUrl" value=$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
-								<div class="pub_id {$pubIdPlugin->getPubIdType()|escape}">
-							<span class="type">
-								{$pubIdPlugin->getPubIdDisplayType()|escape}:
-							</span>
-									<span class="id">
-								{if $doiUrl}
-									<a href="{$doiUrl|escape}">
-										{$doiUrl}
-									</a>
-								{else}
-									{$pubId}
-								{/if}
-							</span>
-								</div>
-							{/if}
-						{/foreach}
-					</div>
-					{/if}
-
-
-				</div>
-		</div>
-
-
-
-	</div>
-
-
+                {if $pubId || $doiURL}
+                    <div class="issue doi">
+                        {* Pub IDs (eg - DOI) *}
+                        <h4 class="text-lg font-semibold border-b border-gray-300 pb-2">DOI</h4>
+                        {foreach from=$pubIdPlugins item=pubIdPlugin}
+                            {assign var=pubId value=$issue->getStoredPubId($pubIdPlugin->getPubIdType())}
+                            {if $pubId}
+                                {assign var="doiUrl" value=$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
+                                <div class="pub_id {$pubIdPlugin->getPubIdType()|escape}">
+                                    <span class="type text-gray-700">
+                                        {$pubIdPlugin->getPubIdDisplayType()|escape}:
+                                    </span>
+                                    <span class="id text-blue-500">
+                                        {if $doiUrl}
+                                            <a href="{$doiUrl|escape}">
+                                                {$doiUrl}
+                                            </a>
+                                        {else}
+                                            {$pubId}
+                                        {/if}
+                                    </span>
+                                </div>
+                            {/if}
+                        {/foreach}
+                    </div>
+                {/if}
+            </div>
+        </div>
+    </div>
 </div>

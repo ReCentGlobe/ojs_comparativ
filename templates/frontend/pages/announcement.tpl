@@ -11,23 +11,20 @@
  *}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$announcement->getLocalizedTitle()}
 
-<section class="hero is-primary">
-	<div class="hero-body">
-		<div class="container">
-			{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$announcement->getLocalizedTitle()}
-			<h1 class="title has-text-weight-light">
-				Press
-			</h1>
-		</div>
+<section class="bg-primary py-8">
+	<div class="container mx-auto">
+		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$announcement->getLocalizedTitle()}
+		<h1 class="text-2xl font-light text-white mt-0">Press</h1>
 	</div>
 </section>
 
-<section class="section page page_announcement">
-	<div class="container">
-		<div class="columns">
-			<div class="column content">
+<section class="py-8 page page_announcement">
+	<div class="container mx-auto">
+		<div class="grid">
+			<div class="col-span-1">
 				{* Display book details *}
-				{include file="frontend/objects/announcement_full.tpl"}	</div>
+				{include file="frontend/objects/announcement_full.tpl"}
+			</div>
 		</div>
 	</div>
 </section><!-- .page -->

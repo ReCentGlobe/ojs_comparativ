@@ -10,22 +10,18 @@
  *}
 {include file="frontend/components/header.tpl"}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-
-	<div class="uk-container">
+<section class="bg-primary py-8">
+	<div class="container mx-auto">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$pageTitle}
-
-		<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
+		<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
 			{translate key=$pageTitle}
 		</h1>
 	</div>
-
 </section>
 
-<section class="uk-section-default uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-	<div class="uk-container">
-
-		<div class="description">
+<section class="bg-white py-8">
+	<div class="container mx-auto">
+		<div class="description text-gray-700 mb-6">
 			{if $messageTranslated}
 				{$messageTranslated}
 			{else}
@@ -33,8 +29,8 @@
 			{/if}
 		</div>
 		{if $backLink}
-			<div class="cmp_back_link">
-				<a href="{$backLink}" class="uk-button uk-button-default">{translate key=$backLinkLabel}</a>
+			<div class="cmp_back_link mt-4">
+				<a href="{$backLink}" class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition">{translate key=$backLinkLabel}</a>
 			</div>
 		{/if}
 	</div>

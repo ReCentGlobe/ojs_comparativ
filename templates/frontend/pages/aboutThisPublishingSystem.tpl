@@ -13,10 +13,10 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="about.aboutThisPublishingSystem"}
 
-<div class="page page_about_publishing_system">
+<div class="page page_about_publishing_system max-w-3xl mx-auto bg-white rounded shadow p-8 my-8">
 	{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.aboutThisPublishingSystem"}
 
-	<p>
+	<p class="mb-6 text-gray-700">
 		{if $currentJournal}
 			{translate key="about.aboutOJSJournal" ojsVersion=$appVersion}
 		{else}
@@ -24,7 +24,7 @@
 		{/if}
 	</p>
 
-	<img src="{$baseUrl}/{$pubProcessFile}" alt="{translate key="about.aboutThisPublishingSystem.altText"}">
+	<img src="{$baseUrl}/{$pubProcessFile}" alt="{translate key="about.aboutThisPublishingSystem.altText"}" class="rounded shadow mx-auto">
 
 </div><!-- .page -->
 

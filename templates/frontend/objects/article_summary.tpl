@@ -14,117 +14,93 @@
  * @uses $hideGalleys bool Hide the article galleys for this article?
  * @uses $primaryGenreIds array List of file genre ids for primary file types
  *}
-{assign var=articlePath value=$article->getBestId()}
+{assign var=publication value=$article->getCurrentPublication()}
+{assign var=articlePath value=$publication->getData('urlPath')|default:$article->getId()}
+{if !$heading}
+	{assign var="heading" value="h2"}
+{/if}
 
-{if (!$section.hideAuthor && $article->getHideAuthor() == $smarty.const.AUTHOR_TOC_DEFAULT) || $article->getHideAuthor() == $smarty.const.AUTHOR_TOC_SHOW}
+{if (!$section.hideAuthor && $publication->getData('hideAuthor') == \APP\submission\Submission::AUTHOR_TOC_DEFAULT) || $publication->getData('hideAuthor') == \APP\submission\Submission::AUTHOR_TOC_SHOW}
 	{assign var="showAuthor" value=true}
 {/if}
 
-
-
-	{if $article->getLocalizedCoverImage()}
-		<figure class="media-left">
-			<a {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if} class="file image is-64x64">
-				<img src="{$article->getLocalizedCoverImageUrl()|escape}"{if $article->getLocalizedCoverImageAltText() != ''} alt="{$article->getLocalizedCoverImageAltText()|escape}"{else} alt="{translate key="article.coverPage.altText"}"{/if}>
+<div class="obj_article_summary bg-white rounded shadow p-6 mb-6">
+	{if $publication->getLocalizedData('coverImage')}
+		<figure class="media-left mb-2">
+			<a {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if} class="block w-16 h-16 overflow-hidden rounded shadow">
+				{assign var="coverImage" value=$publication->getLocalizedData('coverImage')}
+				<img
+					src="{$publication->getLocalizedCoverImageUrl($article->getData('contextId'))|escape}"
+					alt="{$coverImage.altText|escape|default:''}"
+					class="object-cover w-full h-full"
+				>
 			</a>
-		</figure>
+		 </figure>
 	{/if}
 
-	<div uk-grid>
-		<div class="uk-width-1-1">
-					<a class="uk-link-reset" {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if}>
-						{if $section.title|escape ne "Book Review"}
-							{$article->getLocalizedTitle()|strip_unsafe_html}<br>
-							{$article->getLocalizedSubtitle()|strip_unsafe_html}
-						{else}
-							{$article->getLocalizedTitle()|strip_unsafe_html} {$article->getLocalizedSubtitle()|strip_unsafe_html}
-						{/if}
-					</a>
+	<{$heading} class="title text-lg font-bold mb-2">
+		<a id="article-{$article->getId()}" {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if} class="text-primary hover:underline">
+			{if $currentContext}
+				{$publication->getLocalizedTitle(null, 'html')|strip_unsafe_html}
+				{assign var=localizedSubtitle value=$publication->getLocalizedSubtitle(null, 'html')|strip_unsafe_html}
+				{if $localizedSubtitle}
+					<span class="subtitle block text-sm text-gray-600">{$localizedSubtitle}</span>
+				{/if}
+			{else}
+				{$publication->getLocalizedFullTitle(null, 'html')|strip_unsafe_html}
+				<span class="subtitle block text-sm text-gray-600">
+					{$journal->getLocalizedName()|escape}
+				</span>
+			{/if}
+		</a>
+	</{$heading}>
+
+	{assign var=submissionPages value=$publication->getData('pages')}
+	{assign var=submissionDatePublished value=$publication->getData('datePublished')}
+	{if $showAuthor || $submissionPages || ($submissionDatePublished && $showDatePublished)}
+	<div class="meta flex flex-wrap gap-4 text-xs text-gray-500 mb-2">
+		{if $showAuthor}
+		<div class="authors">
+			{$publication->getAuthorString($authorUserGroups)|escape}
 		</div>
-		<div class="uk-width-1-1 uk-margin-small">
-			<div uk-grid>
-				<div class="uk-flex-first">
-
-
-{if $article->getAuthors()}
-{foreach from=$article->getAuthors() item=author}
-					<div class="uk-text-small">
-							<span class="name">
-								{$author->getFullName()|escape}
-							</span>
-						{if $author->getLocalizedAffiliation()}
-							<span class="affiliation">
-									{$author->getLocalizedAffiliation()|escape}
-								</span>
-						{/if}
-						{if $author->getOrcid()}
-							<span class="orcid">
-									{$orcidIcon}
-								<a href="{$author->getOrcid()|escape}" target="_blank">
-										{$author->getOrcid()|escape}
-									</a>
-								</span>
-						{/if}
-					</div>
-				{/foreach}
 		{/if}
 
-				</div>
-			</div>
+		{* Page numbers for this article *}
+		{if $submissionPages}
+			<div class="pages">{$submissionPages|escape}</div>
+		{/if}
 
-
-
-		</div>
-
-    <div class="uk-width-1-1">
-			<div uk-grid>
-				<div class="uk-flex-first">
-					{if !$hideGalleys}
-						<div uk-grid class="">
-							{if $article->getLocalizedAbstract()}
-								<div class="uk-width-auto">
-										<button class="uk-button uk-button-default uk-button-small" type="button" uk-toggle="target: #toggle-{$article->getBestId()}; animation: uk-animation-fade">Abstract</button>
-								</div>
-							{/if}
-							<div class="uk-width-auto">
-								{foreach from=$article->getGalleys() item=galley}
-									{if $primaryGenreIds}
-										{assign var="file" value=$galley->getFile()}
-										{if !$file || !in_array($file->getGenreId(), $primaryGenreIds)}
-											{continue}
-										{/if}
-									{/if}
-									<div class="">
-										{assign var="hasArticleAccess" value=$hasAccess}
-										{if $currentContext->getSetting('publishingMode') == $smarty.const.PUBLISHING_MODE_OPEN || $article->getCurrentPublication()->getData('accessStatus') == $smarty.const.ARTICLE_ACCESS_OPEN}
-											{assign var="hasArticleAccess" value=1}
-										{/if}
-
-
-										{include file="frontend/objects/galley_link.tpl" parent=$article hasAccess=$hasArticleAccess purchaseFee=$currentJournal->getSetting('purchaseArticleFee') purchaseCurrency=$currentJournal->getSetting('currency')}
-									</div>
-								{/foreach}
-							</div>
-						</div>
-					{/if}
-				</div>
-				<div class="uk-width-expand uk-flex-last uk-text-right">
-					{if $article->getPages()}
-						<div class="uk-text-small">
-							{$article->getPages()|escape}
-						</div>
-					{/if}
-				</div>
-			</div>
-		</div>
-
-		{if $article->getLocalizedAbstract()}
-			<div class="uk-width-1-1">
-				<div id="toggle-{$article->getBestId()}" hidden>{$article->getLocalizedAbstract()|strip_unsafe_html}</div>
+		{if $showDatePublished && $submissionDatePublished}
+			<div class="published">
+				{$submissionDatePublished|date_format:$dateFormatShort}
 			</div>
 		{/if}
+
 	</div>
+	{/if}
 
-  {call_hook name="Templates::Issue::Issue::Article"}
+	{if !$hideGalleys}
+		<ul class="galleys_links flex flex-wrap gap-2 mt-2">
+			{foreach from=$article->getGalleys() item=galley}
+				{if $primaryGenreIds}
+					{assign var="file" value=$galley->getFile()}
+					{if !$galley->getRemoteUrl() && !($file && in_array($file->getGenreId(), $primaryGenreIds))}
+						{continue}
+					{/if}
+				{/if}
+				<li>
+					{assign var="hasArticleAccess" value=$hasAccess}
+					{if $currentContext->getSetting('publishingMode') == \APP\journal\Journal::PUBLISHING_MODE_OPEN || $publication->getData('accessStatus') == \APP\submission\Submission::ARTICLE_ACCESS_OPEN}
+						{assign var="hasArticleAccess" value=1}
+					{/if}
+					{assign var="id" value="article-{$article->getId()}-galley-{$galley->getId()}"}
+					{include file="frontend/objects/galley_link.tpl" parent=$article publication=$publication id=$id labelledBy="{$id} article-{$article->getId()}" hasAccess=$hasArticleAccess purchaseFee=$currentJournal->getData('purchaseArticleFee') purchaseCurrency=$currentJournal->getData('currency')}
+				</li>
+			{/foreach}
+		</ul>
+	{/if}
+
+	{call_hook name="Templates::Issue::Issue::Article"}
+</div>
 
 

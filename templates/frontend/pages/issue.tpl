@@ -16,9 +16,9 @@
  *}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$issueIdentification}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
+<section class="bg-primary py-8">
 
-		<div class="uk-container">
+		<div class="container mx-auto">
       {* Display a message if no current issue exists *}
       {if !$issue}
         {include file="frontend/components/breadcrumbs_issue.tpl" currentTitleKey="current.noCurrentIssue"}
@@ -27,12 +27,12 @@
         {include file="frontend/components/breadcrumbs_issue.tpl" currentTitle=$issueIdentification}
       {/if}
 
-			<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
+			<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
         {$issue->getLocalizedTitle()|escape}
 			</h1>
 
 
-				<h2 class="uk-h4 uk-margin" uk-scrollspy-class>
+				<h2 class="text-lg font-semibold text-white mb-4 animate-fadeIn">
           {$issueSeries|escape}
 				</h2>
 
@@ -41,7 +41,7 @@
 
 </section>
 
-<section class="uk-section-default uk-section uk-section-medium" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:200&#125">
+<section class="bg-white py-12">
 
 	{* Display a message if no current issue exists *}
 	{if !$issue}

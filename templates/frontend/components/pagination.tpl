@@ -15,18 +15,22 @@
  *}
 
 {if $prevUrl || $nextUrl}
-  <ul class="uk-pagination" aria-label="{translate|escape key="common.pagination.label"}">
+  <ul class="flex items-center justify-center space-x-4 text-sm" aria-label="{translate|escape key="common.pagination.label"}">
     {if $prevUrl}
-      <li class="uk-margin-auto-right">
-       <a href="{$prevUrl}"><span class="uk-margin-small-right" uk-pagination-previous></span>{translate key="help.previous"}</a>
+      <li>
+       <a href="{$prevUrl}" class="inline-flex items-center px-3 py-1 rounded bg-gray-100 hover:bg-primary hover:text-white transition-colors">
+         <span class="mr-2">&#8592;</span>{translate key="help.previous"}
+       </a>
       </li>
     {/if}
-    <span class="current">
+    <span class="current font-semibold text-primary">
 			{translate key="common.pagination" start=$showingStart end=$showingEnd total=$total}
 		</span>
     {if $nextUrl}
-      <li class="uk-margin-auto-left">
-        <a href="{$nextUrl}">{translate key="help.next"}<span class="uk-margin-small-left" uk-pagination-next></span></a>
+      <li>
+        <a href="{$nextUrl}" class="inline-flex items-center px-3 py-1 rounded bg-gray-100 hover:bg-primary hover:text-white transition-colors">
+          {translate key="help.next"}<span class="ml-2">&#8594;</span>
+        </a>
       </li>
     {/if}
   </ul>

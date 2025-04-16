@@ -10,93 +10,71 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="user.login"}
 
-<section class="uk-section-primary uk-section uk-section-small">
-	<div class="uk-container animated fadeIn">
+<section class="bg-primary py-8">
+	<div class="container mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.login"}
-		<h1 class="uk-h2 uk-margin-remove-top">
-			Login
-		</h1>
+		<h1 class="text-2xl font-bold text-white mt-0">Login</h1>
 	</div>
 </section>
 
-<section class="uk-section-default uk-section uk-section-medium">
-	<div class="uk-container">
-		<div uk-grid>
-			<div class="uk-width-1-1 uk-first-column uk-flex uk-flex-middle uk-flex-center">
-				{* A login message may be displayed if the user was redireceted to the
-   login page from another request. Examples include if login is required
-   before dowloading a file. *}
-				{if $loginMessage}
-					<p>
-						{translate key=$loginMessage}
-					</p>
+<section class="bg-white py-12">
+	<div class="container mx-auto">
+		<div class="flex flex-col items-center">
+			{* A login message may be displayed if the user was redirected to the login page from another request. *}
+			{if $loginMessage}
+				<p class="mb-4 text-primary">
+					{translate key=$loginMessage}
+				</p>
+			{/if}
+			<form class="w-full max-w-md bg-gray-50 rounded shadow p-8" id="login" method="post" action="{$loginUrl}">
+				{csrf}
+
+				{if $error}
+					<div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 rounded">
+						{translate key=$error reason=$reason}
+					</div>
 				{/if}
-			</div>
-			<div class="uk-width-1-1 uk-first-column uk-flex uk-flex-middle uk-flex-center">
-				<form class="uk-form-stacked" id="login" method="post" action="{$loginUrl}">
-					{csrf}
 
-					{if $error}
-						<div class="uk-alert-warning" uk-alert>
-							{translate key=$error reason=$reason}
-						</div>
+				<input type="hidden" name="source" value="{$source|strip_unsafe_html|escape}" />
+
+				<div class="mb-4">
+					<label class="block font-semibold mb-1" for="username">
+						{translate key="user.username"}
+					</label>
+					<div class="relative">
+						<span class="absolute left-3 top-2 text-gray-400"><i class="fa fa-user"></i></span>
+						<input class="border rounded px-10 py-2 w-full" type="text" name="username" id="username" value="{$username|escape}" maxlength="32" required>
+					</div>
+				</div>
+				<div class="mb-4">
+					<label class="block font-semibold mb-1" for="password">
+						{translate key="user.password"}
+					</label>
+					<div class="relative">
+						<span class="absolute left-3 top-2 text-gray-400"><i class="fa fa-lock"></i></span>
+						<input class="border rounded px-10 py-2 w-full" type="password" name="password" id="password" value="{$password|escape}" maxlength="32" required>
+						<a class="absolute right-3 top-2 text-xs text-primary hover:underline" href="{url page="login" op="lostPassword"}">
+							{translate key="user.login.forgotPassword"}
+						</a>
+					</div>
+				</div>
+				<div class="mb-4 flex items-center">
+					<input class="mr-2" type="checkbox" name="remember" id="remember" value="1" checked="$remember">
+					<label for="remember" class="text-sm">{translate key="user.login.rememberUsernameAndPassword"}</label>
+				</div>
+				<div class="flex gap-4 mt-6">
+					<button class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition w-1/2" type="submit">
+						{translate key="user.login"}
+					</button>
+					{if !$disableUserReg}
+						{capture assign="registerUrl"}{url page="user" op="register" source=$source}{/capture}
+						<a href="{$registerUrl}" class="inline-block px-4 py-2 border border-gray-400 text-gray-700 rounded hover:bg-gray-200 transition w-1/2 text-center">
+							{translate key="user.login.registerNewAccount"}
+						</a>
 					{/if}
-
-					<input type="hidden" name="source" value="{$source|strip_unsafe_html|escape}" />
-
-
-					<div class="username uk-margin">
-						<label class="uk-form-label">
-							{translate key="user.username"}
-						</label>
-						<div class="uk-inline uk-width-1-1">
-							<span class="uk-form-icon" uk-icon="icon: user"></span>
-							<input class="uk-input " type="text" name="username" id="username" value="{$username|escape}" maxlength="32" required>
-						</span>
-						</div>
-					</div>
-					<div class="password uk-margin">
-						<label class="uk-form-label">
-							{translate key="user.password"}
-						</label>
-						<div class="uk-inline uk-width-1-1">
-							<span class="uk-form-icon" uk-icon="icon: lock"></span>
-							<input class="uk-input " type="password" name="password" id="password" value="{$password|escape}" password="true" maxlength="32" required>
-						</span>
-							<a class="uk-form-label help" href="{url page="login" op="lostPassword"}">
-								{translate key="user.login.forgotPassword"}
-							</a>
-						</div>
-					</div>
-					<div class="remember uk-margin">
-						<label class="uk-form-label">
-							<input class="uk-checkbox" type="checkbox" name="remember" id="remember" value="1" checked="$remember">
-							{translate key="user.login.rememberUsernameAndPassword"}
-						</label>
-					</div>
-					<div class="uk-margin uk-flex uk-flex-center" uk-grid>
-							<div class="uk-width-1-2">
-								<button class="uk-button uk-button-primary" type="submit">
-									{translate key="user.login"}
-								</button>
-							</div>
-						<div class="uk-width-1-2">
-							{if !$disableUserReg}
-								{capture assign="registerUrl"}{url page="user" op="register" source=$source}{/capture}
-								<a href="{$registerUrl}" class="btn btn-secondary">
-									{translate key="user.login.registerNewAccount"}
-								</a>
-							{/if}
-						</div>
-					</div>
-
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
-
-
-
-
 	</div>
 </section><!-- .page -->
 

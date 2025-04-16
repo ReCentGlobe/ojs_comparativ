@@ -14,23 +14,23 @@
 	{assign var="heading" value="h2"}
 {/if}
 
-<div class="announcement column is-one-third has-text-centered">
-	<{$heading}>
-		<a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}">
+<div class="announcement w-full md:w-1/3 text-center p-4">
+	<{$heading} class="text-lg font-bold mb-2">
+		<a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}" class="text-primary hover:underline">
 			{$announcement->getLocalizedTitle()|escape}
 		</a>
 	</{$heading}>
-	<div class="date">
+	<div class="date text-xs text-gray-500 mb-2">
 		{$announcement->getDatePosted()|date_format:"%d. %B %Y"}
 	</div>
-	<div class="summary">
+	<div class="summary text-gray-700">
 		{$announcement->getLocalizedDescriptionShort()|strip_unsafe_html}
-		<div class="has-text-left">
-			<a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}" class="read_more button is-fullwidth is-inverted is-outlined is-primary">
+		<div class="text-left mt-2">
+			<a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}" class="block w-full border border-primary text-primary rounded px-4 py-2 hover:bg-primary hover:text-white transition-colors">
 			<span aria-hidden="true" role="presentation">
 				{translate key="common.readMore"}
 			</span>
-				<span class="pkp_screen_reader">
+				<span class="sr-only">
 				{translate key="common.readMoreWithTitle" title=$announcement->getLocalizedTitle()|escape}
 			</span>
 			</a>
