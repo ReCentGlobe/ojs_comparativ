@@ -11,22 +11,20 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="about.editorialTeam"}
 
-<section class="bg-primary py-8">
-	<div class="container mx-auto animate-fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.editorialTeam"}
-		<h1 class="text-2xl font-bold text-white mt-0">Editorial Team</h1>
-	</div>
-</section>
+{capture assign="breadcrumbsHtml"}
+  {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.editorialTeam"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="about.editorialTeam"}}
 
 <section class="bg-white py-12">
-	<div class="container mx-auto">
-		<div class="grid">
-			<div class="col-span-1">
-				{$currentContext->getLocalizedSetting('editorialTeam')}
-				{include file="frontend/components/editLink.tpl" page="management" op="settings" path="context" anchor="masthead" sectionTitleKey="about.editorialTeam"}
-			</div>
-		</div>
-	</div>
-</section><!-- .page -->
+  <div class="container mx-auto">
+    <div class="grid">
+      <div class="col-span-1">
+        {$currentContext->getLocalizedSetting('editorialTeam')}
+        {include file="frontend/components/editLink.tpl" page="management" op="settings" path="context" anchor="editorialTeam" sectionTitleKey="about.editorialTeam"}
+      </div>
+    </div>
+  </div>
+</section>
 
 {include file="frontend/components/footer.tpl"}

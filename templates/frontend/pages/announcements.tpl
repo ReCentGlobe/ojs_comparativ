@@ -11,12 +11,10 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="announcement.announcements"}
 
-<section class="bg-primary py-8">
-	<div class="container mx-auto">
-      {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="announcement.announcements"}
-		<h1 class="text-2xl font-light text-white mt-0">Press</h1>
-	</div>
-</section>
+{capture assign="breadcrumbsHtml"}
+  {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="announcement.announcements"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="announcement.announcements"}}
 
 <section class="py-8 page page_announcements">
 	<div class="container mx-auto">

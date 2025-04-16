@@ -12,14 +12,10 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="about.aboutContext"}
 
-
-
-<section class="bg-primary py-8">
-	<div class="container mx-auto animate-fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.aboutContext"}
-		<h1 class="text-2xl font-bold text-white mt-0">About</h1>
-	</div>
-</section>
+{capture assign="breadcrumbsHtml"}
+  {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.aboutContext"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="about.aboutContext"}}
 
 <section class="bg-white py-8">
 	<div class="container mx-auto">

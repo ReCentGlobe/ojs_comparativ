@@ -10,12 +10,10 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="user.login"}
 
-<section class="bg-primary py-8">
-	<div class="container mx-auto animate-fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.login"}
-		<h1 class="text-2xl font-bold text-white mt-0">Login</h1>
-	</div>
-</section>
+{capture assign="breadcrumbsHtml"}
+  {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.login"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="user.login"}}
 
 <section class="bg-white py-12">
 	<div class="container mx-auto">

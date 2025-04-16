@@ -9,12 +9,10 @@
  *}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$title}
 
-<section class="bg-primary py-8">
-    <div class="container mx-auto animate-fadeIn">
-        {include file="frontend/components/breadcrumbs.tpl" currentTitle=$title}
-        <h1 class="text-2xl font-bold text-white mt-0">{$title|escape}</h1>
-    </div>
-</section>
+{capture assign="breadcrumbsHtml"}
+  {include file="frontend/components/breadcrumbs.tpl" currentTitle=$title}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$title}
 
 <section class="bg-white py-12">
     <div class="container mx-auto">

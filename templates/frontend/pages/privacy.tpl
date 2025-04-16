@@ -11,17 +11,10 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="manager.setup.privacyStatement"}
 
-<section class="bg-primary py-8">
-  <div class="container mx-auto">
-    {* Display a message if no current issue exists *}
-    {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="manager.setup.privacyStatement"}
-
-    <h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
-      Privacy Policy
-    </h1>
-
-  </div>
-</section>
+{capture assign="breadcrumbsHtml"}
+  {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="manager.setup.privacyStatement"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="manager.setup.privacyStatement"}}
 
 <section class="bg-white py-12">
   <div class="container mx-auto">
@@ -32,6 +25,5 @@
     </div>
   </div>
 </section><!-- .page -->
-
 
 {include file="frontend/components/footer.tpl"}
