@@ -41,7 +41,7 @@
 
 	{* Primary site navigation *}
 	{if $currentContext}
-		<header class="fixed top-0 left-0 w-full z-50 bg-gray-900 text-white shadow">
+		<header class="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-100 text-gray-900 shadow-sm">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="flex justify-between h-16 items-center">
 					<div class="flex items-center gap-4">
@@ -53,7 +53,7 @@
 								<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:'url'}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogo.altText != ''}alt="{$displayPageHeaderLogo.altText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} class="h-12 w-auto"/>
 							</a>
 						{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_string($displayPageHeaderTitle)}
-							<a href="{$homeUrl}" class="text-xl font-bold">{$displayPageHeaderTitle|escape}</a>
+							<a href="{$homeUrl}" class="text-xl font-bold text-primary">{$displayPageHeaderTitle|escape}</a>
 						{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_array($displayPageHeaderTitle)}
 							<a href="{$homeUrl}" class="block">
 								<img src="{$publicFilesDir}/{$displayPageHeaderTitle.uploadName|escape:'url'}" alt="{$displayPageHeaderTitle.altText|escape}" width="{$displayPageHeaderTitle.width|escape}" height="{$displayPageHeaderTitle.height|escape}" class="h-12 w-auto"/>
@@ -64,26 +64,26 @@
 							</a>
 						{/if}
 					</div>
-					<div class="hidden md:flex md:items-center md:gap-6">
-						{load_menu name="primary" id="navigationPrimary" ulClass="flex gap-6 items-center" liClass=""}
-					</div>
+					<nav class="hidden md:flex md:items-center md:gap-6">
+						{load_menu name="primary" id="navigationPrimary" ulClass="flex gap-6 items-center text-base font-medium text-primary" liClass="hover:text-accent transition-colors"}
+					</nav>
 					<div class="flex items-center gap-4">
 						{* Search form *}
 						<form class="hidden md:block" action="{url page="search" op="search"}" method="post" role="search" autocomplete="on">
-							<input class="rounded px-2 py-1 text-black" name="query" type="search" placeholder="Search..." value="{$searchQuery|escape}" aria-label="{translate|escape key="common.searchQuery"}">
+							<input class="rounded px-2 py-1 text-gray-900 border border-gray-200 focus:border-primary" name="query" type="search" placeholder="Search..." value="{$searchQuery|escape}" aria-label="{translate|escape key="common.searchQuery"}">
 						</form>
 						{load_menu name="user" id="navigationUser" ulClass="flex gap-4 items-center" liClass="profile"}
-						<button id="mobile-menu-toggle" class="md:hidden flex items-center px-2 py-1 border border-gray-400 rounded text-gray-200 hover:text-white hover:border-white focus:outline-none" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+						<button id="mobile-menu-toggle" class="md:hidden flex items-center px-2 py-1 border border-gray-300 rounded text-primary hover:text-accent hover:border-accent focus:outline-none" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
 							<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
 						</button>
 					</div>
 				</div>
 			</div>
-			<div id="mobile-menu" class="md:hidden hidden bg-gray-800">
+			<div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100">
 				<div class="px-4 pt-2 pb-4 space-y-2">
-					{load_menu name="primary" id="navigationPrimaryMobile" ulClass="flex flex-col gap-2" liClass=""}
+					{load_menu name="primary" id="navigationPrimaryMobile" ulClass="flex flex-col gap-2 text-primary" liClass="hover:text-accent transition-colors"}
 					<form class="mt-2" action="{url page="search" op="search"}" method="post" role="search" autocomplete="on">
-						<input class="rounded px-2 py-1 w-full text-black" name="query" type="search" placeholder="Search..." value="{$searchQuery|escape}" aria-label="{translate|escape key="common.searchQuery"}">
+						<input class="rounded px-2 py-1 w-full text-gray-900 border border-gray-200 focus:border-primary" name="query" type="search" placeholder="Search..." value="{$searchQuery|escape}" aria-label="{translate|escape key="common.searchQuery"}">
 					</form>
 					{load_menu name="user" id="navigationUserMobile" ulClass="flex flex-col gap-2" liClass="profile"}
 				</div>

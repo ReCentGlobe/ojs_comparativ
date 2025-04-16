@@ -22,47 +22,20 @@
 <section class="bg-primary py-8">
 
 	<div class="container mx-auto">
-		{if $section}
-			{include file="frontend/components/breadcrumbs_article.tpl" currentTitle=$section->getLocalizedTitle()}
-		{else}
-			{include file="frontend/components/breadcrumbs_article.tpl" currentTitleKey="common.publication"}
-		{/if}
-
-		<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
-			{$publication->getLocalizedFullTitle(null, 'html')|strip_unsafe_html}
-		</h1>
-
-		{if $publication->getLocalizedData('subtitle')}
-			<h2 class="text-lg font-semibold text-white mb-4 animate-fadeIn">
-				{$publication->getLocalizedData('subtitle')|strip_unsafe_html}
-			</h2>
-		{/if}
-
-		{if $publication->getData('authors')}
-			<ul class="flex flex-wrap gap-4 item authors animate-fadeIn">
-				{foreach from=$publication->getData('authors') item=author}
-					<li class="inline-flex items-center gap-2">
-							<span class="name font-medium">
-								{$author->getFullName()|escape}
-							</span>
-						{if $author->getLocalizedAffiliation()}
-							<span class="affiliation text-xs text-gray-200 ml-2">
-								{$author->getLocalizedAffiliation()|escape}
-							</span>
-						{/if}
-						{if $author->getOrcid()}
-							<span class="orcid text-xs text-accent ml-2">
-								{$orcidIcon}
-								<a href="{$author->getOrcid()|escape}" target="_blank">
-									{$author->getOrcid()|escape}
-								</a>
-							</span>
-						{/if}
-					</li>
-				{/foreach}
-			</ul>
-		{/if}
-
+			{capture assign="breadcrumbsHtml"}
+				{if $section}
+					{include file="frontend/components/breadcrumbs_article.tpl" currentTitle=$section->getLocalizedTitle()}
+				{else}
+					{include file="frontend/components/breadcrumbs_article.tpl" currentTitleKey="common.publication"}
+				{/if}
+			{/capture}
+			{capture assign="subtitleHtml"}
+				{if $publication->getLocalizedData('subtitle')}
+					{$publication->getLocalizedData('subtitle')|strip_unsafe_html}
+				{/if}
+			{/capture}
+				{assign var=authors value=$publication->getData('authors')}
+				{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$publication->getLocalizedFullTitle(null, 'html')|strip_unsafe_html subtitle=$subtitleHtml authors=$authors orcidIcon=$orcidIcon}
 	</div>
 
 </section>

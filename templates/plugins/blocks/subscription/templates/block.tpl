@@ -14,10 +14,10 @@
 {/if}
 {if $institutionalSubscription}
 <div class="pkp_block block_subscription">
-	<div class="uk-container uk-container-small uk-text-center">
-			<p>
-				{translate key="plugins.block.subscription.providedBy" institutionName=$institutionalSubscription->getInstitutionName()|escape}
-			</p>
+	<div class="max-w-md mx-auto text-center bg-gray-50 rounded shadow p-4 my-4">
+		<p class="text-gray-700">
+			{translate key="plugins.block.subscription.providedBy" institutionName=$institutionalSubscription->getInstitutionName()|escape}
+		</p>
 	</div>
 </div>
 {/if}

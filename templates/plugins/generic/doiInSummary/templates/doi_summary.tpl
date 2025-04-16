@@ -1,5 +1,5 @@
-<div id="doi_article-{$article->getId()}" class='doiInSummary uk-text-small'>
-    <a href="{$doiUrl|escape}">
+<div id="doi_article-{$article->getId()}" class="doiInSummary text-xs text-gray-700 mb-2">
+    <a class="text-primary hover:underline" href="{$doiUrl|escape}">
         {$doiUrl}
     </a>
 </div>

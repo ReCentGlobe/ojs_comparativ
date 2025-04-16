@@ -7,22 +7,21 @@
  *
  * A template to be included via Templates::Search::SearchResults::PreResults hook.
  *}
-<div id="luceneSpellingsuggestions"  class="plugins_generic_lucene_preResults_spelling">
+<div id="luceneSpellingsuggestions" class="mb-4 text-sm text-gray-700">
 {if !empty($spellingSuggestion)}
-	<strong>{translate key="plugins.generic.lucene.results.didYouMean"}: <a href="{url op="search" params=$spellingSuggestionUrlParams}">{$spellingSuggestion} </a></strong>
+	<strong>{translate key="plugins.generic.lucene.results.didYouMean"}: <a class="text-primary hover:underline" href="{url op="search" params=$spellingSuggestionUrlParams}">{$spellingSuggestion}</a></strong>
 {/if}
 </div>
 
-<div id="luceneOrdering" class="plugins_generic_lucene_preResults_ordering">
-    {translate key="plugins.generic.lucene.results.orderBy"}:&nbsp;
-    <select id="luceneSearchOrder" name="luceneOrderBy" class="selectMenu">
+<div id="luceneOrdering" class="mb-4 flex items-center gap-2">
+    <span>{translate key="plugins.generic.lucene.results.orderBy"}:</span>
+    <select id="luceneSearchOrder" name="luceneOrderBy" class="border rounded px-2 py-1">
         {html_options options=$luceneOrderByOptions selected=$orderBy}
     </select>
-    &nbsp;
-    <select id="luceneSearchDirection" name="luceneOrderDir" class="selectMenu">
+    <select id="luceneSearchDirection" name="luceneOrderDir" class="border rounded px-2 py-1">
         {html_options options=$luceneOrderDirOptions selected=$orderDir}
     </select>
- </div>
+</div>
 <script type="text/javascript">
     // Get references to the required elements.
     document.addEventListener("DOMContentLoaded", function(event) {ldelim}

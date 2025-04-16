@@ -21,28 +21,24 @@
 
 {include file="frontend/components/header.tpl" pageTitleTranslated=$section->getLocalizedTitle()}
 
-<section class="uk-section-primary uk-section uk-section-small">
-	<div class="uk-container animated fadeIn">
+<section class="bg-primary py-8">
+	<div class="container mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.subscriptions"}
-		<h1 class="uk-h2 uk-margin-remove-top">
+		<h1 class="text-2xl font-bold text-white mt-0">
 			{$section->getLocalizedTitle()|escape} Archive
 		</h1>
-		<h2 class="uk-h4 uk-margin">
+		<h2 class="text-lg font-semibold text-white mt-2 mb-0">
 			{$sectionDescription}
 		</h2>
 	</div>
 </section>
 
-<section class="uk-section-default uk-section uk-section-medium page_section_{$sectionPath|escape}" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-	<div class="uk-container">
+<section class="bg-white py-12 page_section_{$sectionPath|escape}">
+	<div class="container mx-auto">
 		{if $articles|@count}
-			<div class="uk-width-1-1">
-
-
-
+			<div class="w-full">
 				{foreach from=$articles item=article}
-
-					<article class="uk-margin-medium uk-margin-remove-top uk-panel uk-article" uk-scrollspy-class>
+					<article class="my-8 p-4 bg-gray-50 rounded shadow">
 						{* TODO remove section=null workaround. article_summary.tpl expects a specific section array. See issue_toc.tpl. *}
 						{include file="frontend/objects/article_summary_wissue.tpl" section=null showDatePublished=true hideGalleys=true allIssues=$issues}
 						<hr>
@@ -50,23 +46,22 @@
 				{/foreach}
 
 				{* Pagination *}
-				{* Pagination *}
-				{if $prevPage > 1}
-					{capture assign="prevUrl"}{url|escape router=$smarty.const.ROUTE_PAGE page="section" op="view" path=$sectionPath|to_array:$prevPage}{/capture}
-				{elseif $prevPage === 1}
-					{capture assign="prevUrl"}{url|escape router=$smarty.const.ROUTE_PAGE page="section" op="view" path=$sectionPath}{/capture}
-				{/if}
-				{if $nextPage}
-					{capture assign="nextUrl"}{url|escape router=$smarty.const.ROUTE_PAGE page="section" op="view" path=$sectionPath|to_array:$nextPage}{/capture}
-				{/if}
-				{include
-				file="frontend/components/pagination.tpl"
-				prevUrl=$prevUrl
-				nextUrl=$nextUrl
-				showingStart=$showingStart
-				showingEnd=$showingEnd
-				total=$total
-				}
+					{if $prevPage > 1}
+						{capture assign="prevUrl"}{url|escape router=$smarty.const.ROUTE_PAGE page="section" op="view" path=$sectionPath|to_array:$prevPage}{/capture}
+					{elseif $prevPage === 1}
+						{capture assign="prevUrl"}{url|escape router=$smarty.const.ROUTE_PAGE page="section" op="view" path=$sectionPath}{/capture}
+					{/if}
+					{if $nextPage}
+						{capture assign="nextUrl"}{url|escape router=$smarty.const.ROUTE_PAGE page="section" op="view" path=$sectionPath|to_array:$nextPage}{/capture}
+					{/if}
+					{include
+					file="frontend/components/pagination.tpl"
+					prevUrl=$prevUrl
+					nextUrl=$nextUrl
+					showingStart=$showingStart
+					showingEnd=$showingEnd
+					total=$total
+					}
 			</div>
 		{else}
 			<p class="section_empty">
@@ -74,7 +69,6 @@
 			</p>
 		{/if}
 	</div>
-
 </section><!-- .page -->
 
 {include file="frontend/components/footer.tpl"}

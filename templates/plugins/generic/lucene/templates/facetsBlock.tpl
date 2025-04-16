@@ -9,55 +9,28 @@
  *}
 
 <div class="pkp_block block_lucene_facets" id="lucene_facets">
-	<span class="title">{translate key="plugins.generic.lucene.faceting.title"}</span>
+	<span class="block text-lg font-semibold mb-2">{translate key="plugins.generic.lucene.faceting.title"}</span>
 	<div class="content">
-        <ul class="block_lucene_facets_facets accordion">
+        <ul class="block_lucene_facets_facets divide-y">
 		    {foreach from=$facets key="facetCategory" item="facetList"}
 			{if count($facetList)}
-                <li class="block_lucene_facets_facet">
-                <a class="lucenetoggle" href="javascript:void(0);">
+                <li class="block_lucene_facets_facet py-2">
+                <a class="lucenetoggle flex items-center gap-2 cursor-pointer" href="javascript:void(0);">
                     <span class="fa fa-plus"></span>
                     <span>{translate key="plugins.generic.lucene.faceting."|concat:$facetCategory}</span>
                 </a>
-                        <ul class="inner">
+                        <ul class="inner ml-4 mt-2">
                         {foreach from=$facetList key="facet" item="facetCount"}
-                            {if $facetCategory == "publicationDate"}
-                                {assign var="dateFromYear" value=$facet}
-                                {assign var="dateFromMonth" value=1}
-                                {assign var="dateFromDay" value=1}
-                                {assign var="dateToYear" value=$facet}
-                                {assign var="dateToMOnth" value=12}
-                                {assign var="dateToDay" value=31}
-                            {else}
-                                {if $facetCategory == "journalTitle"}
-                                    {assign var=$facetCategory value=$facet}
-                                {else}
-                                    {* exact phrase search *}
-                                    {assign var=$facetCategory value='"'|concat:$facet|concat:'"'}
-                                {/if}
-                            {/if}
-                            <li>
-                                <a href="{url query=$query journalTitle=$journalTitle
-                                    authors=$authors title=$title abstract=$abstract galleyFullText=$galleyFullText
-                                    discipline=$discipline subject=$subject type=$type coverage=$coverage
-                                    dateFromMonth=$dateFromMonth dateFromDay=$dateFromDay dateFromYear=$dateFromYear
-                                    dateToMonth=$dateToMonth dateToDay=$dateToDay dateToYear=$dateToYear escape=false}">
+                            <li class="py-1">
+                                <a class="text-primary hover:underline" href="{url query=$query journalTitle=$journalTitle authors=$authors title=$title abstract=$abstract galleyFullText=$galleyFullText discipline=$discipline subject=$subject type=$type coverage=$coverage dateFromMonth=$dateFromMonth dateFromDay=$dateFromDay dateFromYear=$dateFromYear dateToMonth=$dateToMonth dateToDay=$dateToDay dateToYear=$dateToYear escape=false}">
                                         {$facet|escape}
-                                </a> ({$facetCount})
+                                </a> <span class="text-xs text-gray-500">({$facetCount})</span>
                             </li>
-                            {if $facetCategory == "publicationDate"}
-                                {assign var="dateFromYear" value=""}
-                                {assign var="dateToYear" value=""}
-                            {else}
-                                {assign var=$facetCategory value=""}
-                            {/if}
                         {/foreach}
                         </ul>
                 </li>
-
-
 			{/if}
-		{/foreach}
+		    {/foreach}
         </ul>
 	</div>
 </div>

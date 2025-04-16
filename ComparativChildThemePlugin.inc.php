@@ -5,6 +5,7 @@ use APP\issue\Collector;
 use APP\services\NavigationMenuService;
 use PKP\config\Config;
 use PKP\navigationMenu\NavigationMenuItem;
+use APP\template\TemplateManager;
 use PKP\plugins\ThemePlugin;
 
 class ComparativChildThemePlugin extends ThemePlugin
@@ -79,7 +80,6 @@ class ComparativChildThemePlugin extends ThemePlugin
      */
     public function init()
     {
-
         // Initialize the parent theme
         $this->setParent('defaultthemeplugin');
 
@@ -87,11 +87,15 @@ class ComparativChildThemePlugin extends ThemePlugin
             $this->addStyle('comparativ', $css);
         }
 
+        $this->addStyle('adobe-fonts', 'https://use.typekit.net/ezj3ogl.css');
+
         // Remove Default Scripts
         $this->removeScript('popper', 'js/lib/popper/popper.js');
         $this->removeScript('bsUtil', 'js/lib/bootstrap/util.js');
         $this->removeScript('bsDropdown', 'js/lib/bootstrap/dropdown.js');
         $this->removeScript('default', 'js/vendor.js');
+        // Remove Default Style
+        $this->removeStyle('stylesheet');
 
         // Add Polyfills
 

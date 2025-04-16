@@ -7,7 +7,7 @@
  *
  * Lucene plugin settings
  *}
-<div id="luceneSettings">
+<div id="luceneSettings" class="my-8">
 
 <script>
 	$(function() {ldelim}
@@ -15,20 +15,20 @@
 		$('#luceneSettingsForm').pkpHandler('$.pkp.controllers.form.AjaxFormHandler');
 	{rdelim});
 </script>
-<form class="pkp_form" id="luceneSettingsForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT op="manage" category="generic" plugin=$pluginName verb="settings" save=true}">
+<form class="w-full max-w-2xl mx-auto bg-gray-50 rounded shadow p-8" id="luceneSettingsForm" method="post" action="{url router=$smarty.const.ROUTE_COMPONENT op="manage" category="generic" plugin=$pluginName verb="settings" save=true}">
 	{csrf}
 	{include file="common/formErrors.tpl"}
 
 	{fbvFormArea id="luceneSettingsFormArea" title="plugins.generic.lucene.settings.solrServerSettings"}
-		<div id="description"><p>{translate key="plugins.generic.lucene.settings.description"}</p></div>
+		<div id="description" class="mb-4"><p class="text-gray-700">{translate key="plugins.generic.lucene.settings.description"}</p></div>
 		{fbvElement type="text" id="searchEndpoint" value=$searchEndpoint label="plugins.generic.lucene.settings.searchEndpoint" required=true}
-		<span class="instruct">{translate key="plugins.generic.lucene.settings.searchEndpointInstructions"}</span>
+		<span class="instruct text-xs text-gray-500">{translate key="plugins.generic.lucene.settings.searchEndpointInstructions"}</span>
 		{fbvElement type="text" id="username" value=$username label="plugins.generic.lucene.settings.username" required=true}
-		<span class="instruct">{translate key="plugins.generic.lucene.settings.usernameInstructions"}</span>
+		<span class="instruct text-xs text-gray-500">{translate key="plugins.generic.lucene.settings.usernameInstructions"}</span>
 		{fbvElement type="text" id="password" value=$password label="plugins.generic.lucene.settings.password" required=true password=true}
-		<span class="instruct">{translate key="plugins.generic.lucene.settings.passwordInstructions"}</span>
+		<span class="instruct text-xs text-gray-500">{translate key="plugins.generic.lucene.settings.passwordInstructions"}</span>
 		{fbvElement type="text" id="instId" value=$instId label="plugins.generic.lucene.settings.instId" required=true}
-		<span class="instruct">{translate key="plugins.generic.lucene.settings.instIdInstructions"}</span>
+		<span class="instruct text-xs text-gray-500">{translate key="plugins.generic.lucene.settings.instIdInstructions"}</span>
 
 		{fbvFormSection list=true}
 			{fbvElement type="checkbox" id="useSolr7" value="1" checked=$useSolr7 label="plugins.generic.lucene.settings.solr7"}

@@ -68,7 +68,7 @@
 {if !$heading}
 	{assign var="heading" value="h3"}
 {/if}
-<article class="obj_article_details max-w-5xl mx-auto bg-white rounded shadow p-8 my-8">
+<article class="obj_article_details container mx-auto bg-white border border-gray-200 border-l-4 border-l-primary-light rounded-md p-4 md:p-8 my-12">
 
 	{* Indicate if this is only a preview *}
 	{if $publication->getData('status') !== \PKP\submission\PKPSubmission::STATUS_PUBLISHED}
@@ -86,46 +86,8 @@
 		</div>
 	{/if}
 
-	<h1 class="page_title text-2xl font-bold mb-2">
-		{$publication->getLocalizedFullTitle(null, 'html')|strip_unsafe_html}
-	</h1>
-
-	{if $publication->getLocalizedData('subtitle')}
-		<h2 class="subtitle text-lg font-semibold mb-4 text-primary">
-			{$publication->getLocalizedData('subtitle')|strip_unsafe_html}
-		</h2>
-	{/if}
-
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
 		<div class="md:col-span-2">
-
-			{if $publication->getData('authors')}
-				<section class="item authors mb-6">
-					<h2 class="pkp_screen_reader">{translate key="article.authors"}</h2>
-					<ul class="authors flex flex-wrap gap-4 mb-2">
-					{foreach from=$publication->getData('authors') item=author}
-						<li>
-							<span class="name font-medium">
-								{$author->getFullName()|escape}
-							</span>
-							{if $author->getLocalizedAffiliation()}
-								<span class="affiliation text-xs text-gray-500 ml-2">
-									{$author->getLocalizedAffiliation()|escape}
-								</span>
-							{/if}
-							{if $author->getOrcid()}
-								<span class="orcid text-xs text-accent ml-2">
-									{$orcidIcon}
-									<a href="{$author->getOrcid()|escape}" target="_blank">
-										{$author->getOrcid()|escape}
-									</a>
-								</span>
-							{/if}
-						</li>
-					{/foreach}
-					</ul>
-				</section>
-			{/if}
 
 			{* DOI *}
 			{foreach from=$pubIdPlugins item=pubIdPlugin}
@@ -166,7 +128,7 @@
 
 			{* Abstract *}
 			{if $publication->getLocalizedData('abstract')}
-				<section class="item abstract mb-6">
+				<section class="item abstract mb-6 prose prose-xl max-w-full font-serif">
 					<h2 class="label">{translate key="article.abstract"}</h2>
 					{$publication->getLocalizedData('abstract')|strip_unsafe_html}
 				</section>
@@ -234,196 +196,207 @@
 		</div><!-- .main_entry -->
 
 		<div class="md:col-span-1">
-			<div class="space-y-6">
-			{* Article/Issue cover image *}
-			{if $publication->getLocalizedData('coverImage') || ($issue && $issue->getLocalizedCoverImage())}
-				<div class="item cover_image mb-4">
-					<div class="sub_item">
-						{if $publication->getLocalizedData('coverImage')}
-							{assign var="coverImage" value=$publication->getLocalizedData('coverImage')}
-							<img
-								src="{$publication->getLocalizedCoverImageUrl($article->getData('contextId'))|escape}"
-								alt="{$coverImage.altText|escape|default:''}"
-							>
-						{else}
-							<a href="{url page="issue" op="view" path=$issue->getBestIssueId()}">
-								<img src="{$issue->getLocalizedCoverImageUrl()|escape}" alt="{$issue->getLocalizedCoverImageAltText()|escape|default:''}">
-							</a>
-						{/if}
+			<aside class="space-y-6 bg-gray-50 border border-gray-100 rounded-md p-4">
+				{* Article/Issue cover image *}
+				{if $publication->getLocalizedData('coverImage') || ($issue && $issue->getLocalizedCoverImage())}
+					<div class="item cover_image mb-4">
+						<div class="sub_item">
+							{if $publication->getLocalizedData('coverImage')}
+								{assign var="coverImage" value=$publication->getLocalizedData('coverImage')}
+								<img
+									src="{$publication->getLocalizedCoverImageUrl($article->getData('contextId'))|escape}"
+									alt="{$coverImage.altText|escape|default:''}"
+									class="rounded w-full object-cover border border-gray-200"
+								>
+							{else}
+								<a href="{url page="issue" op="view" path=$issue->getBestIssueId()}">
+									<img src="{$issue->getLocalizedCoverImageUrl()|escape}" alt="{$issue->getLocalizedCoverImageAltText()|escape|default:''}" class="rounded w-full object-cover border border-gray-200">
+								</a>
+							{/if}
+						</div>
 					</div>
-				</div>
-			{/if}
+				{/if}
 
-			{* Article Galleys *}
-			{if $primaryGalleys}
-				<div class="item galleys mb-4">
-					<h2 class="pkp_screen_reader">
-						{translate key="submission.downloads"}
-					</h2>
-					<ul class="value galleys_links space-y-1">
-						{foreach from=$primaryGalleys item=galley}
-							<li>
-								{include file="frontend/objects/galley_link.tpl" parent=$article publication=$publication galley=$galley purchaseFee=$currentJournal->getData('purchaseArticleFee') purchaseCurrency=$currentJournal->getData('currency')}
-							</li>
-						{/foreach}
-					</ul>
-				</div>
-			{/if}
-			{if $supplementaryGalleys}
-				<div class="item galleys mb-4">
-					<h3 class="pkp_screen_reader">
-						{translate key="submission.additionalFiles"}
-					</h3>
-					<ul class="value supplementary_galleys_links space-y-1">
-						{foreach from=$supplementaryGalleys item=galley}
-							<li>
-								{include file="frontend/objects/galley_link.tpl" parent=$article publication=$publication galley=$galley isSupplementary="1"}
-							</li>
-						{/foreach}
-					</ul>
-				</div>
-			{/if}
+				
 
-			{if $publication->getData('datePublished')}
-			<div class="item published mb-4">
-				<section class="sub_item">
-					<h2 class="label">
-						{translate key="submissions.published"}
-					</h2>
-					<div class="value">
-						{if $firstPublication->getId() === $publication->getId()}
-							<span>{$firstPublication->getData('datePublished')|date_format:$dateFormatShort}</span>
-						{else}
-							<span>{translate key="submission.updatedOn" datePublished=$firstPublication->getData('datePublished')|date_format:$dateFormatShort dateUpdated=$publication->getData('datePublished')|date_format:$dateFormatShort}</span>
-						{/if}
-					</div>
-				</section>
-				{if count($article->getPublishedPublications()) > 1}
-					<section class="sub_item versions mb-2">
-						<h2 class="label">
-							{translate key="submission.versions"}
+				{* Article Galleys *}
+				{if $primaryGalleys}
+					<div class="item galleys mb-4">
+						<h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+							{translate key="submission.downloads"}
 						</h2>
-						<ul class="value">
-							{foreach from=array_reverse($article->getPublishedPublications()) item=iPublication}
-								{capture assign="name"}{translate key="submission.versionIdentity" datePublished=$iPublication->getData('datePublished')|date_format:$dateFormatShort version=$iPublication->getData('version')}{/capture}
+						<ul class="value galleys_links space-y-1">
+							{foreach from=$primaryGalleys item=galley}
 								<li>
-									{if $iPublication->getId() === $publication->getId()}
-										{$name}
-									{elseif $iPublication->getId() === $currentPublication->getId()}
-										<a href="{url page="article" op="view" path=$article->getBestId()}">{$name}</a>
-									{else}
-										<a href="{url page="article" op="view" path=$article->getBestId()|to_array:"version":$iPublication->getId()}">{$name}</a>
-									{/if}
+									{include file="frontend/objects/galley_link.tpl" parent=$article publication=$publication galley=$galley purchaseFee=$currentJournal->getData('purchaseArticleFee') purchaseCurrency=$currentJournal->getData('currency')}
 								</li>
 							{/foreach}
 						</ul>
-					</section>
+					</div>
 				{/if}
-			</div>
-			{/if}
+				{if $supplementaryGalleys}
+					<div class="item galleys mb-4">
+						<h3 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+							{translate key="submission.additionalFiles"}
+						</h3>
+						<ul class="value supplementary_galleys_links space-y-1">
+							{foreach from=$supplementaryGalleys item=galley}
+								<li>
+									{include file="frontend/objects/galley_link.tpl" parent=$article publication=$publication galley=$galley isSupplementary="1"}
+								</li>
+							{/foreach}
+						</ul>
+					</div>
+				{/if}
 
-			{* Data Availability Statement *}
-			{if $publication->getLocalizedData('dataAvailability')}
-				<section class="item dataAvailability">
-					<h2 class="label">{translate key="submission.dataAvailability"}</h2>
-					{$publication->getLocalizedData('dataAvailability')|strip_unsafe_html}
-				</section>
-			{/if}
-
-			{* Issue article appears in *}
-			{if $issue || $section || $categories}
-				<div class="item issue mb-4">
-					{if $issue}
+				{if $publication->getData('datePublished')}
+					<div class="item published mb-4">
 						<section class="sub_item mb-2">
-							<h2 class="label">
-								{translate key="issue.issue"}
+							<h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+								{translate key="submissions.published"}
 							</h2>
-							<div class="value">
-								<a class="title" href="{url page="issue" op="view" path=$issue->getBestIssueId()}">
-									{$issue->getIssueIdentification()}
-								</a>
+							<div class="value text-sm text-gray-700">
+								{if $firstPublication->getId() === $publication->getId()}
+									<span>{$firstPublication->getData('datePublished')|date_format:$dateFormatShort}</span>
+								{else}
+									<span>{translate key="submission.updatedOn" datePublished=$firstPublication->getData('datePublished')|date_format:$dateFormatShort dateUpdated=$publication->getData('datePublished')|date_format:$dateFormatShort}</span>
+								{/if}
 							</div>
 						</section>
-					{/if}
-					{if $section}
-						<section class="sub_item mb-2">
-							<h2 class="label">
-								{translate key="section.section"}
-							</h2>
-							<div class="value">
-								{$section->getLocalizedTitle()|escape}
-							</div>
-						</section>
-					{/if}
-					{if $categories}
-						<section class="sub_item mb-2">
-							<h2 class="label">
-								{translate key="category.category"}
-							</h2>
-							<div class="value">
-								<ul class="categories flex flex-wrap gap-2 mt-1">
-									{foreach from=$categories item=category}
-										<li><a href="{url router=\PKP\core\PKPApplication::ROUTE_PAGE page="catalog" op="category" path=$category->getPath()|escape}">{$category->getLocalizedTitle()|escape}</a></li>
+						{if count($article->getPublishedPublications()) > 1}
+							<section class="sub_item versions mb-2">
+								<h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+									{translate key="submission.versions"}
+								</h2>
+								<ul class="value text-sm">
+									{foreach from=array_reverse($article->getPublishedPublications()) item=iPublication}
+										{capture assign="name"}{translate key="submission.versionIdentity" datePublished=$iPublication->getData('datePublished')|date_format:$dateFormatShort version=$iPublication->getData('version')}{/capture}
+										<li>
+											{if $iPublication->getId() === $publication->getId()}
+												{$name}
+											{elseif $iPublication->getId() === $currentPublication->getId()}
+												<a href="{url page="article" op="view" path=$article->getBestId()}">{$name}</a>
+											{else}
+												<a href="{url page="article" op="view" path=$article->getBestId()|to_array:"version":$iPublication->getId()}">{$name}</a>
+											{/if}
+										</li>
 									{/foreach}
 								</ul>
-							</div>
-						</section>
-					{/if}
-				</div>
-			{/if}
-
-			{* PubIds (requires plugins) *}
-			{foreach from=$pubIdPlugins item=pubIdPlugin}
-				{if $pubIdPlugin->getPubIdType() == 'doi'}
-					{continue}
+							</section>
+						{/if}
+					</div>
 				{/if}
-				{assign var=pubId value=$publication->getData('pub-id::'|cat:$pubIdPlugin->getPubIdType())}
-				{if $pubId}
-					<section class="item pubid mb-4">
-						<h2 class="label">
-							{$pubIdPlugin->getPubIdDisplayType()|escape}
-						</h2>
-						<div class="value">
-							{if $pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
-								<a id="pub-id::{$pubIdPlugin->getPubIdType()|escape}" href="{$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}">
-									{$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
-								</a>
-							{else}
-								{$pubId|escape}
-							{/if}
-						</div>
+
+				{if $publication->getLocalizedData('dataAvailability')}
+					<section class="item dataAvailability">
+						<h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">{translate key="submission.dataAvailability"}</h2>
+						<div class="text-sm text-gray-700">{$publication->getLocalizedData('dataAvailability')|strip_unsafe_html}</div>
 					</section>
 				{/if}
-			{/foreach}
 
-			{* Licensing info *}
-			{if $currentContext->getLocalizedData('licenseTerms') || $publication->getData('licenseUrl')}
-				<div class="item copyright mb-4">
-					<h2 class="label">
-						{translate key="submission.license"}
-					</h2>
-					{if $publication->getData('licenseUrl')}
-						{if $ccLicenseBadge}
-							{if $publication->getLocalizedData('copyrightHolder')}
-								<p>{translate key="submission.copyrightStatement" copyrightHolder=$publication->getLocalizedData('copyrightHolder') copyrightYear=$publication->getData('copyrightYear')}</p>
-							{/if}
-							{$ccLicenseBadge}
-						{else}
-							<a href="{$publication->getData('licenseUrl')|escape}" class="copyright">
-								{if $publication->getLocalizedData('copyrightHolder')}
-									{translate key="submission.copyrightStatement" copyrightHolder=$publication->getLocalizedData('copyrightHolder') copyrightYear=$publication->getData('copyrightYear')}
-								{else}
-									{translate key="submission.license"}
-								{/if}
-							</a>
+				{if $issue || $section || $categories || $doiObject}
+					{* Issue, Section, Categories *}
+					<div class="item issue mb-4">
+					{* DOI *}
+				{assign var=doiObject value=$article->getCurrentPublication()->getData('doiObject')}
+				{if $doiObject}
+				  {assign var="doiUrl" value=$doiObject->getData('resolvingUrl')|escape}
+				  <section class="item doi mb-4">
+				    <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+				      {capture assign=translatedDOI}{translate key="doi.readerDisplayName"}{/capture}
+				      {translate key="semicolon" label=$translatedDOI}
+				    </h2>
+				    <span class="value text-sm text-primary">
+				      <a href="{$doiUrl}">{$doiUrl}</a>
+				    </span>
+				  </section>
+				{/if}
+						{if $issue}
+							<section class="sub_item mb-2">
+								<h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">{translate key="issue.issue"}</h2>
+								<div class="value text-sm text-primary">
+									<a class="title" href="{url page="issue" op="view" path=$issue->getBestIssueId()}">
+										{$issue->getIssueIdentification()}
+									</a>
+								</div>
+							</section>
 						{/if}
-					{/if}
-					{$currentContext->getLocalizedData('licenseTerms')}
-				</div>
-			{/if}
+						{if $section}
+							<section class="sub_item mb-2">
+								<h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">{translate key="section.section"}</h2>
+								<div class="value text-sm text-gray-700">
+									{$section->getLocalizedTitle()|escape}
+								</div>
+							</section>
+						{/if}
+						{if $categories}
+							<section class="sub_item mb-2">
+								<h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">{translate key="category.category"}</h2>
+								<div class="value text-sm text-gray-700">
+									<ul class="categories flex flex-wrap gap-2 mt-1">
+										{foreach from=$categories item=category}
+											<li><a href="{url router=\PKP\core\PKPApplication::ROUTE_PAGE page="catalog" op="category" path=$category->getPath()|escape}">{$category->getLocalizedTitle()|escape}</a></li>
+										{/foreach}
+									</ul>
+								</div>
+							</section>
+						{/if}
+					</div>
+				{/if}
 
-			{call_hook name="Templates::Article::Details"}
-			</div>
+					{* PubIds (requires plugins) *}
+					{foreach from=$pubIdPlugins item=pubIdPlugin}
+					  {if $pubIdPlugin->getPubIdType() == 'doi'}
+					    {continue}
+					  {/if}
+					  {assign var=pubId value=$article->getStoredPubId($pubIdPlugin->getPubIdType())}
+					  {if $pubId}
+					    <section class="item pubid mb-4">
+					      <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+					        {$pubIdPlugin->getPubIdDisplayType()|escape}
+					      </h2>
+					      <div class="value text-sm text-gray-700">
+					        {if $pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
+					          <a id="pub-id::{$pubIdPlugin->getPubIdType()|escape}" href="{$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}">
+					            {$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
+					          </a>
+					        {else}
+					          {$pubId|escape}
+					        {/if}
+					      </div>
+					    </section>
+					  {/if}
+					{/foreach}
+
+				{if $currentContext->getLocalizedData('licenseTerms') || $publication->getData('licenseUrl')}
+					<div class="item copyright mb-4">
+						<h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+							{translate key="submission.license"}
+						</h2>
+						<div class="text-sm text-gray-700">
+							{if $publication->getData('licenseUrl')}
+								{if $ccLicenseBadge}
+									{if $publication->getLocalizedData('copyrightHolder')}
+										<p>{translate key="submission.copyrightStatement" copyrightHolder=$publication->getLocalizedData('copyrightHolder') copyrightYear=$publication->getData('copyrightYear')}</p>
+									{/if}
+									{$ccLicenseBadge}
+								{else}
+									<a href="{$publication->getData('licenseUrl')|escape}" class="copyright">
+										{if $publication->getLocalizedData('copyrightHolder')}
+											{translate key="submission.copyrightStatement" copyrightHolder=$publication->getLocalizedData('copyrightHolder') copyrightYear=$publication->getData('copyrightYear')}
+										{else}
+											{translate key="submission.license"}
+										{/if}
+									</a>
+								{/if}
+							{/if}
+							{$currentContext->getLocalizedData('licenseTerms')}
+						</div>
+					</div>
+				{/if}
+
+				{call_hook name="Templates::Article::Details"}
+			</aside>
 		</div><!-- .entry_details -->
 	</div><!-- .row -->
 

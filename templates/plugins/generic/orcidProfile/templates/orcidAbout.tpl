@@ -10,41 +10,24 @@
  *}
 {include file="frontend/components/header.tpl"}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-
-	<div class="uk-container">
+<section class="bg-primary py-8">
+	<div class="container mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="plugins.generic.orcidProfile.about.title"}
-		<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
-			{translate key="plugins.generic.orcidProfile.about.title"}
-		</h1>
-
+		<h1 class="text-2xl font-bold text-white mt-0">{translate key="plugins.generic.orcidProfile.about.title"}</h1>
 	</div>
-
 </section>
-<section class="uk-section-default uk-section uk-section-medium">
-	<div class="uk-container">
-		<div uk-grid>
-			<div class="uk-width-1-1">
-				<p class="description">
-					{translate key="plugins.generic.orcidProfile.about.orcidExplanation"}
-				</p>
-				<h3>{translate key="plugins.generic.orcidProfile.about.howAndWhy.title"}</h3>
-
-				{if $isMemberApi}
-					<p class="description">
-					{translate key="plugins.generic.orcidProfile.about.howAndWhyMemberAPI"}
-				</p>
-				{else}
-					<p class="description">
-						{translate key="plugins.generic.orcidProfile.about.howAndWhyPublicAPI"}
-					</p>
-				{/if}
-
-				<h3>{translate key="plugins.generic.orcidProfile.about.display.title"}</h3>
-				<p class="description">
-					{translate key="plugins.generic.orcidProfile.about.display"}
-				</p>
-			</div>
+<section class="bg-white py-12">
+	<div class="container mx-auto">
+		<div class="w-full max-w-xl mx-auto">
+			<p class="mb-4 text-gray-700">{translate key="plugins.generic.orcidProfile.about.orcidExplanation"}</p>
+			<h3 class="text-lg font-semibold mb-2">{translate key="plugins.generic.orcidProfile.about.howAndWhy.title"}</h3>
+			{if $isMemberApi}
+				<p class="mb-4 text-gray-700">{translate key="plugins.generic.orcidProfile.about.howAndWhyMemberAPI"}</p>
+			{else}
+				<p class="mb-4 text-gray-700">{translate key="plugins.generic.orcidProfile.about.howAndWhyPublicAPI"}</p>
+			{/if}
+			<h3 class="text-lg font-semibold mb-2">{translate key="plugins.generic.orcidProfile.about.display.title"}</h3>
+			<p class="mb-4 text-gray-700">{translate key="plugins.generic.orcidProfile.about.display"}</p>
 		</div>
 	</div>
 </section><!-- .page -->

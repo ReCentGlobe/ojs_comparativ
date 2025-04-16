@@ -8,12 +8,12 @@
  * A template to be included via Templates::Manager::Sections::SectionForm::AdditionalMetadata hook.
  *}
 <div class="pkp_helpers_clear"></div>
-<div class="section">
+<div class="my-4">
     <tr>
-        <td class="label">{fieldLabel name="rankingBoost" key="plugins.generic.lucene.sectionForm.rankingBoost"}</td>
-        <td class="value">
-            <span class="instruct">{translate key="plugins.generic.lucene.sectionForm.rankingBoostInstructions"}</span><br />
-            <p><select name="rankingBoostOption" size="1" id="rankingBoostOption" class="selectMenu">
+        <td class="font-semibold pr-2">{fieldLabel name="rankingBoost" key="plugins.generic.lucene.sectionForm.rankingBoost"}</td>
+        <td>
+            <span class="text-xs text-gray-500">{translate key="plugins.generic.lucene.sectionForm.rankingBoostInstructions"}</span><br />
+            <p><select name="rankingBoostOption" size="1" id="rankingBoostOption" class="border rounded px-2 py-1">
                 {html_options options=$rankingBoostOptions selected=$rankingBoostOption}
             </select></p>
         </td>

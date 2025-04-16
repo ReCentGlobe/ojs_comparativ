@@ -16,30 +16,14 @@
  *}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$issueIdentification}
 
-<section class="bg-primary py-8">
-
-		<div class="container mx-auto">
-      {* Display a message if no current issue exists *}
-      {if !$issue}
-        {include file="frontend/components/breadcrumbs_issue.tpl" currentTitleKey="current.noCurrentIssue"}
-        {* Display an issue with the Table of Contents *}
-      {else}
-        {include file="frontend/components/breadcrumbs_issue.tpl" currentTitle=$issueIdentification}
-      {/if}
-
-			<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
-        {$issue->getLocalizedTitle()|escape}
-			</h1>
-
-
-				<h2 class="text-lg font-semibold text-white mb-4 animate-fadeIn">
-          {$issueSeries|escape}
-				</h2>
-
-
-		</div>
-
-</section>
+{capture assign="breadcrumbsHtml"}
+  {if !$issue}
+    {include file="frontend/components/breadcrumbs_issue.tpl" currentTitleKey="current.noCurrentIssue"}
+  {else}
+    {include file="frontend/components/breadcrumbs_issue.tpl" currentTitle=$issueIdentification}
+  {/if}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$issue->getLocalizedTitle()|escape subtitle=$issueSeries|escape}
 
 <section class="bg-white py-12">
 

@@ -9,31 +9,19 @@
  *}
 
 {if !empty($selectedFacets)}
-    <div class="pkp_helpers_clear"></div>
-    <h4>{translate key="search.advancedFilters"}</h4>
-
-    {foreach from=$selectedFacets key="facetCategory" item=value}
-        {* remember the original value*}
-        {assign var = "orgValue" value = $value.facetValue }
-        {* Temporarily remove the filter *}
-        {assign var = $facetCategory value=""}
-
-    <div class="facetsection">
-            <label class="label">{$value.facetDisplayName}</label>
-             {$value.facetValue}
-        <a href="{url query=$query journalTitle=$journalTitle
-        authors=$authors title=$title abstract=$abstract galleyFullText=$galleyFullText
-        discipline=$discipline subject=$subject type=$type coverage=$coverage
-        dateFromMonth=$dateFromMonth dateFromDay=$dateFromDay dateFromYear=$dateFromYear
-        dateToMonth=$dateToMonth dateToDay=$dateToDay dateToYear=$dateToYear escape=false}">
-            Löschen
-        </a>
-
-        {*restore original filter value*}
-        {assign var=$facetCategory value=$orgValue}
-
+    <div class="my-4">
+        <h4 class="text-base font-semibold mb-2">{translate key="search.advancedFilters"}</h4>
+        {foreach from=$selectedFacets key="facetCategory" item=value}
+            {assign var = "orgValue" value = $value.facetValue }
+            {assign var = $facetCategory value = ""}
+            <div class="mb-2 p-2 bg-gray-50 rounded border">
+                <label class="font-semibold">{$value.facetDisplayName}</label>
+                <span class="ml-2">{$value.facetValue}</span>
+                <a class="ml-4 text-red-600 hover:underline" href="{url query=$query journalTitle=$journalTitle authors=$authors title=$title abstract=$abstract galleyFullText=$galleyFullText discipline=$discipline subject=$subject type=$type coverage=$coverage dateFromMonth=$dateFromMonth dateFromDay=$dateFromDay dateFromYear=$dateFromYear dateToMonth=$dateToMonth dateToDay=$dateToDay dateToYear=$dateToYear escape=false}">Löschen</a>
+            </div>
+            {assign var=$facetCategory value=$orgValue}
+        {/foreach}
     </div>
-    {/foreach}
 {/if}
 
 
