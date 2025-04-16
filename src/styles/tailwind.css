@@ -23,6 +23,12 @@
 }
 
 @layer base {
+  .citation_display > .label{
+    @apply text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2;
+  }
+  .citation_display .value{
+    @apply text-sm text-primary;
+  }
 
   /*
  * The Typekit service used to deliver this font or fonts for use on websites

@@ -15,7 +15,7 @@
  * @uses $issue Issue Issue this article was published in.
  *}
 
-<ul class="flex items-center space-x-2 text-sm text-blue-100 mb-2" role="navigation" aria-label="{translate key="navigation.breadcrumbLabel"}">
+<ul class="flex flex-wrap items-center space-x-2 text-sm text-blue-100 mb-2 overflow-x-auto whitespace-nowrap" role="navigation" aria-label="{translate key="navigation.breadcrumbLabel"}">
   <li>
     <a href="{url page="index" router=$smarty.const.ROUTE_PAGE}" class="hover:underline">
       {translate key="common.homepageNavigationLabel"}
@@ -30,7 +30,7 @@
   <li aria-hidden="true" class="select-none">&#8250;</li>
   <li>
     <a href="{url page="issue" op="view" path=$issue->getBestIssueId()}" class="hover:underline">
-      {$issue->getIssueIdentification()}
+      {$issue->getIssueIdentification()|truncate:40:"..."}
     </a>
   </li>
   <li aria-hidden="true" class="select-none">&#8250;</li>

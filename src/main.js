@@ -1,6 +1,7 @@
 // https://vitejs.dev/config/#build-polyfillmodulepreload
 import 'vite/modulepreload-polyfill'
-
+import { setupMobileNav } from './scripts/mobile-nav.js';
+setupMobileNav();
 // Styles
 import './styles'
 

@@ -72,7 +72,7 @@
 						<form class="hidden md:block" action="{url page="search" op="search"}" method="post" role="search" autocomplete="on">
 							<input class="rounded px-2 py-1 text-gray-900 border border-gray-200 focus:border-primary" name="query" type="search" placeholder="Search..." value="{$searchQuery|escape}" aria-label="{translate|escape key="common.searchQuery"}">
 						</form>
-						{load_menu name="user" id="navigationUser" ulClass="flex gap-4 items-center" liClass="profile"}
+						<span class="hidden md:inline">{load_menu name="user" id="navigationUser" ulClass="flex gap-4 items-center" liClass="profile"}</span>
 						<button id="mobile-menu-toggle" class="md:hidden flex items-center px-2 py-1 border border-gray-300 rounded text-primary hover:text-accent hover:border-accent focus:outline-none" aria-label="Open menu" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
 							<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
 						</button>

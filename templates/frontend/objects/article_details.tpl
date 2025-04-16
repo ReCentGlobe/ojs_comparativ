@@ -68,7 +68,7 @@
 {if !$heading}
 	{assign var="heading" value="h3"}
 {/if}
-<article class="obj_article_details container mx-auto bg-white border border-gray-200 border-l-4 border-l-primary-light rounded-md p-4 md:p-8 my-12">
+<article class="obj_article_details container mx-auto bg-white border border-gray-200 md:border-l-4 md:border-l-primary-light rounded-md md:rounded-md p-2 sm:p-4 md:p-8 my-8 md:my-12">
 
 	{* Indicate if this is only a preview *}
 	{if $publication->getData('status') !== \PKP\submission\PKPSubmission::STATUS_PUBLISHED}
@@ -86,7 +86,7 @@
 		</div>
 	{/if}
 
-	<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mt-6 md:mt-8">
 		<div class="md:col-span-2">
 
 			{* DOI *}
@@ -128,7 +128,7 @@
 
 			{* Abstract *}
 			{if $publication->getLocalizedData('abstract')}
-				<section class="item abstract mb-6 prose prose-xl max-w-full font-serif">
+				<section class="item abstract mb-6 prose prose-md sm:prose-xl max-w-full font-serif">
 					<h2 class="label">{translate key="article.abstract"}</h2>
 					{$publication->getLocalizedData('abstract')|strip_unsafe_html}
 				</section>
@@ -195,8 +195,8 @@
 
 		</div><!-- .main_entry -->
 
-		<div class="md:col-span-1">
-			<aside class="space-y-6 bg-gray-50 border border-gray-100 rounded-md p-4">
+		<div class="md:col-span-1 mt-8 md:mt-0">
+			<aside class="space-y-6 bg-gray-50 border border-gray-100 md:rounded-md rounded-none md:p-4 p-2">
 				{* Article/Issue cover image *}
 				{if $publication->getLocalizedData('coverImage') || ($issue && $issue->getLocalizedCoverImage())}
 					<div class="item cover_image mb-4">
