@@ -19,7 +19,7 @@
 <section class="bg-white py-12">
   <div class="container mx-auto">
     <div class="grid">
-      <div class="col-span-1">
+      <div class="col-span-1  prose prose-xl font-serif max-w-full prose-h2:font-sans prose-h2:text-xl prose-a:text-accent prose-a:underline hover:prose-a:text-accent-dark">
         {$currentContext->getLocalizedSetting('editorialTeam')}
         {include file="frontend/components/editLink.tpl" page="management" op="settings" path="context" anchor="editorialTeam" sectionTitleKey="about.editorialTeam"}
       </div>

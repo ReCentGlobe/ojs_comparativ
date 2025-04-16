@@ -21,7 +21,7 @@
 	<div class="container mx-auto">
 		<div class="grid">
 			<div class="col-span-1">
-				<div class="content text-gray-700">
+				<div class="content text-gray-700  prose prose-xl font-serif max-w-full prose-h2:font-sans prose-h2:text-xl prose-a:text-accent prose-a:underline hover:prose-a:text-accent-dark">
 					<p>
 						Comparativ publishes thematic issues and single articles with a specific focus on border-crossing flows of people, goods, capital, ideas, and other cultural patterns as well as viruses, pollution, and effects of climate change. We give preference to manuscripts that address not only the qualitative or quantitative measurement of such flows but also take into consideration the changing attempts to control these flows. This revision may take the form of new institutions, spatial formats, social habits, or ideologies, to mention but a few. We also welcome contributions with theoretical and methodological considerations as well as papers on the role of transnationalism and transregionalism in any societal dimension. The rigorous peer-review process by an international body of reviewers guarantees the high quality of each issue.
 					</p>

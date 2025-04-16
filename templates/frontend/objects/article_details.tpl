@@ -86,7 +86,7 @@
 		</div>
 	{/if}
 
-	<div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mt-6 md:mt-8">
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
 		<div class="md:col-span-2">
 
 			{* DOI *}
