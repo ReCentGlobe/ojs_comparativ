@@ -10,14 +10,14 @@
 {include file="frontend/components/header.tpl"}
 
 <section class="bg-primary py-8">
-	<div class="container mx-auto animate-fadeIn">
+	<div class="container max-w-7xl mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$pageTitle}
 		<h1 class="text-2xl font-bold text-white mt-0">Registration complete</h1>
 	</div>
 </section>
 
 <section class="bg-white py-12">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		<div class="w-full max-w-xl mx-auto bg-green-50 border-l-4 border-green-500 text-green-900 p-6 mb-8 rounded">
 			{translate key="user.login.registrationComplete.instructions"}
 		</div>

@@ -68,7 +68,7 @@
 {if !$heading}
 	{assign var="heading" value="h3"}
 {/if}
-<article class="obj_article_details container mx-auto bg-white border border-gray-200 md:border-l-4 md:border-l-primary-light rounded-md md:rounded-md p-2 sm:p-4 md:p-8 my-8 md:my-12">
+<article class="obj_article_details container max-w-7xl mx-auto bg-white border border-gray-200 md:border-l-4 md:border-l-primary-light rounded-md md:rounded-md p-2 sm:p-4 md:p-8 my-8 md:my-12">
 
 	{* Indicate if this is only a preview *}
 	{if $publication->getData('status') !== \PKP\submission\PKPSubmission::STATUS_PUBLISHED}

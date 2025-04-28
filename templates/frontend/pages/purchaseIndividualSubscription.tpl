@@ -11,7 +11,7 @@
 {include file="frontend/components/header.tpl" pageTitle="user.subscriptions.purchaseIndividualSubscription"}
 
 <section class="bg-primary py-8">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		{* Display a message if no current issue exists *}
 		{include file="frontend/components/breadcrumbs.tpl" currentTitle="Purchase Individual Subscription"}
 
@@ -23,7 +23,7 @@
 </section>
 
 <section class="bg-white py-12">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		<div class="flex justify-center items-center">
 			<form class="w-full max-w-lg bg-gray-50 rounded shadow p-8 purchase_subscription" method="post" id="subscriptionForm" action="{url op="payPurchaseSubscription" path="individual"|to_array:$subscriptionId}">
 		{csrf}

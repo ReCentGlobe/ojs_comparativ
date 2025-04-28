@@ -26,7 +26,7 @@
 {include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="about.contact"}}
 
 <section class="bg-white py-12">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		<div class="grid md:grid-cols-3 gap-8">
 			<div class="md:col-span-3 mb-4">
 				{include file="frontend/components/editLink.tpl" page="management" op="settings" path="context" anchor="contact" sectionTitleKey="about.contact"}

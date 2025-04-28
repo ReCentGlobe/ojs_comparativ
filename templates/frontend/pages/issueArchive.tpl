@@ -19,14 +19,14 @@
 {include file="frontend/components/header.tpl" pageTitleTranslated=$pageTitle}
 
 <section class="bg-primary py-8">
-	<div class="container mx-auto animate-fadeIn">
+	<div class="container max-w-7xl mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitle=$pageTitle}
 		<h1 class="text-2xl font-bold text-white mt-0">Issue Archive</h1>
 	</div>
 </section>
 
 <section class="bg-white py-12">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 
 		{if $isUserLoggedIn}
 			<div id="timeline-login-App" class="mb-8">

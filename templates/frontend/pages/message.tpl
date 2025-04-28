@@ -11,7 +11,7 @@
 {include file="frontend/components/header.tpl"}
 
 <section class="bg-primary py-8">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$pageTitle}
 		<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
 			{translate key=$pageTitle}
@@ -20,7 +20,7 @@
 </section>
 
 <section class="bg-white py-8">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		<div class="description text-gray-700 mb-6">
 			{if $messageTranslated}
 				{$messageTranslated}

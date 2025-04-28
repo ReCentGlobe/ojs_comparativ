@@ -12,14 +12,14 @@
 {include file="frontend/components/header.tpl" pageTitle="user.register"}
 
 <section class="bg-primary py-8">
-	<div class="container mx-auto animate-fadeIn">
+	<div class="container max-w-7xl mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.subscriptions.purchaseInstitutionalSubscription"}
 		<h1 class="text-2xl font-bold text-white mt-0">Registration</h1>
 	</div>
 </section>
 
 <section class="bg-white py-12">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		<form class="w-full max-w-2xl mx-auto bg-gray-50 rounded shadow p-8 registration" id="register" method="post" action="{url op="register"}">
 			{csrf}
 

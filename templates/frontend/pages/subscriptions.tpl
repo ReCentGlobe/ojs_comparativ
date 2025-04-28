@@ -16,7 +16,7 @@
 {include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="about.subscriptions"}}
 
 <section class="bg-white py-12">
-    <div class="container mx-auto">
+    <div class="container max-w-7xl mx-auto">
         <div class="grid">
 
             <div class="col-span-1 mb-8">

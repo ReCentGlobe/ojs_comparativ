@@ -26,7 +26,7 @@
       <circle cx="200" cy="200" r="200" fill="white" />
     </svg>
   </div>
-  <div class="container mx-auto flex flex-col md:flex-row items-center gap-10 px-4 md:px-0 relative z-10">
+  <div class="container max-w-7xl max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 px-4 md:px-0 relative z-10">
     {if $homepageImage}
       <div class="w-full md:w-1/2 flex-shrink-0">
         <figure class="rounded-xl overflow-hidden shadow-lg border-4 border-primary-light bg-white/10">

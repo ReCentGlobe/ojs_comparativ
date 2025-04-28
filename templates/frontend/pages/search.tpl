@@ -20,14 +20,14 @@
 
 
 <section class="bg-primary py-8">
-    <div class="container mx-auto animate-fadeIn">
+    <div class="container max-w-7xl mx-auto animate-fadeIn">
         {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="common.search"}
         <h1 class="text-2xl font-bold text-white mt-0">Search</h1>
     </div>
 </section>
 
 <section class="bg-white py-12">
-    <div class="container mx-auto">
+    <div class="container max-w-7xl mx-auto">
         <div class="grid md:grid-cols-3 gap-8">
 
             <div class="md:col-span-2">

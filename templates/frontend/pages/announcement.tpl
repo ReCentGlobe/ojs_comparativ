@@ -12,14 +12,14 @@
 {include file="frontend/components/header.tpl" pageTitleTranslated=$announcement->getLocalizedTitle()}
 
 <section class="bg-primary py-8">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$announcement->getLocalizedTitle()}
 		<h1 class="text-2xl font-light text-white mt-0">Press</h1>
 	</div>
 </section>
 
 <section class="py-8 page page_announcement">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		<div class="grid">
 			<div class="col-span-1">
 				{* Display book details *}

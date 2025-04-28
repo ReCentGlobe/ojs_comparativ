@@ -17,7 +17,7 @@
 {include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="announcement.announcements"}}
 
 <section class="py-8 page page_announcements">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 
     {include file="frontend/components/editLink.tpl" page="management" op="settings" path="website" anchor="announcements" sectionTitleKey="announcement.announcements"}
 

@@ -11,14 +11,14 @@
 {include file="frontend/components/header.tpl" pageTitle="user.login.resetPassword"}
 
 <section class="bg-primary py-8">
-	<div class="container mx-auto animate-fadeIn">
+	<div class="container max-w-7xl mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.login.resetPassword"}
 		<h1 class="text-2xl font-bold text-white mt-0">Reset Password</h1>
 	</div>
 </section>
 
 <section class="bg-white py-12">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 		<div class="flex flex-col items-center">
 			<div class="bg-gray-100 border-l-4 border-gray-400 text-gray-700 p-4 mb-4 rounded w-full max-w-md">
 				{translate key="user.login.resetPasswordInstructions"}

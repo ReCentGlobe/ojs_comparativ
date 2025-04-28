@@ -22,7 +22,7 @@
 {include file="frontend/components/header.tpl" pageTitleTranslated=$section->getLocalizedTitle()}
 
 <section class="page page_section page_section_{$sectionPath|escape} py-8">
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 	<h1 class="page_title text-2xl font-bold mb-4">
 		{$section->getLocalizedTitle()|escape}
 	</h1>

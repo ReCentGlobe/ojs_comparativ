@@ -18,7 +18,7 @@
 {include file="frontend/components/header.tpl" pageTitle="user.subscriptions.mySubscriptions"}
 
 <section class="uk-section-primary uk-section uk-section-small">
-    <div class="uk-container animated fadeIn">
+    <div class="uk-container max-w-7xl animated fadeIn">
         {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.subscriptions.mySubscriptions"}
         <h1 class="uk-h2 uk-margin-remove-top">
             My Subscriptions
@@ -27,7 +27,7 @@
 </section>
 
 <section class="uk-section-default uk-section uk-section-medium">
-    <div class="uk-container">
+    <div class="uk-container max-w-7xl">
         <div uk-grid>
             {if $individualSubscriptionTypesExist}
                 <div class="my_subscription_individual uk-width-1-1">

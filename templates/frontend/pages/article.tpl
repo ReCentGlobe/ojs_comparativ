@@ -21,7 +21,7 @@
 
 <section class="bg-primary py-8">
 
-	<div class="container mx-auto">
+	<div class="container max-w-7xl mx-auto">
 			{capture assign="breadcrumbsHtml"}
 				{if $section}
 					{include file="frontend/components/breadcrumbs_article.tpl" currentTitle=$section->getLocalizedTitle()}

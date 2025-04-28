@@ -17,7 +17,7 @@
 {include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="about.editorialTeam"}}
 
 <section class="bg-white py-12">
-  <div class="container mx-auto">
+  <div class="container max-w-7xl mx-auto">
     <div class="grid">
       <div class="col-span-1  prose prose-xl font-serif max-w-full prose-h2:font-sans prose-h2:text-xl prose-a:text-accent prose-a:underline hover:prose-a:text-accent-dark">
         {$currentContext->getLocalizedSetting('editorialTeam')}
