@@ -15,7 +15,9 @@ import { createApp } from 'vue'
 // The example here is to have multiple Vue apps sprinkled throughout your page
 // So we would instantiate any known components by their own
 
+import IssueTimeline from './scripts/vue/IssueTimeline.vue';
 
+console.log('Vue is running!')
 // First let's load all components that should be available to in-browser template compilation
 
 // Example of how to import **all** components
@@ -39,3 +41,11 @@ for (const el of document.getElementsByClassName('vue-app')) {
         components
     }).mount(el)
 }
+
+// Mount IssueTimeline to #timeline-App if present
+const timelineApp = document.getElementById('timeline-App');
+if (timelineApp) {
+    createApp(IssueTimeline).mount('#timeline-App');
+}
+
+

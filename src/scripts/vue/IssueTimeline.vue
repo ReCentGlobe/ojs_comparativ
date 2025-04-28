@@ -1,15 +1,16 @@
 <template>
   <div>
-    <ul class="uk-subnav uk-subnav-pill">
-      <li :class="{ 'uk-active' : activeYear == ''}">
-        <a href="#" @click.prevent="resetYear">All</a>
+    <ul class="flex flex-wrap gap-2 mb-6">
+      <li :class="['inline-block', 'rounded', 'border', 'border-gray-200', 'bg-gray-100', 'hover:bg-gray-200', 'transition', 'shadow-sm', 'font-sans', 'text-sm', 'text-primary', 'hover:text-accent', { 'ring-2 ring-accent': activeYear == '' }]">
+        <a href="#" @click.prevent="resetYear" class="block px-3 py-1 rounded focus:outline-none focus:ring-2 focus:ring-accent" aria-pressed="true" tabindex="0">All</a>
       </li>
       <ListYears
-        :year-item="year"
         v-for="year in years"
         :key="year"
+        :year-item="year"
+        :active-year="activeYear"
         @update:year-item="handleClickYear"
-        :class="{ 'uk-active' : year === activeYear}"
+        :class="[{'ring-2 ring-accent': year === activeYear}]"
       />
     </ul>
     <ul class="timeline js-filter">
@@ -123,4 +124,6 @@
   });
 </script>
 
-<style></style>
+<style scoped>
+/* Add any additional custom styles here if needed */
+</style>
