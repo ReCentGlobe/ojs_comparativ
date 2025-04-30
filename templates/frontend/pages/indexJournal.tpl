@@ -41,7 +41,7 @@
           {$journalDescription|strip_unsafe_html|truncate:300}
         </div>
         <a href="{url router=$smarty.const.ROUTE_PAGE page="about"}" class="inline-block px-6 py-3 bg-accent text-white font-semibold rounded shadow hover:bg-accent-dark transition-colors text-base mt-2">
-          {translate key="plugins.themes.pragma.more-info"}
+          {translate key="plugins.themes.comparativ.more-info"}
         </a>
       {/if}
     </div>
@@ -68,7 +68,7 @@
 						{$journalDescription|strip_unsafe_html|truncate:450}
 						<p class="mt-4">
 							{capture assign="aboutPageUrl"}{url router=$smarty.const.ROUTE_PAGE page="about"}{/capture}
-							<a href="{$aboutPageUrl}" class="inline-block px-4 py-2 bg-primary text-white rounded hover:bg-accent transition">{translate key="plugins.themes.pragma.more-info"}</a>
+							<a href="{$aboutPageUrl}" class="inline-block px-4 py-2 bg-primary text-white rounded hover:bg-accent transition">{translate key="plugins.themes.comparativ.more-info"}</a>
 						</p>
 					</article>
 				</section>
@@ -118,7 +118,7 @@
 	{if ($recentIssues && !empty($recentIssues))}
 		<hr class="my-8 border-t border-gray-300"/>
 		<section class="recent-issues">
-			<h3 class="text-lg font-semibold mb-4">{translate key="plugins.themes.pragma.issues.recent"}</h3>
+			<h3 class="text-lg font-semibold mb-4">{translate key="plugins.themes.comparativ.issues.recent"}</h3>
 			<div class="flex flex-wrap -mx-2">
 				{foreach from=$recentIssues item=recentIssue}
 					<article class="w-1/2 md:w-1/4 px-2 mb-6 recent-issues__item">

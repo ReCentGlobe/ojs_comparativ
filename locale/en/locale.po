@@ -1,0 +1,44 @@
+msgid "plugins.themes.comparativ.name"
+msgstr "Comparativ (comparativ child theme)"
+
+msgid "plugins.themes.comparativ.description"
+msgstr "Comparativ Theme"
+
+msgid "plugins.themes.comparativ.option.typography.montserrat_notoSerif"
+msgstr "Montserrat/Noto Serif"
+
+msgid "plugins.themes.comparativ.option.accentColour.label"
+msgstr "Accent Colour"
+
+msgid "plugins.themes.comparativ.accessible_menu.label"
+msgstr "Quick jump to page content"
+
+msgid "plugins.themes.comparativ.accessible_menu.main_navigation"
+msgstr "Main Navigation"
+
+msgid "plugins.themes.comparativ.accessible_menu.main_content"
+msgstr "Main Content"
+
+msgid "plugins.themes.comparativ.accessible_menu.sidebar"
+msgstr "Sidebar"
+
+msgid "plugins.themes.comparativ.article.sidebar"
+msgstr "Article Sidebar"
+
+msgid "plugins.themes.comparativ.article.main"
+msgstr "Main Article Content"
+
+msgid "plugins.themes.comparativ.article.details"
+msgstr "Article Details"
+
+msgid "plugins.themes.comparativ.more-info"
+msgstr "More Information"
+
+msgid "plugins.themes.comparativ.issues.recent"
+msgstr "Recent Issues"
+
+msgid "plugins.themes.comparativ.contact"
+msgstr "Contact Us"
+
+msgid "plugins.themes.comparativ.faq"
+msgstr "Frequently Asked Questions"
