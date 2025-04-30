@@ -1,51 +1,20 @@
 // https://vitejs.dev/config/#build-polyfillmodulepreload
-import 'vite/modulepreload-polyfill'
+import 'vite/modulepreload-polyfill';
+import './styles';
 import { setupMobileNav } from './scripts/mobile-nav.js';
+import { initMenuAnimation } from './scripts/initAnimation.js';
+import { mountSprinkledVueApps } from './scripts/vueAppLoader.js';
+import { mountTimelineApp } from './scripts/timelineMount.js';
+
+// Initialize mobile nav
 setupMobileNav();
-// Styles
-import './styles'
 
-// Vue
-import { createApp } from 'vue'
-
-// If you are build a SPA with a single <div id="app"></div> entry you would:
-// import App from './App.vue'
-// createApp(App).mount('#app')
-
-// The example here is to have multiple Vue apps sprinkled throughout your page
-// So we would instantiate any known components by their own
-
-import IssueTimeline from './scripts/vue/IssueTimeline.vue';
-
-console.log('Vue is running!')
-// First let's load all components that should be available to in-browser template compilation
-
-// Example of how to import **all** components
-const components = {}
-const modules = import.meta.glob('./components/*.vue', { eager: true })
-for (const path in modules) {
-    components[modules[path].default.__name] = modules[path].default
-}
-
-// if importing all is too much you can always do it manually
-// import HelloWorld from './components/HelloWorld.vue'
-// const components = {
-//   HelloWorld
-// }
-
-// now let's instantiate the Vue apps
-// Note: our lookup is a wrapping div with .vue-app class
-for (const el of document.getElementsByClassName('vue-app')) {
-    createApp({
-        template: el.innerHTML,
-        components
-    }).mount(el)
-}
-
-// Mount IssueTimeline to #timeline-App if present
-const timelineApp = document.getElementById('timeline-App');
-if (timelineApp) {
-    createApp(IssueTimeline).mount('#timeline-App');
-}
+// Run menu animation and mount Vue apps on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function () {
+  initMenuAnimation();
+  mountSprinkledVueApps();
+  mountTimelineApp();
+  console.log('Vue is running!');
+});
 
 
