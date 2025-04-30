@@ -14,15 +14,7 @@
         No issues found for this year.
       </div>
       <div v-else class="space-y-4">
-        <template v-for="post in posts.items" :key="post.id">
-          <div class="w-full">
-            <div class="text-sm text-gray-500 mb-1 font-sans">Vol {{ post.volume }} No {{ post.number }} ({{ post.year }})</div>
-            <div class="mb-2">
-              <a :href="post.publishedUrl" class="text-lg font-serif text-primary hover:text-accent transition focus:outline-none focus:ring-2 focus:ring-accent">{{ post.title.en_US }}</a>
-            </div>
-            <hr class="my-2 border-t border-gray-200" />
-          </div>
-        </template>
+        <PostListItem v-for="post in posts.items" :key="post.id" :post="post" />
       </div>
     </div>
   </div>
@@ -31,6 +23,8 @@
 <script setup>
 import { ref, watchEffect, defineProps } from "vue";
 import axios from "axios";
+import { API_CONFIG } from "./config.js";
+import PostListItem from "./PostListItem.vue";
 
 const props = defineProps({
   yearItem: {
@@ -39,30 +33,23 @@ const props = defineProps({
   },
 });
 
-const apiToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.IjQ0NzcwZWM3YzNmNzZjYTc3YTNlNDQ5OWNjZTkzY2ZlMGYzMTMwOTMi.iQv-aKKm7lyO1GtkdHJgy8wtCaLcaH5JpKq2q-BlJkc";
-
-const showDetails = ref(false);
-const posts = ref([]);
-const toggled = ref(false);
-const currentYear = ref(props.yearItem);
+const posts = ref({ items: [] });
 const loading = ref(false);
 const error = ref("");
-
-const toggleItem = () => {
-  toggled.value = !toggled.value;
-  loadIssueYear();
-};
 
 const loadIssueYear = async () => {
   loading.value = true;
   error.value = "";
-  let postsUrl =
-    `https://www.comparativ.net/index.php/v2/api/v1/issues?apiToken=${apiToken}`;
-  if (currentYear.value !== undefined) {
-    postsUrl += "&year=" + currentYear.value;
+  let postsUrl = `${API_CONFIG.apiBaseUrl}`;
+  if (props.yearItem !== undefined) {
+    postsUrl += `?year=${props.yearItem}`;
   }
   try {
-    const response = await axios.get(postsUrl);
+    const response = await axios.get(postsUrl, {
+      headers: {
+        Authorization: `Bearer ${API_CONFIG.apiToken}`
+      }
+    });
     posts.value = response.data;
   } catch (e) {
     error.value = "Failed to load issues. Please try again later.";
@@ -78,5 +65,12 @@ watchEffect(() => {
 </script>
 
 <style scoped>
-/* Add any additional custom styles here if needed */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-clamp: 3;
+}
 </style>

@@ -34,7 +34,6 @@ const isActive = computed(() => props.activeYear === props.yearItem);
 const toggleItem = () => {
   emit("update:yearItem", props.yearItem);
 };
-
 </script>
 
 <style scoped>

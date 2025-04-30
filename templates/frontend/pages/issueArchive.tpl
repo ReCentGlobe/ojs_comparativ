@@ -21,7 +21,7 @@
 <section class="bg-primary py-8">
 	<div class="container max-w-7xl mx-auto animate-fadeIn">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitle=$pageTitle}
-		<h1 class="text-2xl font-bold text-white mt-0">Issue Archive</h1>
+		{include file="frontend/components/sectionHeader.tpl" breadcrumbs=null title=$pageTitle class="text-white"}
 	</div>
 </section>
 
