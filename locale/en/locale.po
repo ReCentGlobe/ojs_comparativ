@@ -42,3 +42,6 @@ msgstr "Contact Us"
 
 msgid "plugins.themes.comparativ.faq"
 msgstr "Frequently Asked Questions"
+
+msgid "plugins.themes.comparativ.article.abstract"
+msgstr "Abstract"

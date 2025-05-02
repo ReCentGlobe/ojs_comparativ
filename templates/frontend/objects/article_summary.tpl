@@ -74,6 +74,21 @@
 	</div>
 	{/if}
 
+	{assign var=abstract value=$publication->getLocalizedData('abstract')}
+	{if $abstract}
+	{assign var=AbstractText value="{translate key='plugins.themes.comparativ.article.abstract'}"}
+	<div class="my-4">
+		<button type="button" class="toggle-abstract-btn inline-block px-3 py-1 rounded border border-primary text-primary bg-white hover:bg-primary hover:text-white text-xs font-medium transition-colors "
+			aria-expanded="false"
+			data-show-text="{$AbstractText|escape}" data-hide-text="{$AbstractText|escape}">
+			{$AbstractText|escape}
+		</button>
+		<div class="article-abstract text-base text-gray-700 font-serif mt-2 hidden">
+			{$abstract|strip_unsafe_html}
+		</div>
+	</div>
+	{/if}
+
 	{if !$hideGalleys}
 		<div class="flex justify-between items-center mt-4 gap-2">
 			<ul class="galleys_links flex flex-wrap gap-2">
