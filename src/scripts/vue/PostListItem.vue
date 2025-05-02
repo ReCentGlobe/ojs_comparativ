@@ -28,7 +28,13 @@ const props = defineProps({
 
 function stripHtml(html) {
   if (!html) return '';
-  return html.replace(/<[^>]*>/g, '').replace(/\n+/g, ' ').trim();
+  const text = html.replace(/<[^>]*>/g, '').replace(/\n+/g, ' ').trim();
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 function truncateDescription(text) {
