@@ -85,11 +85,11 @@ importers:
         specifier: ^12.6.0
         version: 12.6.0(sass@1.87.0)(webpack@5.91.0)
       vite:
-        specifier: ^4.5.14
+        specifier: ^4.4.11
         version: 4.5.14(@types/node@20.8.5)(sass@1.87.0)(terser@5.39.0)
       vue-loader:
-        specifier: ^16.8.3
-        version: 16.8.3(@vue/compiler-sfc@3.5.13)(vue@3.5.13)(webpack@5.91.0)
+        specifier: ^17.0.0
+        version: 17.4.2(vue@3.5.13)(webpack@5.91.0)
 
 packages:
 
@@ -3526,11 +3526,11 @@ packages:
     resolution: {integrity: sha512-n5ef5/dAB4cyUz6OaolYZEeyfV/fcsVU/RCTT/aHXcyjNbXf7EU2TgaOlMwu+cTOjdn5tBJKyKP6lr6IOUf9bg==}
     engines: {node: '>= 4.0.0', npm: '>= 3.0.0'}
 
-  vue-loader@16.8.3:
-    resolution: {integrity: sha512-7vKN45IxsKxe5GcVCbc2qFU5aWzyiLrYJyUuMz4BQLKctCj/fmCa0w6fGiiQ2cLFetNcek1ppGJQDCup0c1hpA==}
+  vue-loader@17.4.2:
+    resolution: {integrity: sha512-yTKOA4R/VN4jqjw4y5HrynFL8AK0Z3/Jt7eOJXEitsm0GMRHDBjCfCiuTiLP7OESvsZYo2pATCWhDqxC5ZrM6w==}
     peerDependencies:
-      '@vue/compiler-sfc': ^3.0.8
-      vue: ^3.2.13
+      '@vue/compiler-sfc': '*'
+      vue: '*'
       webpack: ^4.1.0 || ^5.0.0-0
     peerDependenciesMeta:
       '@vue/compiler-sfc':
@@ -7423,14 +7423,13 @@ snapshots:
     dependencies:
       tiny-cookie: 2.4.1
 
-  vue-loader@16.8.3(@vue/compiler-sfc@3.5.13)(vue@3.5.13)(webpack@5.91.0):
+  vue-loader@17.4.2(vue@3.5.13)(webpack@5.91.0):
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
-      loader-utils: 2.0.4
+      watchpack: 2.4.2
       webpack: 5.91.0(webpack-cli@4.10.0)
     optionalDependencies:
-      '@vue/compiler-sfc': 3.5.13
       vue: 3.5.13
 
   vue-scrollactive@0.9.3:
