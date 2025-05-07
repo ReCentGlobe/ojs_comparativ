@@ -57,59 +57,65 @@
             </div>
 
             <div>
-                <h4 class="text-lg font-semibold mb-4 border-b border-gray-200 pb-2">Search Filter</h4>
-                {capture name="searchFormUrl"}{url escape=false}{/capture}
-                {assign var=formUrlParameters value=[]}{* Prevent Smarty warning *}
-                {$smarty.capture.searchFormUrl|parse_url:$smarty.const.PHP_URL_QUERY|parse_str:$formUrlParameters}
-                <form class="space-y-4" method="get"
-                    action="{$smarty.capture.searchFormUrl|strtok:"?"|escape}">
-                    {foreach from=$formUrlParameters key=paramKey item=paramValue}
-                        <input type="hidden" name="{$paramKey|escape}" value="{$paramValue|escape}" />
-                    {/foreach}
-                    {csrf}
+                <div class="bg-gray-50 border border-gray-200 rounded-md p-6 shadow-sm mb-8">
+                    <h4 class="text-lg font-semibold mb-4 border-b border-gray-200 pb-2 text-primary">{translate key="plugins.themes.comparativ.search.filter"}</h4>
+                    {capture name="searchFormUrl"}{url escape=false}{/capture}
+                    {assign var=formUrlParameters value=[]}{* Prevent Smarty warning *}
+                    {$smarty.capture.searchFormUrl|parse_url:$smarty.const.PHP_URL_QUERY|parse_str:$formUrlParameters}
+                    <form class="space-y-6" method="get"
+                        action="{$smarty.capture.searchFormUrl|strtok:"?"|escape}">
+                        {foreach from=$formUrlParameters key=paramKey item=paramValue}
+                            <input type="hidden" name="{$paramKey|escape}" value="{$paramValue|escape}" />
+                        {/foreach}
+                        {csrf}
 
-                    <div class="search_input mb-4">
-                        <label class="block font-semibold mb-1" for="query">
-                            {translate key="search.searchFor"}
-                        </label>
-                        {block name=searchQuery}
-                            <input type="text" id="query" name="query" value="{$query|escape}" class="border rounded px-3 py-2 w-full"
-                                placeholder="{translate|escape key="common.search"}">
-                        {/block}
-                    </div>
-
-                    <fieldset class="search_advanced mb-4">
-                        <legend class="font-semibold mb-2">{translate key="search.advancedFilters"}</legend>
-                        <div class="date_range flex gap-4">
-                            <div class="from">
-                                <label class="block font-medium mb-1">
-                                    {translate key="search.dateFrom"}
-                                </label>
-                                {html_select_date class="border rounded px-2 py-1" prefix="dateFrom" time=$dateFrom start_year=$yearStart end_year=$yearEnd year_empty="" month_empty="" day_empty="" field_order="YMD"}
-                            </div>
-                            <div class="to">
-                                <label class="block font-medium mb-1">
-                                    {translate key="search.dateTo"}
-                                </label>
-                                {html_select_date class="border rounded px-2 py-1" prefix="dateTo" time=$dateTo start_year=$yearStart end_year=$yearEnd year_empty="" month_empty="" day_empty="" field_order="YMD"}
-                            </div>
-                        </div>
-                        <div class="author mt-4">
-                            <label class="block font-medium mb-1" for="authors">
-                                {translate key="search.author"}
+                        <div class="search_input mb-4">
+                            <label class="block font-semibold mb-2 text-gray-700" for="query">
+                                {translate key="search.searchFor"}
                             </label>
-                            {block name=searchAuthors}
-                                <input type="text" id="authors" name="authors" value="{$authors|escape}" class="border rounded px-3 py-2 w-full">
+                            {block name=searchQuery}
+                                <input type="text" id="query" name="query" value="{$query|escape}" class="border border-gray-300 rounded px-3 py-2 w-full focus:ring-2 focus:ring-primary focus:border-primary transition"
+                                    placeholder="{translate|escape key="common.search"}">
                             {/block}
                         </div>
-                        {call_hook name="Templates::Search::SearchResults::AdditionalFilters"}
-                    </fieldset>
 
-                    <div class="submit">
-                        <button class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition"
-                            type="submit">{translate key="common.search"}</button>
-                    </div>
-                </form>
+                        <fieldset class="search_advanced mb-4 border border-gray-200 rounded p-4 bg-white">
+                            <legend class="font-semibold mb-2 text-primary">{translate key="search.advancedFilters"}</legend>
+                            <div class="date_range space-y-4">
+                                <div class="from">
+                                    <label class="block font-medium mb-1 text-gray-700">
+                                        {translate key="search.dateFrom"}
+                                    </label>
+                                    <div class="flex gap-2">
+                                        {html_select_date class="border border-gray-300 rounded px-2 py-1 w-auto focus:ring-2 focus:ring-primary focus:border-primary transition" prefix="dateFrom" time=$dateFrom start_year=$yearStart end_year=$yearEnd year_empty="" month_empty="" day_empty="" field_order="YMD"}
+                                    </div>
+                                </div>
+                                <div class="to">
+                                    <label class="block font-medium mb-1 text-gray-700">
+                                        {translate key="search.dateTo"}
+                                    </label>
+                                    <div class="flex gap-2">
+                                        {html_select_date class="border border-gray-300 rounded px-2 py-1 w-auto focus:ring-2 focus:ring-primary focus:border-primary transition" prefix="dateTo" time=$dateTo start_year=$yearStart end_year=$yearEnd year_empty="" month_empty="" day_empty="" field_order="YMD"}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="author mt-4">
+                                <label class="block font-medium mb-1 text-gray-700" for="authors">
+                                    {translate key="search.author"}
+                                </label>
+                                {block name=searchAuthors}
+                                    <input type="text" id="authors" name="authors" value="{$authors|escape}" class="border border-gray-300 rounded px-3 py-2 w-full focus:ring-2 focus:ring-primary focus:border-primary transition">
+                                {/block}
+                            </div>
+                            {call_hook name="Templates::Search::SearchResults::AdditionalFilters"}
+                        </fieldset>
+
+                        <div class="submit flex justify-end">
+                            <button class="inline-block px-6 py-2 border border-primary text-primary rounded bg-white hover:bg-primary hover:text-white font-semibold transition"
+                                type="submit">{translate key="common.search"}</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
             {call_hook name="Templates::Search::SearchResults::PreResults"}

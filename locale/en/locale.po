@@ -45,3 +45,6 @@ msgstr "Frequently Asked Questions"
 
 msgid "plugins.themes.comparativ.article.abstract"
 msgstr "Abstract"
+
+msgid "plugins.themes.comparativ.search.filter"
+msgstr "Search Filter"
