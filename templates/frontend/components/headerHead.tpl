@@ -20,4 +20,5 @@
 
 	{load_header context="frontend"}
 	{load_stylesheet context="frontend"}
+	<script defer src="https://analytics.dev.byte-revolution.com/script.js" data-website-id="baa4b229-befb-433e-a0b5-9a030483a04d"></script>
 </head>

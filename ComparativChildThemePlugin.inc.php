@@ -87,7 +87,7 @@ class ComparativChildThemePlugin extends ThemePlugin
             $this->addStyle('comparativ', $css);
         }
 
-        $this->addStyle('adobe-fonts', 'https://use.typekit.net/ezj3ogl.css');
+        $this->addStyle('adobe-fonts', 'https://use.typekit.net/ezj3ogl.css', array('crossorigin' => 'anonymous','baseUrl' => ''));
 
         // Remove Default Scripts
         $this->removeScript('popper', 'js/lib/popper/popper.js');
