@@ -46,7 +46,7 @@
                         </h4>
                         {iterate from=results item=result}
                         {assign var=issue value=$result.issue}
-                        <article class="mb-8 bg-gray-50 p-4 rounded shadow">
+                        <article class="mb-8">
                             {include file="frontend/objects/article_search.tpl" article=$result.publishedSubmission journal=$result.journal issue=$result.issue showDatePublished=true hideGalleys=true}
                             <hr>
                         </article>
