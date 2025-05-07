@@ -15,8 +15,8 @@ importers:
         specifier: 5.3.6
         version: 5.3.6(@popperjs/core@2.11.8)
       bulma:
-        specifier: ^0.9.4
-        version: 0.9.4
+        specifier: ^1.0.0
+        version: 1.0.4
       bulma-pricingtable:
         specifier: ^0.2.0
         version: 0.2.0
@@ -85,7 +85,7 @@ importers:
         specifier: ^12.6.0
         version: 12.6.0(sass@1.87.0)(webpack@5.91.0)
       vite:
-        specifier: ^4.5.14
+        specifier: ^4.4.11
         version: 4.5.14(@types/node@20.8.5)(sass@1.87.0)(terser@5.39.0)
       vue-loader:
         specifier: ^16.8.3
@@ -1420,8 +1420,8 @@ packages:
     resolution: {integrity: sha512-EJq9XYcJ+pG94FIYgw9AI2NoRDRjQX/Iua0H3iIJq4C3D+4sVOCg/Y+I7gd/G0v7fez/qvKX/S+91UZqaTmXSQ==}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
-  bulma@0.9.4:
-    resolution: {integrity: sha512-86FlT5+1GrsgKbPLRRY7cGDg8fsJiP/jzTqXXVqiUZZ2aZT8uemEOHlU1CDU+TxklPEZ11HZNNWclRBBecP4CQ==}
+  bulma@1.0.4:
+    resolution: {integrity: sha512-Ffb6YGXDiZYX3cqvSbHWqQ8+LkX6tVoTcZuVB3lm93sbAVXlO0D6QlOTMnV6g18gILpAXqkG2z9hf9z4hCjz2g==}
 
   bytes@3.0.0:
     resolution: {integrity: sha512-pMhOfFDPiv9t5jjIXkHosWmkSyQbvsgEVNkz0ERHbuLh2T/7j4Mqqpz523Fe8MVY89KC6Sh/QfS2sM+SjgFDcw==}
@@ -5251,7 +5251,7 @@ snapshots:
 
   bulma-quickview@2.0.0: {}
 
-  bulma@0.9.4: {}
+  bulma@1.0.4: {}
 
   bytes@3.0.0: {}
 
