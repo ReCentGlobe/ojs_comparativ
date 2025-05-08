@@ -32,8 +32,6 @@ export function mountGlobe() {
       glowColor: [0.859, 0.918, 0.996],
       offset: [0, 0],
       markers: [
-        { location: [37.7595, -122.4367], size: 0.03 },
-        { location: [40.7128, -74.006], size: 0.1 },
       ],
       onRender: (state) => {
         // Called on every animation frame.

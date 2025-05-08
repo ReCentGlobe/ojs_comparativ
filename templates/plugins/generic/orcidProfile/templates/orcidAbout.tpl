@@ -10,26 +10,25 @@
  *}
 {include file="frontend/components/header.tpl"}
 
-<section class="bg-primary py-8">
-	<div class="container mx-auto animate-fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="plugins.generic.orcidProfile.about.title"}
-		<h1 class="text-2xl font-bold text-white mt-0">{translate key="plugins.generic.orcidProfile.about.title"}</h1>
-	</div>
-</section>
+{capture assign="breadcrumbsHtml"}
+	{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="plugins.generic.orcidProfile.about.title"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="plugins.generic.orcidProfile.about.title"}}
+
 <section class="bg-white py-12">
-	<div class="container mx-auto">
-		<div class="w-full max-w-xl mx-auto">
+	<div class="container max-w-2xl mx-auto">
+		<div class="w-full">
 			<p class="mb-4 text-gray-700">{translate key="plugins.generic.orcidProfile.about.orcidExplanation"}</p>
-			<h3 class="text-lg font-semibold mb-2">{translate key="plugins.generic.orcidProfile.about.howAndWhy.title"}</h3>
+			<h3 class="text-lg font-bold border-b border-gray-200 pb-2 mb-4">{translate key="plugins.generic.orcidProfile.about.howAndWhy.title"}</h3>
 			{if $isMemberApi}
 				<p class="mb-4 text-gray-700">{translate key="plugins.generic.orcidProfile.about.howAndWhyMemberAPI"}</p>
 			{else}
 				<p class="mb-4 text-gray-700">{translate key="plugins.generic.orcidProfile.about.howAndWhyPublicAPI"}</p>
 			{/if}
-			<h3 class="text-lg font-semibold mb-2">{translate key="plugins.generic.orcidProfile.about.display.title"}</h3>
+			<h3 class="text-lg font-bold border-b border-gray-200 pb-2 mb-4">{translate key="plugins.generic.orcidProfile.about.display.title"}</h3>
 			<p class="mb-4 text-gray-700">{translate key="plugins.generic.orcidProfile.about.display"}</p>
 		</div>
 	</div>
-</section><!-- .page -->
+</section>
 
 {include file="frontend/components/footer.tpl"}

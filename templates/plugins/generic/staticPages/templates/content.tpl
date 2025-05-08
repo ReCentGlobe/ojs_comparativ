@@ -14,10 +14,11 @@
 {/capture}
 {include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$title}
 
+
 <section class="bg-white py-12">
-    <div class="container mx-auto">
-        <div class="w-full">{$content}</div>
+    <div class="container max-w-2xl mx-auto">
+        <div class="w-full prose prose-gray">{$content}</div>
     </div>
-</section><!-- .page -->
+</section>
 
 {include file="frontend/components/footer.tpl"}
