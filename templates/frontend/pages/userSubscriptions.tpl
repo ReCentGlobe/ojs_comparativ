@@ -17,216 +17,153 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="user.subscriptions.mySubscriptions"}
 
-<section class="uk-section-primary uk-section uk-section-small">
-    <div class="uk-container max-w-7xl animated fadeIn">
-        {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.subscriptions.mySubscriptions"}
-        <h1 class="uk-h2 uk-margin-remove-top">
-            My Subscriptions
-        </h1>
-    </div>
-</section>
+{capture assign="breadcrumbsHtml"}
+    {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.subscriptions.mySubscriptions"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="user.subscriptions.mySubscriptions"}}
 
-<section class="uk-section-default uk-section uk-section-medium">
-    <div class="uk-container max-w-7xl">
-        <div uk-grid>
+<section class="bg-white py-12">
+    <div class="container max-w-7xl mx-auto">
+        <div class="grid">
+
             {if $individualSubscriptionTypesExist}
-                <div class="my_subscription_individual uk-width-1-1">
-                    <h4 class="uk-h4 uk-heading-bullet">{translate key="user.subscriptions.individualSubscriptions"}</h4>
-                    <p>{translate key="subscriptions.individualDescription"}</p>
+                <div class="subscriptions_individual col-span-1 mb-8">
+                    <h4 class="text-lg font-bold border-b border-gray-200 pb-2">{translate key="user.subscriptions.individualSubscriptions"}</h4>
+                    <p class="text-red-600">{translate key="subscriptions.individualDescription"}</p>
                     {if $userIndividualSubscription}
-                        <div class="uk-overflow-auto">
-                            <table class="uk-table uk-table-hover uk-table-divider uk-table-justify uk-table-middle">
-                                <thead>
-                                <tr>
-                                    <th>{translate key="user.subscriptions.form.typeId"}</th>
-                                    <th>{translate key="subscriptions.status"}</th>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <tr class="bg-gray-100">
+                                    <th class="px-4 py-2">{translate key="user.subscriptions.form.typeId"}</th>
+                                    <th class="px-4 py-2">{translate key="subscriptions.status"}</th>
                                     {if $paymentsEnabled}
-                                        <th></th>
+                                        <th class="px-4 py-2"></th>
                                     {/if}
                                 </tr>
-                                </thead>
                                 <tr>
-                                    <td>{$userIndividualSubscription->getSubscriptionTypeName()|escape}</td>
-                                    <td>
+                                    <td class="px-4 py-2">{$userIndividualSubscription->getSubscriptionTypeName()|escape}</td>
+                                    <td class="px-4 py-2">
                                         {assign var="subscriptionStatus" value=$userIndividualSubscription->getStatus()}
                                         {assign var="isNonExpiring" value=$userIndividualSubscription->isNonExpiring()}
                                         {if $paymentsEnabled && $subscriptionStatus == $smarty.const.SUBSCRIPTION_STATUS_AWAITING_ONLINE_PAYMENT}
-                                            <span class="subscription_disabled">
-														{translate key="subscriptions.status.awaitingOnlinePayment"}
-													</span>
+                                            <span class="text-red-600">{translate key="subscriptions.status.awaitingOnlinePayment"}</span>
                                         {elseif $paymentsEnabled && $subscriptionStatus == $smarty.const.SUBSCRIPTION_STATUS_AWAITING_MANUAL_PAYMENT}
-                                            <span class="subscription_disabled">
-														{translate key="subscriptions.status.awaitingManualPayment"}
-													</span>
+                                            <span class="text-red-600">{translate key="subscriptions.status.awaitingManualPayment"}</span>
                                         {elseif $subscriptionStatus != $smarty.const.SUBSCRIPTION_STATUS_ACTIVE}
-                                            <span class="subscription_disabled">
-														{translate key="subscriptions.inactive"}
-													</span>
+                                            <span class="text-red-600">{translate key="subscriptions.inactive"}</span>
                                         {else}
                                             {if $isNonExpiring}
                                                 {translate key="subscriptionTypes.nonExpiring"}
                                             {else}
                                                 {assign var="isExpired" value=$userIndividualSubscription->isExpired()}
                                                 {if $isExpired}
-                                                    <span class="subscription_disabled">
-																{translate key="user.subscriptions.expired" date=$userIndividualSubscription->getDateEnd()|date_format:$dateFormatShort}
-															</span>
+                                                    <span class="text-red-600">{translate key="user.subscriptions.expired" date=$userIndividualSubscription->getDateEnd()|date_format:$dateFormatShort}</span>
                                                 {else}
-                                                    <span class="subscription_active">
-																{translate key="user.subscriptions.expires" date=$userIndividualSubscription->getDateEnd()|date_format:$dateFormatShort}
-															</span>
+                                                    <span class="text-green-600">{translate key="user.subscriptions.expires" date=$userIndividualSubscription->getDateEnd()|date_format:$dateFormatShort}</span>
                                                 {/if}
                                             {/if}
                                         {/if}
                                     </td>
                                     {if $paymentsEnabled}
-                                        <td>
-
+                                        <td class="px-4 py-2">
                                             {if $subscriptionStatus == $smarty.const.SUBSCRIPTION_STATUS_AWAITING_ONLINE_PAYMENT}
-                                                <a class="uk-button uk-button-default"
-                                                   href="{url op="completePurchaseSubscription" path="individual"|to_array:$userIndividualSubscription->getId()}">
-                                                    {translate key="user.subscriptions.purchase"}
-                                                </a>
+                                                <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" href="{url op="completePurchaseSubscription" path="individual"|to_array:$userIndividualSubscription->getId()}">{translate key="user.subscriptions.purchase"}</a>
                                             {elseif $subscriptionStatus == $smarty.const.SUBSCRIPTION_STATUS_ACTIVE}
                                                 {if !$isNonExpiring}
-                                                    <a class="uk-button uk-button-default"
-                                                       href="{url op="payRenewSubscription" path="individual"|to_array:$userIndividualSubscription->getId()}">
-                                                        {translate key="user.subscriptions.renew"}
-                                                    </a>
+                                                    <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" href="{url op="payRenewSubscription" path="individual"|to_array:$userIndividualSubscription->getId()}">{translate key="user.subscriptions.renew"}</a>
                                                 {/if}
-                                                <a class="uk-button uk-button-default"
-                                                   href="{url op="purchaseSubscription" path="individual"|to_array:$userIndividualSubscription->getId()}">
-                                                    {translate key="user.subscriptions.purchase"}
-                                                </a>
+                                                <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" href="{url op="purchaseSubscription" path="individual"|to_array:$userIndividualSubscription->getId()}">{translate key="user.subscriptions.purchase"}</a>
                                             {/if}
-
                                         </td>
                                     {/if}
                                 </tr>
                             </table>
                         </div>
                     {elseif $paymentsEnabled}
-                        <div class="uk-margin">
-                            <a class="uk-button uk-button-default"
-                               href="{url op="purchaseSubscription" path="individual"}">
-                                {translate key="user.subscriptions.purchaseNewSubscription"}
-                            </a>
+                        <div class="mt-4">
+                            <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" href="{url op="purchaseSubscription" path="individual"}">{translate key="user.subscriptions.purchaseNewSubscription"}</a>
                         </div>
                     {else}
                         <p>
-                            <a href="{url page="about" op="subscriptions" anchor="subscriptionTypes"}">
-                                {translate key="user.subscriptions.viewSubscriptionTypes"}
-                            </a>
+                            <a href="{url page="about" op="subscriptions" anchor="subscriptionTypes"}">{translate key="user.subscriptions.viewSubscriptionTypes"}</a>
                         </p>
                     {/if}
                 </div>
             {/if}
 
+
             {if $institutionalSubscriptionTypesExist}
-                <div class="my_subscriptions_institutional uk-width-1-1">
-                    <h4 class="uk-h4 uk-heading-bullet">{translate key="user.subscriptions.institutionalSubscriptions"}</h4>
-                    <p>
-                        {translate key="subscriptions.institutionalDescription"}
+                <div class="subscriptions_institutional col-span-1 mb-8">
+                    <h4 class="text-lg font-bold border-b border-gray-200 pb-2">{translate key="user.subscriptions.institutionalSubscriptions"}</h4>
+                    <p>{translate key="subscriptions.institutionalDescription"}
                         {if $paymentsEnabled}
                             {translate key="subscriptions.institutionalOnlinePaymentDescription"}
                         {/if}
                     </p>
                     {if $userInstitutionalSubscriptions}
-                        <div class="uk-overflow-auto">
-                            <table class="uk-table uk-table-hover uk-table-divider uk-table-justify uk-table-middle">
-                                <thead>
-                                <tr>
-                                    <th>{translate key="user.subscriptions.form.typeId"}</th>
-                                    <th>{translate key="user.subscriptions.form.institutionName"}</th>
-                                    <th>{translate key="subscriptions.status"}</th>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <tr class="bg-gray-100">
+                                    <th class="px-4 py-2">{translate key="user.subscriptions.form.typeId"}</th>
+                                    <th class="px-4 py-2">{translate key="user.subscriptions.form.institutionName"}</th>
+                                    <th class="px-4 py-2">{translate key="subscriptions.status"}</th>
                                     {if $paymentsEnabled}
-                                        <th></th>
+                                        <th class="px-4 py-2"></th>
                                     {/if}
                                 </tr>
-                                </thead>
                                 {foreach from=$userInstitutionalSubscriptions item=userInstitutionalSubscription}
-                                    <tbody>
                                     <tr>
-                                        <td>{$userInstitutionalSubscription->getSubscriptionTypeName()|escape}</td>
-                                        <td>{$userInstitutionalSubscription->getInstitutionName()|escape}</td>
-                                        <td>
+                                        <td class="px-4 py-2">{$userInstitutionalSubscription->getSubscriptionTypeName()|escape}</td>
+                                        <td class="px-4 py-2">{$userInstitutionalSubscription->institutionName|escape}</td>
+                                        <td class="px-4 py-2">
                                             {assign var="subscriptionStatus" value=$userInstitutionalSubscription->getStatus()}
                                             {assign var="isNonExpiring" value=$userInstitutionalSubscription->isNonExpiring()}
                                             {if $paymentsEnabled && $subscriptionStatus == $smarty.const.SUBSCRIPTION_STATUS_AWAITING_ONLINE_PAYMENT}
-                                                <span class="subscription_disabled">
-															{translate key="subscriptions.status.awaitingOnlinePayment"}
-														</span>
+                                                <span class="text-red-600">{translate key="subscriptions.status.awaitingOnlinePayment"}</span>
                                             {elseif $paymentsEnabled && $subscriptionStatus == $smarty.const.SUBSCRIPTION_STATUS_AWAITING_MANUAL_PAYMENT}
-                                                <span class="subscription_disabled">
-															{translate key="subscriptions.status.awaitingManualPayment"}
-														</span>
+                                                <span class="text-red-600">{translate key="subscriptions.status.awaitingManualPayment"}</span>
                                             {elseif $paymentsEnabled && $subscriptionStatus == $smarty.const.SUBSCRIPTION_STATUS_NEEDS_APPROVAL}
-                                                <span class="subscription_disabled">
-															{translate key="subscriptions.status.needsApproval"}
-														</span>
+                                                <span class="text-red-600">{translate key="subscriptions.status.needsApproval"}</span>
                                             {elseif $subscriptionStatus != $smarty.const.SUBSCRIPTION_STATUS_ACTIVE}
-                                                <span class="subscription_disabled">
-															{translate key="subscriptions.inactive"}
-														</span>
+                                                <span class="text-red-600">{translate key="subscriptions.inactive"}</span>
                                             {else}
                                                 {if $isNonExpiring}
-                                                    <span class="subscription_active">
-																{translate key="subscriptionTypes.nonExpiring"}
-															</span>
+                                                    <span class="text-green-600">{translate key="subscriptionTypes.nonExpiring"}</span>
                                                 {else}
                                                     {assign var="isExpired" value=$userInstitutionalSubscription->isExpired()}
                                                     {if $isExpired}
-                                                        <span class="subscription_disabled">
-																	{translate key="user.subscriptions.expired" date=$userInstitutionalSubscription->getDateEnd()|date_format:$dateFormatShort}
-																</span>
+                                                        <span class="text-red-600">{translate key="user.subscriptions.expired" date=$userInstitutionalSubscription->getDateEnd()|date_format:$dateFormatShort}</span>
                                                     {else}
-                                                        <span class="subscription_enabled">
-																	{translate key="user.subscriptions.expires" date=$userInstitutionalSubscription->getDateEnd()|date_format:$dateFormatShort}
-																</span>
+                                                        <span class="text-green-600">{translate key="user.subscriptions.expires" date=$userInstitutionalSubscription->getDateEnd()|date_format:$dateFormatShort}</span>
                                                     {/if}
                                                 {/if}
                                             {/if}
                                         </td>
                                         {if $paymentsEnabled}
-                                            <td>
+                                            <td class="px-4 py-2">
                                                 {if $subscriptionStatus == $smarty.const.SUBSCRIPTION_STATUS_AWAITING_ONLINE_PAYMENT}
-                                                    <a class="uk-button uk-button-default"
-                                                       href="{url op="completePurchaseSubscription" path="institutional"|to_array:$userInstitutionalSubscription->getId()}">
-                                                        {translate key="user.subscriptions.purchase"}
-                                                    </a>
+                                                    <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" href="{url op="completePurchaseSubscription" path="institutional"|to_array:$userInstitutionalSubscription->getId()}">{translate key="user.subscriptions.purchase"}</a>
                                                 {elseif $subscriptionStatus == $smarty.const.SUBSCRIPTION_STATUS_ACTIVE}
                                                     {if !$isNonExpiring}
-                                                        <a class="uk-button uk-button-default"
-                                                           href="{url op="payRenewSubscription" path="institutional"|to_array:$userInstitutionalSubscription->getId()}">
-                                                            {translate key="user.subscriptions.renew"}
-                                                        </a>
+                                                        <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" href="{url op="payRenewSubscription" path="institutional"|to_array:$userInstitutionalSubscription->getId()}">{translate key="user.subscriptions.renew"}</a>
                                                     {/if}
-                                                    <a class="uk-button uk-button-default"
-                                                       href="{url op="purchaseSubscription" path="institutional"|to_array:$userInstitutionalSubscription->getId()}">
-                                                        {translate key="user.subscriptions.purchase"}
-                                                    </a>
+                                                    <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" href="{url op="purchaseSubscription" path="institutional"|to_array:$userInstitutionalSubscription->getId()}">{translate key="user.subscriptions.purchase"}</a>
                                                 {/if}
                                             </td>
                                         {/if}
                                     </tr>
-                                    </tbody>
                                 {/foreach}
                             </table>
                         </div>
                     {/if}
-                    <p class="field">
+                    <p class="field mt-4">
                         {if $paymentsEnabled}
-                            <a class="uk-button uk-button-default"
-                               href="{url page="user" op="purchaseSubscription" path="institutional"}">
-							<span class="icon">
-								<i class="fa fa-shopping-cart"></i>
-							</span>
+                            <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" href="{url page="user" op="purchaseSubscription" path="institutional"}">
+                                <span class="icon"><i class="fa fa-shopping-cart"></i></span>
                                 <span>{translate key="user.subscriptions.purchaseNewSubscription"}</span>
                             </a>
                         {else}
-                            <a href="{url page="about" op="subscriptions" anchor="subscriptionTypes"}">
-                                {translate key="user.subscriptions.viewSubscriptionTypes"}
-                            </a>
+                            <a href="{url page="about" op="subscriptions" anchor="subscriptionTypes"}">{translate key="user.subscriptions.viewSubscriptionTypes"}</a>
                         {/if}
                     </p>
                 </div>
@@ -234,30 +171,30 @@
 
 
             {if $paymentsEnabled}
-                <div class="my_subscription_payments uk-width-1-1">
-                    <h4 class="uk-h4 uk-heading-bullet">{translate key="user.subscriptions.subscriptionStatus"}</h4>
+                <div class="my_subscription_payments col-span-1 mb-8">
+                    <h4 class="text-lg font-bold border-b border-gray-200 pb-2">{translate key="user.subscriptions.subscriptionStatus"}</h4>
                     <p>{translate key="user.subscriptions.statusInformation"}</p>
-                    <div class="uk-overflow-auto">
-                        <table class="uk-table uk-table-divider uk-table-justify uk-table-middle">
-                            <tr>
-                                <th>{translate key="user.subscriptions.status"}</th>
-                                <th>{translate key="user.subscriptions.statusDescription"}</th>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <tr class="bg-gray-100">
+                                <th class="px-4 py-2">{translate key="user.subscriptions.status"}</th>
+                                <th class="px-4 py-2">{translate key="user.subscriptions.statusDescription"}</th>
                             </tr>
                             <tr>
-                                <td>{translate key="subscriptions.status.needsInformation"}</td>
-                                <td>{translate key="user.subscriptions.status.needsInformationDescription"}</td>
+                                <td class="px-4 py-2">{translate key="subscriptions.status.needsInformation"}</td>
+                                <td class="px-4 py-2">{translate key="user.subscriptions.status.needsInformationDescription"}</td>
                             </tr>
                             <tr>
-                                <td>{translate key="subscriptions.status.needsApproval"}</td>
-                                <td>{translate key="user.subscriptions.status.needsApprovalDescription"}</td>
+                                <td class="px-4 py-2">{translate key="subscriptions.status.needsApproval"}</td>
+                                <td class="px-4 py-2">{translate key="user.subscriptions.status.needsApprovalDescription"}</td>
                             </tr>
                             <tr>
-                                <td>{translate key="subscriptions.status.awaitingManualPayment"}</td>
-                                <td>{translate key="user.subscriptions.status.awaitingManualPaymentDescription"}</td>
+                                <td class="px-4 py-2">{translate key="subscriptions.status.awaitingManualPayment"}</td>
+                                <td class="px-4 py-2">{translate key="user.subscriptions.status.awaitingManualPaymentDescription"}</td>
                             </tr>
                             <tr>
-                                <td>{translate key="subscriptions.status.awaitingOnlinePayment"}</td>
-                                <td>{translate key="user.subscriptions.status.awaitingOnlinePaymentDescription"}</td>
+                                <td class="px-4 py-2">{translate key="subscriptions.status.awaitingOnlinePayment"}</td>
+                                <td class="px-4 py-2">{translate key="user.subscriptions.status.awaitingOnlinePaymentDescription"}</td>
                             </tr>
                         </table>
                     </div>
@@ -265,9 +202,9 @@
             {/if}
         </div>
 
-        {include file="frontend/components/subscriptionContact.tpl"}
-
-
+        <div class="col-span-1 mb-8">
+            {include file="frontend/components/subscriptionContact.tpl"}
+        </div>
     </div>
 </section>
 

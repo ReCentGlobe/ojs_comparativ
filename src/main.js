@@ -5,6 +5,7 @@ import { setupMobileNav } from './scripts/mobile-nav.js';
 import { initMenuAnimation } from './scripts/initAnimation.js';
 import { mountSprinkledVueApps } from './scripts/vueAppLoader.js';
 import { mountTimelineApp } from './scripts/timelineMount.js';
+import { mountGlobe } from './scripts/globeMount.js';
 
 // Initialize mobile nav
 setupMobileNav();
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initMenuAnimation();
   mountSprinkledVueApps();
   mountTimelineApp();
+  mountGlobe();
   // Accordion for article abstract
   document.querySelectorAll('.toggle-abstract-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {

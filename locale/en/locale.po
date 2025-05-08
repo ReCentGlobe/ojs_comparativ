@@ -48,3 +48,15 @@ msgstr "Abstract"
 
 msgid "plugins.themes.comparativ.search.filter"
 msgstr "Search Filter"
+
+msgid "plugins.themes.comparativ.issues.current"
+msgstr "Current Issue"
+
+msgid "plugins.themes.comparativ.issues.viewCurrent"
+msgstr "View Current Issue"
+
+msgid "plugins.themes.comparativ.issues.noDescription"
+msgstr "No description available for this issue."
+
+msgid "plugins.themes.comparativ.common.subscribe"
+msgstr "Subscribe"
