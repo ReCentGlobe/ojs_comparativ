@@ -20,7 +20,8 @@
 
 {include file="frontend/components/header.tpl" pageTitleTranslated=$currentJournal->getLocalizedName()}
 
-<section class="relative bg-primary py-12 md:py-20 overflow-clip w-full js-scrollcontainer">
+<section class="relative bg-primary py-12 md:py-20 overflow-clip w-full js-scrollcontainer inset-shadow-sm inset-shadow-white/50">
+<div className="absolute inset-0 w-full h-full bg-[radial-gradient(#ffffff33_1px,#13335c_1px)] bg-[size:25px_25px] "></div>
 <div id="ripple-container"></div>		
 <canvas
 		id="globe-container"
