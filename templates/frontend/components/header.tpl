@@ -32,12 +32,10 @@
 <div class="relative z-10">
 
 	{* Sidebars *}
-	{if empty($isFullWidth)}
 		{call_hook name="Templates::Common::Sidebar"}
 		{if $sidebarCode}
 			{$sidebarCode}
 		{/if}
-	{/if}
 
 	{* Primary site navigation *}
 	{if $currentContext}
