@@ -25,7 +25,7 @@
 {/capture}
 {include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$issue->getLocalizedTitle()|escape subtitle=$issueSeries|escape}
 
-<section class="bg-white py-12">
+<section class="bg-white container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 	{* Display a message if no current issue exists *}
 	{if !$issue}

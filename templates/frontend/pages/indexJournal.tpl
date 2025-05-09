@@ -30,9 +30,9 @@
 		height="1000"
 	></canvas>
 
-  <div class="container max-w-7xl max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 px-4 md:px-0 relative z-10">
+  <div class="container max-w-7xl max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 px-4 sm:px-6 lg:px-8 relative z-10">
 
-	<div class="w-full md:w-1/2 px-4 flex flex-col items-start justify-center text-white animate-fadeIn">
+	<div class="w-full md:w-1/2 flex flex-col items-start justify-center text-white animate-fadeIn">
 	  <h1 class="text-3xl md:text-6xl font-serif font-base mb-4 drop-shadow-lg">{$displayPageHeaderTitle|escape}</h1>
 	  {if $journalDescription}
 		<div class="text-lg md:text-xl font-sans mb-6 text-blue-100/90 max-w-xl">
@@ -51,7 +51,7 @@
   </div>
 </section>
 
-<main class="max-w-7xl mx-auto px-4 py-8" id="main">
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" id="main">
 	{if $journalDescription or $announcements}
 	<header class="flex flex-col md:flex-row gap-8">
 		{if $journalDescription}

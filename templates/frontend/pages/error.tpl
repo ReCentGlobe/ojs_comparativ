@@ -11,7 +11,7 @@
 {include file="frontend/components/header.tpl"}
 
 <section class="bg-primary py-8">
-	<div class="container max-w-7xl mx-auto">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$pageTitle}
 		<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
 			{translate key=$errorMsg params=$errorParams}

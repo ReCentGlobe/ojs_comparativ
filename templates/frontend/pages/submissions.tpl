@@ -18,7 +18,7 @@
 {include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="about.submissions"}}
 
 <section class="bg-white py-12">
-	<div class="container max-w-7xl mx-auto">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="grid">
 			<div class="col-span-1">
 				<div class="content text-gray-700  prose prose-xl font-serif max-w-full prose-h2:font-sans prose-h2:text-xl prose-a:text-accent prose-a:underline hover:prose-a:text-accent-dark">

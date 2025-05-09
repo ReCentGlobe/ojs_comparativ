@@ -19,15 +19,17 @@
 {include file="frontend/components/header.tpl" pageTitle="common.search"}
 
 
-<section class="bg-primary py-8">
-    <div class="container max-w-7xl mx-auto animate-fadeIn">
-        {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="common.search"}
-        <h1 class="text-2xl font-bold text-white mt-0">Search</h1>
-    </div>
-</section>
+
+{capture name="breadcrumbs"}
+    {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="common.search"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl"
+    breadcrumbs=$smarty.capture.breadcrumbs
+    title={translate key="common.search"}
+}
 
 <section class="bg-white py-12">
-    <div class="container max-w-7xl mx-auto">
+    <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-3 gap-8">
 
             <div class="md:col-span-2">
@@ -128,8 +130,35 @@
                     {* Results pagination *}
                 {else}
                     <div class="flex justify-center mt-8">
-                        {page_info iterator=$results}
-                        {page_links anchor="results" iterator=$results name="search" query=$query searchJournal=$searchJournal authors=$authors title=$title abstract=$abstract galleyFullText=$galleyFullText discipline=$discipline subject=$subject type=$type coverage=$coverage indexTerms=$indexTerms dateFromMonth=$dateFromMonth dateFromDay=$dateFromDay dateFromYear=$dateFromYear dateToMonth=$dateToMonth dateToDay=$dateToDay dateToYear=$dateToYear orderBy=$orderBy orderDir=$orderDir}
+                        <div class="prose prose-sm flex flex-col items-center w-full max-w-2xl bg-gray-50 border border-gray-200 rounded-lg px-6 py-4 shadow-sm">
+                            <div class="text-gray-500 mb-2">{page_info iterator=$results}</div>
+                            <nav class="flex flex-wrap gap-2 items-center justify-center prose-a:text-primary prose-a:font-semibold prose-a:no-underline prose-a:rounded prose-a:px-2 prose-a:py-1 prose-a:transition-colors prose-a:hover:bg-primary/10 prose-a:hover:text-primary-700 prose-a:focus:ring-2 prose-a:focus:ring-primary prose-a:bg-white prose-a:border prose-a:border-gray-200" aria-label="{translate key='common.pagination.label'}">
+                                {page_links
+                                    anchor="results"
+                                    iterator=$results
+                                    name="search"
+                                    query=$query
+                                    searchJournal=$searchJournal
+                                    authors=$authors
+                                    title=$title
+                                    abstract=$abstract
+                                    galleyFullText=$galleyFullText
+                                    discipline=$discipline
+                                    subject=$subject
+                                    type=$type
+                                    coverage=$coverage
+                                    indexTerms=$indexTerms
+                                    dateFromMonth=$dateFromMonth
+                                    dateFromDay=$dateFromDay
+                                    dateFromYear=$dateFromYear
+                                    dateToMonth=$dateToMonth
+                                    dateToDay=$dateToDay
+                                    dateToYear=$dateToYear
+                                    orderBy=$orderBy
+                                    orderDir=$orderDir
+                                }
+                            </nav>
+                        </div>
                     </div>
                 {/if}
             </div>

@@ -17,7 +17,7 @@
 </div><!-- pkp_structure_content -->
 
 <footer id="pkp_content_footer" class="bg-white text-gray-800 pt-16 pb-8 rounded-t-3xl shadow-lg mt-20" role="contentinfo">
-  <div class="container max-w-7xl mx-auto px-4">
+  <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-gray-100 pb-8 mb-8">
       <div>
         <h3 class="text-lg font-sans font-semibold tracking-wide uppercase mb-4 text-primary">About Us</h3>

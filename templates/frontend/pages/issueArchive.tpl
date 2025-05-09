@@ -18,15 +18,17 @@
 {/capture}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$pageTitle}
 
-<section class="bg-primary py-8">
-	<div class="container max-w-7xl mx-auto animate-fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitle=$pageTitle}
-		{include file="frontend/components/sectionHeader.tpl" breadcrumbs=null title=$pageTitle class="text-white"}
-	</div>
-</section>
+		{capture assign="breadcrumbsHtml"}
+				{if $section}
+					{include file="frontend/components/breadcrumbs_issue.tpl" currentTitle=$section->getLocalizedTitle()}
+				{else}
+					{include file="frontend/components/breadcrumbs_issue.tpl" currentTitleKey="common.publication"}
+				{/if}
+			{/capture}
+		{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$pageTitle class="text-white"}
 
 <section class="bg-white py-12">
-	<div class="container max-w-7xl mx-auto">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 		{if $isUserLoggedIn}
 			<div id="timeline-login-App" class="mb-8">

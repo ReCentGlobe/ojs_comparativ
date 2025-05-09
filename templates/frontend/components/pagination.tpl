@@ -15,23 +15,27 @@
  *}
 
 {if $prevUrl || $nextUrl}
-  <ul class="flex items-center justify-center space-x-4 text-sm" aria-label="{translate|escape key="common.pagination.label"}">
-    {if $prevUrl}
+  <nav aria-label="{translate|escape key="common.pagination.label"}">
+    <ul class="flex items-center justify-center gap-4 text-sm bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 shadow-sm">
+      {if $prevUrl}
+        <li>
+          <a href="{$prevUrl}" class="inline-flex items-center px-4 py-2 rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-primary hover:text-white focus:ring-2 focus:ring-primary transition-colors font-semibold">
+            <span class="mr-2">&#8592;</span>{translate key="help.previous"}
+          </a>
+        </li>
+      {/if}
       <li>
-       <a href="{$prevUrl}" class="inline-flex items-center px-3 py-1 rounded bg-gray-100 hover:bg-primary hover:text-white transition-colors">
-         <span class="mr-2">&#8592;</span>{translate key="help.previous"}
-       </a>
+        <span class="current font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+          {translate key="common.pagination" start=$showingStart end=$showingEnd total=$total}
+        </span>
       </li>
-    {/if}
-    <span class="current font-semibold text-primary">
-			{translate key="common.pagination" start=$showingStart end=$showingEnd total=$total}
-		</span>
-    {if $nextUrl}
-      <li>
-        <a href="{$nextUrl}" class="inline-flex items-center px-3 py-1 rounded bg-gray-100 hover:bg-primary hover:text-white transition-colors">
-          {translate key="help.next"}<span class="ml-2">&#8594;</span>
-        </a>
-      </li>
-    {/if}
-  </ul>
+      {if $nextUrl}
+        <li>
+          <a href="{$nextUrl}" class="inline-flex items-center px-4 py-2 rounded-full bg-white border border-gray-300 text-gray-600 hover:bg-primary hover:text-white focus:ring-2 focus:ring-primary transition-colors font-semibold">
+            {translate key="help.next"}<span class="ml-2">&#8594;</span>
+          </a>
+        </li>
+      {/if}
+    </ul>
+  </nav>
 {/if}

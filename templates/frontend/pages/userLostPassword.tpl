@@ -10,15 +10,17 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="user.login.resetPassword"}
 
-<section class="bg-primary py-8">
-	<div class="container max-w-7xl mx-auto animate-fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.login.resetPassword"}
-		<h1 class="text-2xl font-bold text-white mt-0">Reset Password</h1>
-	</div>
-</section>
+
+{capture name="breadcrumbs"}
+	{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.login.resetPassword"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl"
+	breadcrumbs=$smarty.capture.breadcrumbs
+	title={translate key="user.login.resetPassword"}
+}
 
 <section class="bg-white py-12">
-	<div class="container max-w-7xl mx-auto">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex flex-col items-center">
 			<div class="bg-gray-100 border-l-4 border-gray-400 text-gray-700 p-4 mb-4 rounded w-full max-w-md">
 				{translate key="user.login.resetPasswordInstructions"}

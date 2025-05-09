@@ -87,7 +87,7 @@
 				{$issue->getIssueIdentification()}
 			</a>
 			{if $article->getPages()}
-				<div class="text-xs text-primary font-serif bg-primary-lightest px-2 py-1 rounded">
+				<div class="text-xs text-primary font-serif bg-primary-lightest px-2 py-1 rounded whitespace-nowrap">
 					{$article->getPages()|escape}
 				</div>
 			{/if}

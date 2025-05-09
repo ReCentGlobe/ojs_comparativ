@@ -51,10 +51,12 @@
 								<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:'url'}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogo.altText != ''}alt="{$displayPageHeaderLogo.altText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} class="h-12 w-auto"/>
 							</a>
 						{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_string($displayPageHeaderTitle)}
-							<a href="{$homeUrl}" class="text-xl font-bold text-primary">{$displayPageHeaderTitle|escape}</a>
+							<a href="{$homeUrl}" class="block">
+								<img src="{$publicFilesDir}/LogoCompInv.png" alt="Comparativ Logo" class="h-12 w-auto"/>
+							</a>
 						{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_array($displayPageHeaderTitle)}
 							<a href="{$homeUrl}" class="block">
-								<img src="{$publicFilesDir}/{$displayPageHeaderTitle.uploadName|escape:'url'}" alt="{$displayPageHeaderTitle.altText|escape}" width="{$displayPageHeaderTitle.width|escape}" height="{$displayPageHeaderTitle.height|escape}" class="h-12 w-auto"/>
+								<img src="{$publicFilesDir}/LogoCompInv.png" alt="{$displayPageHeaderTitle.altText|escape}" width="{$displayPageHeaderTitle.width|escape}" height="{$displayPageHeaderTitle.height|escape}" class="h-12 w-auto"/>
 							</a>
 						{else}
 							<a href="{$homeUrl}" class="block">

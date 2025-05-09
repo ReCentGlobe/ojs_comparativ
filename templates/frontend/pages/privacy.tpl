@@ -17,7 +17,7 @@
 {include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="manager.setup.privacyStatement"}}
 
 <section class="bg-white py-12">
-  <div class="container max-w-7xl mx-auto">
+  <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div>
       <div class="text-gray-700">
         {$currentContext->getLocalizedSetting('privacyStatement')}

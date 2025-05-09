@@ -16,7 +16,7 @@
  *   sorted by section.
  * @uses $primaryGenreIds array List of file genre ids for primary file types
  *}
-<div class="obj_issue_toc container max-w-7xl mx-auto bg-white border border-gray-200 md:border-l-4 md:border-l-primary-light rounded-md md:rounded-md rounded p-4 md:p-8 my-12">
+<div class="obj_issue_toc bg-white border border-gray-200 md:border-l-4 md:border-l-primary-light rounded-md md:rounded-md rounded p-4 md:p-8 my-12">
     {foreach from=$userInstitutionalSubscriptions item=userInstitutionalSubscription}
     {$userInstitutionalSubscription->getInstitutionName()|escape}
     {/foreach}

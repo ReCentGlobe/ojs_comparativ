@@ -19,10 +19,7 @@
  *}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$publication->getLocalizedFullTitle(null, 'html')|strip_unsafe_html}
 
-<section class="bg-primary py-8">
-
-	<div class="container max-w-7xl mx-auto">
-			{capture assign="breadcrumbsHtml"}
+{capture assign="breadcrumbsHtml"}
 				{if $section}
 					{include file="frontend/components/breadcrumbs_article.tpl" currentTitle=$section->getLocalizedTitle()}
 				{else}
@@ -36,12 +33,9 @@
 			{/capture}
 				{assign var=authors value=$publication->getData('authors')}
 				{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$publication->getLocalizedFullTitle(null, 'html')|strip_unsafe_html subtitle=$subtitleHtml authors=$authors orcidIcon=$orcidIcon}
-	</div>
-
-</section>
 
 
-<section class="bg-white py-12">
+<section class="bg-white container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 	{* Show article overview *}
 	{include file="frontend/objects/article_details.tpl"}

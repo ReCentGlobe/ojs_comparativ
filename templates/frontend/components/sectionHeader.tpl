@@ -8,7 +8,7 @@
  * @param string $orcidIcon ORCID icon HTML (optional)
  *}
 <section class="bg-primary py-10 md:py-14">
-  <div class="container max-w-7xl mx-auto px-4 md:px-0">
+  <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     {if $breadcrumbs}
       <div class="mb-2">
         {$breadcrumbs}
