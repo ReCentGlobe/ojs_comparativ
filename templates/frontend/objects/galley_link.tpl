@@ -52,10 +52,10 @@
 
 
 {* Don't be frightened. This is just a link *}
-<a class="uk-button uk-button-small uk-button-default {if $isSupplementary}obj_galley_link_supplementary{else}com-galley_link{/if} {$type}{if $restricted} uk-button-danger restricted{/if}" href="{url page=$page op="view" path=$parentId|to_array:$galley->getBestGalleyId()}">
+<a class="inline-block px-3 py-1 rounded border border-primary text-primary bg-white hover:bg-primary hover:text-white text-xs font-medium transition-colors {if $isSupplementary}bg-gray-100 border-gray-300 text-gray-700{else}com-galley_link{/if} {$type}{if $restricted} bg-red-100 border-red-400 text-red-700 restricted{/if}" href="{url page=$page op="view" path=$parentId|to_array:$galley->getBestGalleyId()}">
     {* Add some screen reader text to indicate if a galley is restricted *}
     {if $restricted}
-		<span class="pkp_screen_reader">
+		<span class="sr-only">
 			{if $purchaseArticleEnabled}
                 {translate key="reader.subscriptionOrFeeAccess"}
             {else}
@@ -67,7 +67,7 @@
     {$galley->getGalleyLabel()|escape}
 
     {if $restricted && $purchaseFee && $purchaseCurrency}
-		<span class="purchase_cost">
+		<span class="purchase_cost ml-2 text-xs text-gray-500">
 			{translate key="reader.purchasePrice" price=$purchaseFee currency=$purchaseCurrency}
 		</span>
     {/if}

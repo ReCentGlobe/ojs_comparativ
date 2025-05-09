@@ -15,54 +15,16 @@
 {assign var=issueSeries value=$issue->getIssueSeries()}
 {assign var=issueCover value=$issue->getLocalizedCoverImageUrl()}
 
-<div class="obj_issue_summary">
-
-	<div class="card">
-		<div class="card-image">
-			<figure class="image">
-				<a href="{url op="view" path=$issue->getBestIssueId()}">
-					<img src="{$issueCover|escape}" alt="Placeholder image">
-				</a>
-			</figure>
-		</div>
-		<div class="card-content">
-			<div class="media">
-				<div class="media-content">
-					<p class="title is-4">{$issueSeries|escape}</p>
-					<p class="subtitle is-6">{$issueTitle|escape}</p>
-				</div>
-			</div>
-
-		</div>
-	</div>
-
-
-{**
-	{if $issueCover}
-		<a class="cover" href="{url op="view" path=$issue->getBestIssueId()}">
-			<img src="{$issueCover|escape}"{if $issue->getLocalizedCoverImageAltText() != ''} alt="{$issue->getLocalizedCoverImageAltText()|escape}"{/if}>
+<div class="obj_issue_summary bg-white rounded shadow p-4 mb-6">
+	<div class="mb-2">
+		<a href="{url op="view" path=$issue->getBestIssueId()}">
+			<img src="{$issueCover|escape}" alt="Placeholder image" class="w-full h-48 object-cover rounded">
 		</a>
-
-
-	{/if}
-
-	<a class="title" href="{url op="view" path=$issue->getBestIssueId()}">
-		{if $issueTitle}
-			{$issueTitle|escape}
-		{else}
-			{$issueSeries|escape}
-		{/if}
-	</a>
-	{if $issueTitle && $issueSeries}
-		<div class="series">
-			{$issueSeries|escape}
-		</div>
-	{/if}
-
-	<div class="description">
-		{$issue->getLocalizedDescription()|strip_unsafe_html}
 	</div>
-
-*}
+	<div class="media-content">
+		<p class="text-lg font-bold text-primary">{$issueSeries|escape}</p>
+		<p class="text-sm text-gray-700">{$issueTitle|escape}</p>
+	</div>
+</div>
 
 </div><!-- .obj_issue_summary -->

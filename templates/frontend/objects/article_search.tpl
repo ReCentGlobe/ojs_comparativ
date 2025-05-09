@@ -14,7 +14,11 @@
  * @uses $hideGalleys bool Hide the article galleys for this article?
  * @uses $primaryGenreIds array List of file genre ids for primary file types
  *}
-{assign var=articlePath value=$article->getBestId()}
+
+
+{if ($article->getBestId())}
+	{assign var=articlePath value=$article->getBestId()}
+{/if}
 
 {if (!$section.hideAuthor && $article->getHideAuthor() == $smarty.const.AUTHOR_TOC_DEFAULT) || $article->getHideAuthor() == $smarty.const.AUTHOR_TOC_SHOW}
 	{assign var="showAuthor" value=true}
@@ -22,55 +26,71 @@
 
 
 
-{if $article->getLocalizedCoverImage()}
-	<figure class="media-left">
-		<a {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if} class="file image is-64x64">
-			<img src="{$article->getLocalizedCoverImageUrl()|escape}"{if $article->getLocalizedCoverImageAltText() != ''} alt="{$article->getLocalizedCoverImageAltText()|escape}"{else} alt="{translate key="article.coverPage.altText"}"{/if}>
+{assign var=publication value=$article->getCurrentPublication()}
+{if $publication->getLocalizedData('coverImage')}
+	{assign var="coverImage" value=$publication->getLocalizedData('coverImage')}
+	<figure class="media-left mb-2">
+		<a {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if} class="block w-16 h-16 overflow-hidden rounded shadow">
+			<img
+				src="{$publication->getLocalizedCoverImageUrl($article->getData('contextId'))|escape}"
+				alt="{$coverImage.altText|escape|default:''}"
+				class="object-cover w-full h-full"
+			>
 		</a>
 	</figure>
 {/if}
 
-<div uk-grid class="uk-grid-small">
-	<div class="uk-width-1-1">
-		<a class="uk-link-reset" {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if}>
+
+<div class="obj_article_summary bg-white rounded-md border border-gray-200 p-6 mb-8 transition hover:border-primary-light hover:bg-primary-lightest">
+	{if $publication->getLocalizedData('coverImage')}
+		<figure class="media-left mb-4">
+			<a {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if} class="block w-20 h-20 overflow-hidden rounded-lg border border-gray-100">
+				{assign var="coverImage" value=$publication->getLocalizedData('coverImage')}
+				<img
+					src="{$publication->getLocalizedCoverImageUrl($article->getData('contextId'))|escape}"
+					alt="{$coverImage.altText|escape|default:''}"
+					class="object-cover w-full h-full"
+				>
+			</a>
+		</figure>
+	{/if}
+
+	<h2 class="title text-2xl font-sans font-bold text-gray-900 mb-1 leading-tight">
+		<a id="article-{$article->getId()}" {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if} class="text-black hover:underline">
 			{if $section.title|escape ne "Book Review"}
-				{$article->getLocalizedTitle()|strip_unsafe_html}<br>
-				{$article->getLocalizedSubtitle()|strip_unsafe_html}
+				{$article->getLocalizedTitle()|strip_unsafe_html}
+				{if $article->getLocalizedSubtitle()}
+					<span class="subtitle block text-base text-gray-500 font-serif mt-1">{$article->getLocalizedSubtitle()|strip_unsafe_html}</span>
+				{/if}
 			{else}
 				{$article->getLocalizedTitle()|strip_unsafe_html} {$article->getLocalizedSubtitle()|strip_unsafe_html}
 			{/if}
 		</a>
-	</div>
-	<div class="uk-width-1-1 uk-margin-small">
-		<div uk-grid>
-			<div class="uk-flex-first">
-				{if $showAuthor || $article->getPages() || ($article->getDatePublished() && $showDatePublished)}
-					{if $showAuthor}
-						<div class="uk-text-small">
-							{$article->getAuthorString()}
-						</div>
-					{/if}
-				{/if}
-			</div>
-		</div>
-	</div>
+	</h2>
 
+	<hr class="my-3 border-gray-100">
 
-	<div class="uk-width-1-1">
-		<div uk-grid>
-			<div class="uk-flex-first uk-width-2-3">
-						<a class="uk-link-reset uk-text-small" href="{url page="issue" op="view" path=$issue->getBestIssueId()}">
-							{$issue->getIssueIdentification()}
-						</a>
-			</div>
-			<div class="uk-width-expand uk-flex-last uk-text-right">
-				{if $article->getPages()}
-					<div class="uk-text-small">
-						{$article->getPages()|escape}
-					</div>
-				{/if}
-			</div>
+	{assign var=submissionPages value=$article->getPages()}
+	{assign var=submissionDatePublished value=$article->getDatePublished()}
+	{if $showAuthor || $submissionPages || ($submissionDatePublished && $showDatePublished)}
+	<div class="meta flex flex-wrap gap-4 text-sm text-gray-500 font-serif mb-1">
+		{if $showAuthor}
+		<div class="authors">
+			{$publication->getAuthorString($authorUserGroups)|escape}
 		</div>
+		{/if}
+	</div>
+	{/if}
+
+	<div class="flex justify-between items-center mt-4 gap-2">
+			<a class="text-xs text-accent hover:underline" href="{url page="issue" op="view" path=$issue->getBestIssueId()}">
+				{$issue->getIssueIdentification()}
+			</a>
+			{if $article->getPages()}
+				<div class="text-xs text-primary font-serif bg-primary-lightest px-2 py-1 rounded whitespace-nowrap">
+					{$article->getPages()|escape}
+				</div>
+			{/if}
 	</div>
 </div>
 

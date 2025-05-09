@@ -9,28 +9,16 @@
  *}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$title}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
+{capture assign="breadcrumbsHtml"}
+  {include file="frontend/components/breadcrumbs.tpl" currentTitle=$title}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$title}
 
-    <div class="uk-container">
-        {* Display a message if no current issue exists *}
-        {include file="frontend/components/breadcrumbs.tpl" currentTitle=$title}
 
-        <h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
-            {$title|escape}
-        </h1>
-
+<section class="bg-white py-12">
+    <div class="container max-w-2xl mx-auto">
+        <div class="w-full prose prose-gray">{$content}</div>
     </div>
-
 </section>
-
-<section class="uk-section-default uk-section uk-section-medium">
-    <div class="uk-container">
-        <div uk-grid>
-            <div class="uk-width-1-1">
-                {$content}
-            </div>
-        </div>
-    </div>
-</section><!-- .page -->
 
 {include file="frontend/components/footer.tpl"}

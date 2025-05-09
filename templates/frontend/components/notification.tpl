@@ -12,7 +12,7 @@
  * @uses $message string The notification message
  * @uses $messageKey string Optional translation key to generate the message
  *}
-<div uk-alert class="uk-alert {$type|escape|replace:' ':'_'}">
+<div class="rounded px-4 py-3 mb-4 border-l-4 bg-blue-50 border-blue-400 text-blue-800 {$type|escape|replace:' ':'_'}">
 	{if $messageKey}
 		{translate key=$messageKey}
 	{else}

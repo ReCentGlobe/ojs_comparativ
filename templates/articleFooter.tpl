@@ -13,11 +13,11 @@
 		<h3>{translate key="plugins.generic.recommendByAuthor.heading"}</h3>
 		{translate key="plugins.generic.recommendByAuthor.noMetric"}
 	{else}
-		{if !$articlesBySameAuthor->wasEmpty()}
+		{if $articlesBySameAuthor|@count}
 			<h3>{translate key="plugins.generic.recommendByAuthor.heading"}</h3>
 
 			<ul>
-				{iterate from=articlesBySameAuthor item=articleBySameAuthor}
+				{foreach from=$articlesBySameAuthor item=articleBySameAuthor}
 					{assign var=publishedArticle value=$articleBySameAuthor.publishedArticle}
 					{assign var=article value=$articleBySameAuthor.article}
 					{assign var=issue value=$articleBySameAuthor.issue}
@@ -33,7 +33,7 @@
 							{$journal->getLocalizedName()|escape}: {$issue->getIssueIdentification()|escape}
 						</a>
 					</li>
-				{/iterate}
+				{/foreach}
 			</ul>
 			<div id="articlesBySameAuthorPages">
 				{page_links anchor="articlesBySameAuthor" iterator=$articlesBySameAuthor name="articlesBySameAuthor"}

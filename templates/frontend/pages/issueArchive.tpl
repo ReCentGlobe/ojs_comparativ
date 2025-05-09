@@ -18,25 +18,24 @@
 {/capture}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$pageTitle}
 
-<section class="uk-section-primary uk-section uk-section-small">
-	<div class="uk-container animated fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitle=$pageTitle}
-		<h1 class="uk-h2 uk-margin-remove-top">
-			Issue Archive
-		</h1>
-	</div>
-</section>
+		{capture assign="breadcrumbsHtml"}
+				{if $section}
+					{include file="frontend/components/breadcrumbs_issue.tpl" currentTitle=$section->getLocalizedTitle()}
+				{else}
+					{include file="frontend/components/breadcrumbs_issue.tpl" currentTitleKey="common.publication"}
+				{/if}
+			{/capture}
+		{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$pageTitle class="text-white"}
 
-
-<section class="uk-section-default uk-section uk-section-medium">
-	<div class="uk-container">
+<section class="bg-white py-12">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 		{if $isUserLoggedIn}
-			<div id="timeline-login-App" class="uk-width-1-1">
+			<div id="timeline-login-App" class="mb-8">
 				<timeline></timeline>
 			</div>
 		{else}
-			<div id="timeline-App" class="uk-width-1-1">
+			<div id="timeline-App" class="mb-8">
 				<timeline></timeline>
 			</div>
 		{/if}
@@ -45,22 +44,20 @@
 		{if $issues->wasEmpty()}
 			<p>{translate key="current.noCurrentIssueDesc"}</p>
 		{else}
-			<div class="columns is-multiline issues_archive">
-        {iterate from=issues item=issue}
-
-        {if $issue->getYear() != $lastYear}
-					<li><h3>{$issue->getYear()|escape}</h3></li>
-          {assign var=lastYear value=$issue->getYear()}
-        {/if}
-
-					<div class="column is-one-quarter">
-            {include file="frontend/objects/issue_summary.tpl"}
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-8 issues_archive">
+				{iterate from=issues item=issue}
+					{if $issue->getYear() != $lastYear}
+						<li><h3 class="text-lg font-bold mt-4 mb-2">{$issue->getYear()|escape}</h3></li>
+						{assign var=lastYear value=$issue->getYear()}
+					{/if}
+					<div>
+						{include file="frontend/objects/issue_summary.tpl"}
 					</div>
-        {/iterate}
+				{/iterate}
 			</div>
 
 			{if $issues->getPageCount() > 0}
-				<div class="cmp_pagination">
+				<div class="cmp_pagination mt-8">
 					{page_info iterator=$issues}
 					{page_links anchor="issues" name="issues" iterator=$issues}
 				</div>

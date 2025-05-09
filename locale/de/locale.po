@@ -1,0 +1,62 @@
+msgid "plugins.themes.comparativ.name"
+msgstr "Comparativ (Comparativ-Child-Theme)"
+
+msgid "plugins.themes.comparativ.description"
+msgstr "Comparativ Theme"
+
+msgid "plugins.themes.comparativ.option.typography.montserrat_notoSerif"
+msgstr "Montserrat/Noto Serif"
+
+msgid "plugins.themes.comparativ.option.accentColour.label"
+msgstr "Akzentfarbe"
+
+msgid "plugins.themes.comparativ.accessible_menu.label"
+msgstr "Schnell zum Seiteninhalt springen"
+
+msgid "plugins.themes.comparativ.accessible_menu.main_navigation"
+msgstr "Hauptnavigation"
+
+msgid "plugins.themes.comparativ.accessible_menu.main_content"
+msgstr "Hauptinhalt"
+
+msgid "plugins.themes.comparativ.accessible_menu.sidebar"
+msgstr "Seitenleiste"
+
+msgid "plugins.themes.comparativ.article.sidebar"
+msgstr "Artikel-Seitenleiste"
+
+msgid "plugins.themes.comparativ.article.main"
+msgstr "Hauptartikelinhalt"
+
+msgid "plugins.themes.comparativ.article.details"
+msgstr "Artikeldetails"
+
+msgid "plugins.themes.comparativ.more-info"
+msgstr "Weitere Informationen"
+
+msgid "plugins.themes.comparativ.issues.recent"
+msgstr "Aktuelle Ausgaben"
+
+msgid "plugins.themes.comparativ.contact"
+msgstr "Kontakt"
+
+msgid "plugins.themes.comparativ.faq"
+msgstr "Häufig gestellte Fragen"
+
+msgid "plugins.themes.comparativ.article.abstract"
+msgstr "Abstract"
+
+msgid "plugins.themes.comparativ.search.filter"
+msgstr "Suchfilter"
+
+msgid "plugins.themes.comparativ.issues.current"
+msgstr "Aktuelle Ausgabe"
+
+msgid "plugins.themes.comparativ.issues.viewCurrent"
+msgstr "Aktuelle Ausgabe anzeigen"
+
+msgid "plugins.themes.comparativ.issues.noDescription"
+msgstr "Für diese Ausgabe ist keine Beschreibung verfügbar."
+
+msgid "plugins.themes.comparativ.common.subscribe"
+msgstr "Abonnieren"

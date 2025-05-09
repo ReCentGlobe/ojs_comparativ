@@ -10,60 +10,33 @@
  *}
 {include file="frontend/components/header.tpl"}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
+{capture assign="breadcrumbsHtml"}
+	{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="plugins.generic.orcidProfile.about.title"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="plugins.generic.orcidProfile.verify.title"}}
 
-	<div class="uk-container">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="plugins.generic.orcidProfile.about.title"}
-		<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
-			{translate key="plugins.generic.orcidProfile.verify.title"}
-		</h1>
-
-	</div>
-
-</section>
-<section class="uk-section-default uk-section uk-section-medium">
-	<div class="uk-container">
-		<div uk-grid>
-			<div class="uk-width-1-1">
-				<div class="description">
-					{if $verifySuccess}
-						<p>
-							<span class="orcid"><a href="{$orcid|escape}" target="_blank">{$orcidIcon}{$orcid|escape}</a></span>
-						</p>
-						<div class="orcid-success">
-							{translate key="plugins.generic.orcidProfile.verify.success"}
-						</div>
-						{if $sendSubmission}
-							{if $sendSubmissionSuccess}
-								<div class="orcid-success">
-									{translate key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success"}
-								</div>
-							{else}
-								<div class="orcid-failure">
-									{translate key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure"}
-								</div>
-							{/if}
-						{elseif $submissionNotPublished}
-							{translate key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished"}
+<section class="bg-white py-12">
+	<div class="container max-w-xl mx-auto">
+		<div class="w-full">
+			<div class="mb-6">
+				{if $verifySuccess}
+					<p class="mb-2"><span class="orcid"><a href="{$orcid|escape}" target="_blank">{$orcidIcon}{$orcid|escape}</a></span></p>
+					<div class="bg-green-50 border-l-4 border-green-400 text-green-900 p-4 rounded mb-2">{translate key="plugins.generic.orcidProfile.verify.success"}</div>
+					{if $sendSubmission}
+						{if $sendSubmissionSuccess}
+							<div class="bg-green-50 border-l-4 border-green-400 text-green-900 p-4 rounded mb-2">{translate key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.success"}</div>
+						{else}
+							<div class="bg-red-50 border-l-4 border-red-400 text-red-900 p-4 rounded mb-2">{translate key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.failure"}</div>
 						{/if}
-					{else}
-						<div class="orcid-failure">
-							{if $denied}
-								{translate key="plugins.generic.orcidProfile.authDenied"}
-							{elseif $authFailure}
-								{translate key="plugins.generic.orcidProfile.authFailure"}
-							{elseif $duplicateOrcid}
-								{translate key="plugins.generic.orcidProfile.verify.duplicateOrcid"}
-							{else}
-								{translate key="plugins.generic.orcidProfile.verify.failure"}
-							{/if}
-						</div>
-						{translate key="plugins.generic.orcidProfile.failure.contact"}
+					{elseif $submissionNotPublished}
+						<div class="bg-yellow-50 border-l-4 border-yellow-400 text-yellow-900 p-4 rounded mb-2">{translate key="plugins.generic.orcidProfile.verify.sendSubmissionToOrcid.notpublished"}</div>
 					{/if}
-				</div>
+				{else}
+					<div class="bg-red-50 border-l-4 border-red-400 text-red-900 p-4 rounded mb-2">{translate key="plugins.generic.orcidProfile.verify.failure"}</div>
+				{/if}
 			</div>
 		</div>
 	</div>
-</section><!-- .page -->
+</section>
 
 {include file="frontend/components/footer.tpl"}

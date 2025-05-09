@@ -12,21 +12,15 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="about.aboutContext"}
 
+{capture assign="breadcrumbsHtml"}
+  {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.aboutContext"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="about.aboutContext"}}
 
-
-<section class="uk-section-primary uk-section uk-section-small">
-	<div class="uk-container animated fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.aboutContext"}
-		<h1 class="uk-h2 uk-margin-remove-top">
-			About
-		</h1>
-	</div>
-</section>
-
-<section class="uk-section-default uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-	<div class="uk-container">
-		<div uk-grid>
-			<div class="uk-width-1-1" uk-scrollspy-class>
+<section class="bg-white py-8">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="grid">
+			<div class="col-span-1 animate-fadeIn prose prose-xl font-serif max-w-full prose-h2:font-sans prose-h2:text-xl prose-a:text-accent prose-a:underline hover:prose-a:text-accent-dark">
 				{$currentContext->getLocalizedSetting('about')}
 				{include file="frontend/components/editLink.tpl" page="management" op="settings" path="context" anchor="masthead" sectionTitleKey="about.aboutContext"}
 			</div>

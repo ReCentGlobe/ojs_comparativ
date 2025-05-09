@@ -11,7 +11,7 @@
  *}
 
 
-<div uk-grid class="uk-grid-large uk-grid-margin-large uk-grid uk-grid-match">
+<div class="grid gap-8 mb-12 md:grid-cols-2 lg:grid-cols-3">
 	{foreach from=$announcements item=announcement}
 
 			{include file="frontend/objects/announcement_front.tpl" heading="h2 class='subtitle'"}

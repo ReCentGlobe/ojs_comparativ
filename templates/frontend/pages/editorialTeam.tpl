@@ -11,24 +11,20 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="about.editorialTeam"}
 
-<section class="uk-section-primary uk-section uk-section-small">
-	<div class="uk-container animated fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.editorialTeam"}
-		<h1 class="uk-h2 uk-margin-remove-top">
-			Editorial Team
-		</h1>
-	</div>
-</section>
+{capture assign="breadcrumbsHtml"}
+  {include file="frontend/components/breadcrumbs.tpl" currentTitleKey="about.editorialTeam"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title={translate key="about.editorialTeam"}}
 
-<section class="uk-section-default uk-section uk-section-medium">
-	<div class="uk-container">
-		<div uk-grid>
-			<div class="uk-width-1-1">
-				{$currentContext->getLocalizedSetting('editorialTeam')}
-				{include file="frontend/components/editLink.tpl" page="management" op="settings" path="context" anchor="masthead" sectionTitleKey="about.editorialTeam"}
-			</div>
-		</div>
-	</div>
-</section><!-- .page -->
+<section class="bg-white py-12">
+  <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid">
+      <div class="col-span-1  prose prose-xl font-serif max-w-full prose-h2:font-sans prose-h2:text-xl prose-a:text-accent prose-a:underline hover:prose-a:text-accent-dark">
+        {$currentContext->getLocalizedSetting('editorialTeam')}
+        {include file="frontend/components/editLink.tpl" page="management" op="settings" path="context" anchor="editorialTeam" sectionTitleKey="about.editorialTeam"}
+      </div>
+    </div>
+  </div>
+</section>
 
 {include file="frontend/components/footer.tpl"}

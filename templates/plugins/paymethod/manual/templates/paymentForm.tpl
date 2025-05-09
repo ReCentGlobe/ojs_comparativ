@@ -9,38 +9,32 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="plugins.paymethod.manual"}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-
-  <div class="uk-container">
+<section class="bg-primary py-8">
+  <div class="container mx-auto animate-fadeIn">
     {include file="frontend/components/breadcrumbs.tpl" currentTitle="Manual Fee Payment"}
-
-    <h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
+    <h1 class="text-2xl font-bold text-white mt-0" uk-scrollspy-class>
       {translate key="plugins.paymethod.manual"}
     </h1>
   </div>
-
 </section>
 
-<section class="uk-section-default uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-  <div class="uk-container">
-
-    <table class="uk-table uk-table-divider">
+<section class="bg-white py-12">
+  <div class="container mx-auto">
+    <table class="w-full mb-6">
       <tr>
-        <th>{translate key="plugins.paymethod.manual.purchase.title"}</th>
+        <th class="text-left font-semibold">{translate key="plugins.paymethod.manual.purchase.title"}</th>
         <td>{$itemName|escape}</td>
       </tr>
       {if $itemAmount}
         <tr>
-          <th>{translate key="plugins.paymethod.manual.purchase.fee"}</th>
+          <th class="text-left font-semibold">{translate key="plugins.paymethod.manual.purchase.fee"}</th>
           <td>{$itemAmount|string_format:"%.2f"}{if $itemCurrencyCode} ({$itemCurrencyCode|escape}){/if}</td>
         </tr>
       {/if}
     </table>
-
-    <p>{$manualInstructions|nl2br}</p>
-
+    <p class="mb-4">{$manualInstructions|nl2br}</p>
     <p>
-      <a class="uk-button uk-button-danger" href="{url page="payment" op="plugin" path="ManualPayment"|to_array:"notify":$queuedPaymentId|escape}" class="action">
+      <a class="inline-block px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition" href="{url page="payment" op="plugin" path="ManualPayment"|to_array:"notify":$queuedPaymentId|escape}">
         Complete purchase
       </a>
     </p>

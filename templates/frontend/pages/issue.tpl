@@ -16,32 +16,16 @@
  *}
 {include file="frontend/components/header.tpl" pageTitleTranslated=$issueIdentification}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
+{capture assign="breadcrumbsHtml"}
+  {if !$issue}
+    {include file="frontend/components/breadcrumbs_issue.tpl" currentTitleKey="current.noCurrentIssue"}
+  {else}
+    {include file="frontend/components/breadcrumbs_issue.tpl" currentTitle=$issueIdentification}
+  {/if}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl" breadcrumbs=$breadcrumbsHtml title=$issue->getLocalizedTitle()|escape subtitle=$issueSeries|escape}
 
-		<div class="uk-container">
-      {* Display a message if no current issue exists *}
-      {if !$issue}
-        {include file="frontend/components/breadcrumbs_issue.tpl" currentTitleKey="current.noCurrentIssue"}
-        {* Display an issue with the Table of Contents *}
-      {else}
-        {include file="frontend/components/breadcrumbs_issue.tpl" currentTitle=$issueIdentification}
-      {/if}
-
-			<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
-        {$issue->getLocalizedTitle()|escape}
-			</h1>
-
-
-				<h2 class="uk-h4 uk-margin" uk-scrollspy-class>
-          {$issueSeries|escape}
-				</h2>
-
-
-		</div>
-
-</section>
-
-<section class="uk-section-default uk-section uk-section-medium" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:200&#125">
+<section class="bg-white container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 	{* Display a message if no current issue exists *}
 	{if !$issue}

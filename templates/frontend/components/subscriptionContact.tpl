@@ -14,28 +14,28 @@
  * @uses $subscriptionPhone string Contact phone number for subscriptions
  * @uses $subscriptionEmail string Contact email address for subscriptions
  *}
- <div uk-grid class="cmp_subscription_contact">
+ <div class="cmp_subscription_contact grid grid-cols-1 md:grid-cols-3 gap-8">
 	 {if $subscriptionName || $subscriptionPhone || $subscriptionEmail}
-		 <div class="contact uk-width-1-3@s uk-width-1-1">
-			 <h4 class="uk-h4 uk-heading-bullet">
+		 <div class="contact col-span-1">
+			 <h4 class="text-lg font-bold border-l-4 border-primary pl-2 mb-4">
 				 {translate key="about.subscriptionsContact"}
 			 </h4>
 
 			 {if $subscriptionName}
-				 <div class="name">
+				 <div class="name font-semibold mb-1">
 					 {$subscriptionName|escape}
 				 </div>
 			 {/if}
 
 			 {if $subscriptionMailingAddress}
-				 <div class="address">
+				 <div class="address text-sm text-gray-700 mb-1">
 					 {$subscriptionMailingAddress|nl2br|strip_unsafe_html}
 				 </div>
 			 {/if}
 
 			 {if $subscriptionPhone}
-				 <div class="phone">
-					<span class="label">
+				 <div class="phone flex items-center gap-2 mb-1">
+					<span class="label font-medium">
 						{translate key="about.contact.phone"}
 					</span>
 					 <span class="value">
@@ -46,16 +46,16 @@
 
 			 {if $subscriptionEmail}
 				 <div class="email">
-					 <a href="mailto:{$subscriptionEmail|escape}">
+					 <a href="mailto:{$subscriptionEmail|escape}" class="text-primary hover:underline">
 						 {$subscriptionEmail|escape}
 					 </a>
 				 </div>
 			 {/if}
 		 </div>
 	 {/if}
-	 
+ 
 	 {if $subscriptionAdditionalInformation}
-		<div class="description uk-width-2-3@s uk-width-1-1">
+		<div class="description col-span-2 text-sm text-gray-700">
 			{$subscriptionAdditionalInformation|strip_unsafe_html}
 		</div>
 	{/if}

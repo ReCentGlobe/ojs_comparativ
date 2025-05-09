@@ -10,13 +10,13 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="user.subscriptions.purchaseInstitutionalSubscription"}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
+<section class="bg-primary py-8">
 
-	<div class="uk-container">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		{* Display a message if no current issue exists *}
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.subscriptions.purchaseInstitutionalSubscription"}
 
-		<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
+		<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
 			{translate key="user.subscriptions.purchaseInstitutionalSubscription"}
 		</h1>
 
@@ -25,96 +25,69 @@
 </section>
 
 
-<section class="uk-section-default uk-section uk-section-medium" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:200&#125">
-	<div class="uk-container">
-		<div uk-grid>
-			<div class="uk-width-1-1 uk-first-column uk-flex uk-flex-middle uk-flex-center">
-				{assign var="formPath" value="institutional"}
-				{if $subscriptionId}
-					{assign var="formPath" value="institutional"|to_array:$subscriptionId}
-				{/if}
-			</div>
-			<div class="uk-width-1-1 uk-first-column uk-flex uk-flex-middle uk-flex-center">
-				<form class="purchase_subscription uk-form-stacked" method="post" id="subscriptionForm" action="{url op="payPurchaseSubscription" path=$formPath}">
-					{csrf}
+<section class="bg-white py-12">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex justify-center items-center">
+			<form class="w-full max-w-lg bg-gray-50 rounded shadow p-8 purchase_subscription" method="post" id="subscriptionForm" action="{url op=\"payPurchaseSubscription\" path=$formPath}">
+				{csrf}
 
-					{if $isError}
-						<div class="uk-alert-warning" uk-alert>
-							{include file="common/formErrors.tpl"}
-						</div>
-					{/if}
-
-
-					<div class="fields">
-						<div class="subscription_type uk-margin">
-							<label class="uk-form-label">
-								{translate key="user.subscriptions.form.typeId"}
-								<span class="required">*</span>
-							</label>
-
-							<select name="typeId" id="typeId" class="uk-select" required>
-								{foreach name=types from=$subscriptionTypes item=subscriptionType}
-									<option value="{$subscriptionType->getId()}"{if $typeId == $subscriptionType->getId()} selected{/if}>{$subscriptionType->getLocalizedName()|escape}</option>
-								{/foreach}
-							</select>
-
-						</div>
-{*						<div class="subscription_membership uk-margin">
-							<label class="uk-form-label">
-								{translate key="user.subscriptions.form.membership"}
-							</label>
-							<input class="uk-input" type="text" name="membership" id="membership" value="{$membership|escape}" aria-describedby="subscriptionMembershipDescription">
-							<p class="help" id="subscriptionMembershipDescription">{translate key="user.subscriptions.form.membershipInstructions"}</p>
-						</div>*}
-						<div class="subscription_institution uk-margin">
-							<label class="uk-form-label">
-								{translate key="user.subscriptions.form.institutionName"}
-							</label>
-							<input class="uk-input" type="text" name="institutionName" id="institutionName" value="{$institutionName|escape}">
-						</div>
-						<div class="subscription_address uk-margin">
-							<label class="uk-form-label">
-								{translate key="user.subscriptions.form.institutionMailingAddress"}
-							</label>
-							<textarea class="uk-textarea" name="institutionMailingAddress" id="institutionMailingAddress">{$institutionMailingAddress|escape}</textarea>
-						</div>
-						<div class="subscription_domain uk-margin">
-							<label class="uk-form-label">
-								{translate key="user.subscriptions.form.domain"}
-							</label>
-							<input class="uk-input" type="text" name="domain" id="domain" value="{$domain|escape}" aria-describedby="subscriptionDomainDescription">
-							<p class="help" id="subscriptionDomainDescription">{translate key="user.subscriptions.form.domainInstructions"}</p>
-						</div>
-						<div class="subscription_ips uk-margin">
-							<label class="uk-formlabel">
-								{translate key="user.subscriptions.form.ipRange"}
-							</label>
-							<input class="uk-input" type="text" name="ipRanges" id="ipRanges" value="{$ipRanges|escape}" aria-describedby="subscriptionIPDescription">
-							<p class="help" id="subscriptionIPDescription">{translate key="user.subscriptions.form.ipRangeInstructions"}</p>
-						</div>
-						<div class="uk-margin uk-flex uk-flex-center uk-text-center" uk-grid>
-							<div class="uk-width-1-2">
-								<button class="uk-button uk-button-primary submit" type="submit">
-									{translate key="common.continue"}
-								</button>
-							</div>
-							<div class="uk-width-1-2">
-								<a class="uk-button uk-button-danger is-outlined" href="{url page="user" op="subscriptions"}">
-									{translate key="common.cancel"}
-								</a>
-							</div>
-						</div>
+				{if $isError}
+					<div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 rounded">
+						{include file="common/formErrors.tpl"}
 					</div>
+				{/if}
 
+				<div class="fields space-y-6">
+					<div class="subscription_type">
+						<label class="block font-semibold mb-1">
+							{translate key="user.subscriptions.form.typeId"}
+							<span class="text-red-600">*</span>
+						</label>
 
+						<select name="typeId" id="typeId" class="border rounded px-3 py-2 w-full" required>
+							{foreach name=types from=$subscriptionTypes item=subscriptionType}
+								<option value="{$subscriptionType->getId()}"{if $typeId == $subscriptionType->getId()} selected{/if}>{$subscriptionType->getLocalizedName()|escape}</option>
+							{/foreach}
+						</select>
 
-
-				</form>
-
-			</div>
+					</div>
+					<div class="subscription_institution">
+						<label class="block font-semibold mb-1">
+							{translate key="user.subscriptions.form.institutionName"}
+						</label>
+						<input class="border rounded px-3 py-2 w-full" type="text" name="institutionName" id="institutionName" value="{$institutionName|escape}">
+					</div>
+					<div class="subscription_address">
+						<label class="block font-semibold mb-1">
+							{translate key="user.subscriptions.form.institutionMailingAddress"}
+						</label>
+						<textarea class="border rounded px-3 py-2 w-full" name="institutionMailingAddress" id="institutionMailingAddress">{$institutionMailingAddress|escape}</textarea>
+					</div>
+					<div class="subscription_domain">
+						<label class="block font-semibold mb-1">
+							{translate key="user.subscriptions.form.domain"}
+						</label>
+						<input class="border rounded px-3 py-2 w-full" type="text" name="domain" id="domain" value="{$domain|escape}" aria-describedby="subscriptionDomainDescription">
+						<p class="text-xs text-gray-500 mt-1" id="subscriptionDomainDescription">{translate key="user.subscriptions.form.domainInstructions"}</p>
+					</div>
+					<div class="subscription_ips">
+						<label class="block font-semibold mb-1">
+							{translate key="user.subscriptions.form.ipRange"}
+						</label>
+						<input class="border rounded px-3 py-2 w-full" type="text" name="ipRanges" id="ipRanges" value="{$ipRanges|escape}" aria-describedby="subscriptionIPDescription">
+						<p class="text-xs text-gray-500 mt-1" id="subscriptionIPDescription">{translate key="user.subscriptions.form.ipRangeInstructions"}</p>
+					</div>
+					<div class="flex gap-4 mt-6">
+						<button class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition w-1/2" type="submit">
+							{translate key="common.continue"}
+						</button>
+						<a class="inline-block px-4 py-2 border border-red-500 text-red-600 rounded hover:bg-red-500 hover:text-white transition w-1/2 text-center" href="{url page=\"user\" op=\"subscriptions\"}">
+							{translate key="common.cancel"}
+						</a>
+					</div>
+				</div>
+			</form>
 		</div>
-
-
 	</div>
 </section>
 

@@ -14,21 +14,20 @@
  * @uses $currentTitleKey string Translation key for title of current page.
  *}
 
-<ul class="uk-breadcrumb uk-visible@s" role="navigation" aria-label="{translate key="navigation.breadcrumbLabel"}">
-
-		<li>
-			<a href="{url page="index" router=$smarty.const.ROUTE_PAGE}">
-				{translate key="common.homepageNavigationLabel"}
-			</a>
-		</li>
-		<li class="is-active">
-			<a aria-current="page" href="#">
-				{if $currentTitleKey}
-					{translate key=$currentTitleKey}
-				{else}
-					{$currentTitle|escape}
-				{/if}
-			</a>
-		</li>
-
+<ul class="flex flex-wrap items-center space-x-2 text-sm text-blue-100 mb-2 overflow-x-auto whitespace-nowrap" role="navigation" aria-label="{translate key="navigation.breadcrumbLabel"}">
+	<li>
+		<a href="{url page="index" router=$smarty.const.ROUTE_PAGE}" class="hover:underline">
+			{translate key="common.homepageNavigationLabel"}
+		</a>
+	</li>
+	<li aria-hidden="true" class="select-none">&#8250;</li>
+	<li class="font-semibold text-white">
+		<a aria-current="page" href="#">
+			{if $currentTitleKey}
+				{translate key=$currentTitleKey|truncate:40:"..."}
+			{else}
+				{$currentTitle|escape|truncate:40:"..."}
+			{/if}
+		</a>
+	</li>
 </ul>

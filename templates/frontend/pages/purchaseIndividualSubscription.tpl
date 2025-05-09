@@ -10,57 +10,52 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="user.subscriptions.purchaseIndividualSubscription"}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-
-	<div class="uk-container">
+<section class="bg-primary py-8">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		{* Display a message if no current issue exists *}
 		{include file="frontend/components/breadcrumbs.tpl" currentTitle="Purchase Individual Subscription"}
 
-		<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
+		<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
 			{translate key="user.subscriptions.purchaseIndividualSubscription"}
 		</h1>
 
 	</div>
-
 </section>
 
-<section class="uk-section-default uk-section uk-section-medium" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:200&#125">
-	<div class="uk-container">
-		<div uk-grid>
-			<div class="uk-width-1-1 uk-first-column uk-flex uk-flex-middle uk-flex-center">
-				<form class="uk-form-stacked purchase_subscription" method="post" id="subscriptionForm" action="{url op="payPurchaseSubscription" path="individual"|to_array:$subscriptionId}">
+<section class="bg-white py-12">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex justify-center items-center">
+			<form class="w-full max-w-lg bg-gray-50 rounded shadow p-8 purchase_subscription" method="post" id="subscriptionForm" action="{url op="payPurchaseSubscription" path="individual"|to_array:$subscriptionId}">
 		{csrf}
 
-			<div class="fields">
-				<div class="subscription_type uk-margin">
-					<label class="uk-form-label">
-							{translate key="user.subscriptions.form.typeId"}
+			<div class="fields space-y-6">
+				<div class="subscription_type">
+					<label class="block font-semibold mb-1">
+						{translate key="user.subscriptions.form.typeId"}
 					</label>
 
-					<select class="uk-select" name="typeId" id="typeId" onchange="yesnoCheck(this);">
-													{foreach name=types from=$subscriptionTypes key=thisTypeId item=subscriptionType}
+					<select class="border rounded px-3 py-2 w-full" name="typeId" id="typeId" onchange="yesnoCheck(this);">
+										{foreach name=types from=$subscriptionTypes key=thisTypeId item=subscriptionType}
 							<option value="{$thisTypeId|escape}"{if $typeId == $thisTypeId} selected{/if}>{$subscriptionType|escape}</option>
-													{/foreach}
+										{/foreach}
 					</select>
 
 				</div>
-				<div class="subscription_membership uk-hidden" id="membership" uk-margin">
-					<label class="uk-form-label">
-							{translate key="user.subscriptions.form.membership"}
+				<div class="subscription_membership hidden" id="membership">
+					<label class="block font-semibold mb-1">
+						{translate key="user.subscriptions.form.membership"}
 					</label>
-
-					<input class="uk-input" type="text" name="membership"  value="{$membership|escape}">
+					<input class="border rounded px-3 py-2 w-full" type="text" name="membership"  value="{$membership|escape}">
 
 				</div>
-				<div class="buttons field uk-margin">
-					<button class="uk-button uk-button-default" type="submit">
+				<div class="buttons field">
+					<button class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" type="submit">
                         {translate key="common.save"}
 					</button>
 				</div>
 			</div>
 
 	</form>
-			</div>
 		</div>
 	</div>
 </section>

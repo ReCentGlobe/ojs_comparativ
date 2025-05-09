@@ -1,8 +1,8 @@
 {**
  * templates/frontend/pages/indexJournal.tpl
  *
- * Copyright (c) 2014-2017 Simon Fraser University
- * Copyright (c) 2003-2017 John Willinsky
+ * Copyright (c) 2014-2020 Simon Fraser University
+ * Copyright (c) 2003-2020 John Willinsky
  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
  *
  * @brief Display the index page for a journal
@@ -15,199 +15,110 @@
  * @uses $numAnnouncementsHomepage int Number of announcements to display on the
  *       homepage
  * @uses $issue Issue Current issue
+ * @uses $issueIdentificationString string issue identification that relies on user's settings
  *}
+
 {include file="frontend/components/header.tpl" pageTitleTranslated=$currentJournal->getLocalizedName()}
 
-<section class="uk-section-primary uk-position-relative uk-light">
-	<!-- Hero head: will stick at the top -->
+<section class="relative bg-primary py-12 md:py-20 overflow-clip w-full js-scrollcontainer inset-shadow-sm inset-shadow-white/50">
+<div className="absolute inset-0 w-full h-full bg-[radial-gradient(#ffffff33_1px,#13335c_1px)] bg-[size:25px_25px] "></div>
+<div id="ripple-container"></div>		
+<canvas
+		id="globe-container"
+		class="absolute -right-50 -top-10 z-1 touch-none js-cobe w-[1000px] h-[1000px]"
+		width="1000"
+		height="1000"
+	></canvas>
 
+  <div class="container max-w-7xl max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 px-4 sm:px-6 lg:px-8 relative z-10">
 
-	<!-- Hero content: will be in the middle -->
-	<div uk-height-viewport="offset-top: true; offset-bottom: true" class="uk-section uk-section-small uk-flex uk-flex-middle uk-text-center" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:300&#125">
-		<div class="uk-width-1-1">
-
-			<div class="uk-container">
-				<p uk-scrollspy-class>
-					<img width="500" uk-svg class="uk-preserve uk-preserve uk-responsive-width uk-responsive-height" src="{$baseUrl}/plugins/themes/comparativ/dist/images/Comparativ.svg">
-				</p>
-				<p class="uk-margin-medium uk-text-lead" uk-scrollspy-class>
-					{$additionalHomeContent|strip_tags}
-				</p>
-				<div uk-grid="" class="uk-child-width-auto uk-grid-medium uk-flex-inline uk-flex-center uk-grid" uk-scrollspy-class>
-					<div class="uk-first-column">
-						<a href="/v2/about/subscriptions" class="uk-button uk-button-primary tm-button-primary uk-button-large tm-button-large uk-visible@s" >Subscribe</a>
-						<a href="/v2/about/subscriptions" class="uk-button uk-button-primary tm-button-primary uk-hidden@s">Subscribe</a>
-					</div>
-					<div>
-						<a href="/v2/about/submissions" class="uk-button uk-button-default tm-button-default uk-button-large tm-button-large uk-visible@s">Submit</a>
-						<a href="/v2/about/submissions" class="uk-button uk-button-default tm-button-default uk-hidden@s">Submit</a>
-					</div>
-				</div>
-
-				<a href="#issue" class="uk-position-bottom-right uk-padding" uk-scroll uk-icon="icon:chevron-down; ratio: 2;"></a>
-			</div>
-
+	<div class="w-full md:w-1/2 flex flex-col items-start justify-center text-white animate-fadeIn">
+	  <h1 class="text-3xl md:text-6xl font-serif font-base mb-4 drop-shadow-lg">{$displayPageHeaderTitle|escape}</h1>
+	  {if $journalDescription}
+		<div class="text-lg md:text-xl font-sans mb-6 text-blue-100/90 max-w-xl">
+		  {$journalDescription|strip_unsafe_html|truncate:300}
 		</div>
+		<div class="flex flex-row gap-3 mt-2">
+				<a href="{url router=$smarty.const.ROUTE_PAGE page='about' op='subscriptions'}" class="inline-block px-6 py-3 bg-accent text-white font-semibold rounded shadow hover:bg-accent-dark transition-colors text-base order-first">
+			{translate key="plugins.themes.comparativ.common.subscribe"}
+		  </a>
+		  <a href="{url router=$smarty.const.ROUTE_PAGE page="about"}" class="inline-block px-6 py-3 bg-white/20 text-white font-semibold rounded shadow border border-white/20 hover:bg-white/40 transition-colors text-base">
+			{translate key="plugins.themes.comparativ.more-info"}
+		  </a>
+		</div>
+	  {/if}
 	</div>
-</section>
-<section id="issue" class="uk-background-secondary uk-section uk-section-large uk-dark" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:300&#125">
-	<div class="uk-container">
-		<div class="uk-flex-middle uk-grid-margin" uk-grid uk-scrollspy-class>
-			<div class="uk-width-2-3@s">
-				<h2 class="uk-h3 uk-heading-bullet uk-animation-fade" uk-scrollspy>
-					Recent Issue
-				</h2>
-			</div>
-			<div class="uk-width-expand@s">
-				<div class="uk-margin uk-text-right@s uk-animation-fade" uk-scrollspy>
-					<a class="el-content uk-button uk-button-text" href="/v2/issue/archive">
-						Show all issues
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="uk-grid-large uk-flex-middle uk-grid-margin-large uk-grid">
-			<div class="uk-width-1-3@m uk-grid-margin">
-				<div class="uk-margin">
-					{assign var=issueCover value=$issue->getLocalizedCoverImageUrl()}
-					{if $issueCover}
-						<a href="{url op="view" page="issue" path=$issue->getBestIssueId()}" uk-scrollspy-class>
-							<img class="uk-box-shadow-large uk-responsive-width uk-responsive-height" uk-img data-src="{$issueCover|escape}"{if $issue->getLocalizedCoverImageAltText() != ''} alt="{$issue->getLocalizedCoverImageAltText()|escape}"{/if}>
-						</a>
-					{/if}
-				</div>
-			</div>
-			<div class="uk-width-expand@m uk-grid-margin">
-				<h2 class="uk-margin-remove-top uk-h2" uk-scrollspy-class="uk-animation-slide-right-medium">
-					{$issue->getIssueIdentification()|strip_unsafe_html}
-				</h2>
-
-				<div class="uk-margin-medium uk-margin-remove-top" uk-scrollspy-class="uk-animation-slide-right-medium">
-					</div>
-
-				<ul class="uk-list" uk-scrollspy-class="uk-animation-slide-right-medium">
-					<li class="el-item">
-						<div uk-grid="" class="uk-child-width-expand uk-grid-small uk-grid">
-							<div class="uk-text-break uk-width-small uk-first-column">
-								<h3 class="el-title uk-h5 uk-margin-remove">Number</h3>
-							</div>
-							<div>
-								<div class="el-content">
-									{$issue->getNumber()|strip_unsafe_html}
-								</div>
-							</div>
-						</div>
-					</li>
-					<li class="el-item">
-						<div uk-grid="" class="uk-child-width-expand uk-grid-small uk-grid">
-							<div class="uk-text-break uk-width-small uk-first-column">
-								<h3 class="el-title uk-h5 uk-margin-remove">Volume</h3>
-							</div>
-							<div>
-								<div class="el-content">
-									{$issue->getVolume()|strip_unsafe_html}
-								</div>
-							</div>
-						</div>
-
-
-					</li>
-				</ul>
-				<div class="uk-margin-medium" uk-scrollspy-class="uk-animation-slide-right-medium">
-					<a class="el-content uk-button uk-button-text" href="{url op="view" page="issue" path=$issue->getBestIssueId()}">
-						Show Issue
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-{* Additional Homepage Content
-{if $additionalHomeContent}
-	<section class="hero is-light">
-		<div class="hero-body">
-			<div class="container">
-				<div class="additionalcontent">
-					<h2 class="title has-text-centered">{translate key="about.aboutContext"}</h2>
-                    {$additionalHomeContent}
-				</div>
-			</div>
-		</div>
-	</section>
-{/if}
-*}
-
-{* Announcements *}
-{if $numAnnouncementsHomepage && $announcements|@count}
-	<section class="uk-section-muted uk-section uk-section-large" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:300&#125">
-	<div class="uk-container">
-		<div class="uk-flex-middle uk-grid-margin" uk-grid>
-			<div class="uk-width-2-3@s">
-				<h2 class="uk-h3 uk-heading-bullet" uk-scrollspy-class>
-					Press
-				</h2>
-			</div>
-			<div class="uk-width-expand@s">
-				<div class="uk-margin uk-text-right@s" uk-scrollspy-class>
-					<a class="el-content uk-button uk-button-text" href="/allissues">
-						Show all press reviews
-					</a>
-				</div>
-			</div>
-		</div>
-		<div uk-grid class="uk-grid-large uk-grid-margin-large uk-grid uk-grid-match">
-
-
-				{foreach name=announcements from=$announcements item=announcement}
-				{if $smarty.foreach.announcements.iteration > $numAnnouncementsHomepage}
-					{break}
-				{/if}
-				{if $smarty.foreach.announcements.iteration <= 3}
-					{include file="frontend/objects/announcement_front.tpl" heading="h2 class='subtitle'"}
-				  {/if}
-				  {/foreach}
-
-		</div>
-	</div>
-</section>
-{/if}
-
-
-
-{call_hook name="Templates::Index::journal"}
-
-{**
-<section class="section page_index_journal">
-<div class="container">
-
-
-
-
-{if $homepageImage}
-  <div class="homepage_image">
-    <img src="{$publicFilesDir}/{$homepageImage.uploadName|escape:"url"}" alt="{$homepageImageAltText|escape}">
   </div>
-{/if}
+</section>
 
-{if $issue}
-  <div class="current_issue">
-    <h2>
-      {translate key="journal.currentIssue"}
-    </h2>
-    <div class="current_issue_title">
-      {$issue->getIssueIdentification()|strip_unsafe_html}
-    </div>
-    {include file="frontend/objects/issue_toc.tpl"}
-    <a href="{url router=$smarty.const.ROUTE_PAGE page="issue" op="archive"}" class="read_more">
-      {translate key="journal.viewAllIssues"}
-    </a>
-  </div>
-{/if}
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8" id="main">
+	{if $journalDescription or $announcements}
+	<header class="flex flex-col md:flex-row gap-8">
+		{if $journalDescription}
+			<div class="w-full md:w-1/2">
+			   <section class="journal-desc bg-white/80 border border-gray-200 rounded-lg shadow p-6 mb-6">
+				   <h2 class="text-xl font-bold mb-4 flex items-center gap-2">
+					   
+					   {translate key="plugins.themes.comparativ.issues.current"}
+				   </h2>
+				   {if $issue}
+					   <article class="flex flex-col gap-2">
+						   <div class="flex flex-col md:flex-row md:items-center md:gap-4">
+							   <h3 class="font-serif text-lg font-semibold text-gray-800 mb-1 md:mb-0">
+								   <a href="{url page='issue' op='view' path=$issue->getBestIssueId()}" class="hover:underline text-primary">
+									   {if $issueIdentificationString|strip_unsafe_html}{$issueIdentificationString|strip_unsafe_html}{else}{$issue->getLocalizedTitle()|escape}{/if}
+								   </a>
+							   </h3>
+						   </div>
+						   <div class="text-xs text-gray-400 mb-1">
+							   {if $issue->getIssueIdentification()}
+								   {$issue->getIssueIdentification()|strip_unsafe_html|regex_replace:'/\\)[^)]*$/':')'}
+							   {/if}
+						   </div>
+						   {if $issue->getLocalizedDescription()}
+							   <p class="text-gray-700 text-sm mb-2">{$issue->getLocalizedDescription()|strip_unsafe_html|truncate:300}</p>
+						   {else}
+							   <p class="text-gray-400 text-sm mb-2">{translate key="plugins.themes.comparativ.issues.noDescription"}</p>
+						   {/if}
+						   <div>
+							   <a href="{url page='issue' op='view' path=$issue->getBestIssueId()}" class="inline-block px-4 py-2 bg-primary text-white font-semibold rounded shadow hover:bg-accent-dark transition mt-2">
+								   {translate key="plugins.themes.comparativ.issues.viewCurrent"}
+							   </a>
+						   </div>
+					   </article>
+				   {else}
+					   <p class="text-gray-500 italic">{translate key="plugins.themes.comparativ.issues.noCurrent"}</p>
+				   {/if}
+			   </section>
+			</div>
+		{/if}
+
+		{if $numAnnouncementsHomepage && $announcements|@count}
+		<div class="w-full md:w-1/2">
+			<aside class="bg-gray-100 p-6 rounded shadow announcement__content_boxed">
+				<h2 class="text-xl font-semibold mb-4">{translate key="announcement.announcements"}</h2>
+				<div class="flex flex-col gap-6">
+					{foreach name=announcements from=$announcements item=announcement}
+						{if $smarty.foreach.announcements.iteration > $numAnnouncementsHomepage}
+							{break}
+						{/if}
+						<article class="announcement-item block">
+							<h3 class="font-bold text-base mb-1">{$announcement->getLocalizedData('title')|escape}</h3>
+							<p class="text-xs text-gray-500 mb-2">{$announcement->datePosted|date_format:$dateFormatLong}</p>
+							<p>{$announcement->getLocalizedData('descriptionShort')|strip_unsafe_html}</p>
+							<p class="mt-2">
+								{capture assign="announcementPageUrl"}{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->id}{/capture}
+							</p>
+						</article>
+					{/foreach}
+				</div>
+			</aside>
+		</div>
+		{/if}
+	</header>
+	{/if}
 
 
-	</div>
-</section><!-- .page -->
-*}
+</main>
 
 {include file="frontend/components/footer.tpl"}

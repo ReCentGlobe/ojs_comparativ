@@ -10,22 +10,19 @@
  *}
 {include file="frontend/components/header.tpl"}
 
-<section class="uk-section-primary uk-section uk-section-small" uk-scrollspy="&#123;&quot;target&quot;:&quot;[uk-scrollspy-class]&quot;,&quot;cls&quot;:&quot;uk-animation-fade&quot;,&quot;delay&quot;:100&#125">
-
-	<div class="uk-container">
+<section class="bg-primary py-8">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$pageTitle}
-
-		<h1 class="uk-h2 uk-margin-remove-top" uk-scrollspy-class>
+		<h1 class="text-2xl font-bold text-white mt-0 animate-fadeIn">
 			{translate key=$errorMsg params=$errorParams}
 		</h1>
 	</div>
-
 </section>
 
-<div class="page page_error">
+<div class="page page_error max-w-xl mx-auto my-8">
 	{if $backLink}
-		<div class="cmp_back_link">
-			<a href="{$backLink}">{translate key=$backLinkLabel}</a>
+		<div class="cmp_back_link mt-4">
+			<a href="{$backLink}" class="text-primary hover:underline">{translate key=$backLinkLabel}</a>
 		</div>
 	{/if}
 </div>

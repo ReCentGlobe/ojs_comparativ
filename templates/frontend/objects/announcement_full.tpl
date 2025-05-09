@@ -11,14 +11,14 @@
  * @uses $announcement Announcement The announcement to display
  *}
 
-<article class="obj_announcement_full">
-	<h1>
+<article class="obj_announcement_full max-w-2xl mx-auto bg-white rounded shadow p-8 my-8">
+	<h1 class="text-2xl font-bold mb-2">
 		{$announcement->getLocalizedTitle()}
 	</h1>
-	<div class="date">
+	<div class="date text-sm text-gray-500 mb-4">
 		{$announcement->getDatePosted()|date_format:$dateFormatShort}
 	</div>
-	<div class="description">
+	<div class="description text-gray-700">
 		{if $announcement->getLocalizedDescription()}
 			{$announcement->getLocalizedDescription()|strip_unsafe_html}
 		{else}

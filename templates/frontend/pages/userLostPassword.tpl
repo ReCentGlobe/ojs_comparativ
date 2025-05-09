@@ -10,70 +10,54 @@
  *}
 {include file="frontend/components/header.tpl" pageTitle="user.login.resetPassword"}
 
-<section class="uk-section-primary uk-section uk-section-small">
-	<div class="uk-container animated fadeIn">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.login.resetPassword"}
-		<h1 class="uk-h2 uk-margin-remove-top">
-			Reset Password
-		</h1>
-	</div>
-</section>
 
-<section class="uk-section-default uk-section uk-section-medium">
-	<div class="uk-container">
+{capture name="breadcrumbs"}
+	{include file="frontend/components/breadcrumbs.tpl" currentTitleKey="user.login.resetPassword"}
+{/capture}
+{include file="frontend/components/sectionHeader.tpl"
+	breadcrumbs=$smarty.capture.breadcrumbs
+	title={translate key="user.login.resetPassword"}
+}
 
-		<div uk-grid>
-			<div class="uk-width-1-1">
-				<div class="uk-alert-default" uk-alert>{translate key="user.login.resetPasswordInstructions"}</div>
+<section class="bg-white py-12">
+	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-col items-center">
+			<div class="bg-gray-100 border-l-4 border-gray-400 text-gray-700 p-4 mb-4 rounded w-full max-w-md">
+				{translate key="user.login.resetPasswordInstructions"}
 			</div>
-			<div class="uk-width-1-1 uk-flex uk-flex-middle uk-flex-center">
-				<form class="uk-form-stacked" id="lostPasswordForm" action="{url page="login" op="requestResetPassword"}" method="post">
+			<form class="w-full max-w-md bg-gray-50 rounded shadow p-8" id="lostPasswordForm" action="{url page="login" op="requestResetPassword"}" method="post">
 
 				{csrf}
 
 				{if $error}
-					<div class="uk-alert-warning" uk-alert>
+					<div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4 rounded">
 						{translate key=$error}
 					</div>
 				{/if}
 
-
-				<div class="email uk-margin">
-					<label class="uk-form-label">
-							{translate key="user.login.registeredEmail"}
+				<div class="mb-4">
+					<label class="block font-semibold mb-1" for="email">
+						{translate key="user.login.registeredEmail"}
 					</label>
-					<div class="uk-inline uk-width-1-1">
-						<span class="uk-form-icon" uk-icon="icon: mail"></span>
-						<input class="uk-input" type="text" name="email" id="email" value="{$email|escape}" required>
+					<div class="relative">
+						<span class="absolute left-3 top-2 text-gray-400"><i class="fa fa-envelope"></i></span>
+						<input class="border rounded px-10 py-2 w-full" type="text" name="email" id="email" value="{$email|escape}" required>
 					</div>
 				</div>
-				<div class="uk-margin uk-flex uk-flex-center" uk-grid>
-
-
-						<div class="uk-width-auto">
-							<button class="uk-button uk-button-danger" type="submit">
-								{translate key="user.login.resetPassword"}
-							</button>
-						</div>
-						<div class="uk-width-auto">
-							{if !$disableUserReg}
-								{capture assign=registerUrl}{url page="user" op="register" source=$source}{/capture}
-								<a href="{$registerUrl}" class="uk-button uk-button-default">
-									{translate key="user.login.registerNewAccount"}
-								</a>
-							{/if}
-						</div>
-
-
+				<div class="flex gap-4 mt-6">
+					<button class="inline-block px-4 py-2 border border-red-500 text-red-600 rounded hover:bg-red-500 hover:text-white transition w-1/2" type="submit">
+						{translate key="user.login.resetPassword"}
+					</button>
+					{if !$disableUserReg}
+						{capture assign=registerUrl}{url page="user" op="register" source=$source}{/capture}
+						<a href="{$registerUrl}" class="inline-block px-4 py-2 border border-gray-400 text-gray-700 rounded hover:bg-gray-200 transition w-1/2 text-center">
+							{translate key="user.login.registerNewAccount"}
+						</a>
+					{/if}
 				</div>
-
-
 			</form>
-			</div>
 		</div>
-
-</div>
-
+	</div>
 </section><!-- .page -->
 
 {include file="frontend/components/footer.tpl"}
