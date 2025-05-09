@@ -87,7 +87,6 @@ importers:
       vite-plugin-live-reload:
         specifier: ^3.0.4
         version: 3.0.4(vite@6.3.0(jiti@2.4.2)(lightningcss@1.29.2))
-
 packages:
 
   '@babel/helper-string-parser@7.25.9':
@@ -454,7 +453,7 @@ packages:
     resolution: {integrity: sha512-4UQeMrONbvrsXKXXp/uxmdEN5JIJ9RkH7YVzs6AMxC/KC1+Np7WZBaNIco7TEjlkthqxZbt8pU/ipD+hKjm80A==}
     peerDependencies:
       vite: ^5.2.0 || ^6
-
+      
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
 
