@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/ReCentGlobe/ojs_comparativ/compare/v1.2.0...v1.2.1) (2025-05-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency uikit to v3.23.7 ([#117](https://github.com/ReCentGlobe/ojs_comparativ/issues/117)) ([980ddd3](https://github.com/ReCentGlobe/ojs_comparativ/commit/980ddd31155ebd9c3cbf4c1af7c425264599184f))
+
 ## [1.2.0](https://github.com/ReCentGlobe/ojs_comparativ/compare/v1.1.0...v1.2.0) (2025-05-09)
 
 
