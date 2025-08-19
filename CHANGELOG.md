@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/ReCentGlobe/ojs_comparativ/compare/v1.2.0...v1.3.0) (2025-08-19)
+
+
+### Features
+
+* Add OJS Comparativ Theme Development Guide ([ff0abdb](https://github.com/ReCentGlobe/ojs_comparativ/commit/ff0abdb6f54e1462a4c310e98812da80ce062edc))
+
+
+### Bug Fixes
+
+* **deps:** update dependency uikit to v3.23.7 ([#117](https://github.com/ReCentGlobe/ojs_comparativ/issues/117)) ([980ddd3](https://github.com/ReCentGlobe/ojs_comparativ/commit/980ddd31155ebd9c3cbf4c1af7c425264599184f))
+
 ## [1.2.1](https://github.com/ReCentGlobe/ojs_comparativ/compare/v1.2.0...v1.2.1) (2025-05-10)
 
 
