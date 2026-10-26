@@ -30,15 +30,7 @@
 <section class="bg-white py-12">
 	<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-		{if $isUserLoggedIn}
-			<div id="timeline-login-App" class="mb-8">
-				<timeline></timeline>
-			</div>
-		{else}
-			<div id="timeline-App" class="mb-8">
-				<timeline></timeline>
-			</div>
-		{/if}
+		<div id="timeline-App" class="mb-8" data-issues="{$comparativIssues|escape}"></div>
 
 		{* No issues have been published
 		{if $issues->wasEmpty()}

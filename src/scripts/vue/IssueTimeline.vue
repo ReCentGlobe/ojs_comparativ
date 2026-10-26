@@ -18,6 +18,7 @@
         v-for="year in filteredYears"
         :key="year"
         :year-item="year"
+        :issues="issuesByYear[year]"
         :id="'volume-' + year"
       />
     </ul>
@@ -25,47 +26,34 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
-import axios from "axios";
+import { ref, computed } from "vue";
 import PostByYear from "./GetPostsByYear.vue";
 import ListYears from "./ListYears.vue";
-import { API_CONFIG } from "./config.js";
 
-const posts = ref([]);
-const loading = ref(false);
-const years = ref([]);
+const props = defineProps({
+  issues: {
+    type: Array,
+    default: () => [],
+  },
+});
+
 const activeYear = ref("");
 
 const resetYear = () => {
   activeYear.value = "";
 };
 
-const getYears = () => {
-  loading.value = true;
-  const currentYear = new Date().getFullYear();
-  for (let year = currentYear; year >= 1991; year--) {
-    years.value.push(year);
+const issuesByYear = computed(() => {
+  const byYear = {};
+  for (const issue of props.issues) {
+    (byYear[String(issue.year)] ??= []).push(issue);
   }
-  loading.value = false;
-};
+  return byYear;
+});
 
-const loadIssueYear = () => {
-  loading.value = true;
-  let postsUrl = `${API_CONFIG.apiBaseUrl}`;
-  axios
-    .get(postsUrl, {
-      headers: {
-        Authorization: `Bearer ${API_CONFIG.apiToken}`
-      }
-    })
-    .then((response) => {
-      posts.value = response.data;
-      loading.value = false;
-    })
-    .catch((e) => {
-      loading.value = false;
-    });
-};
+const years = computed(() =>
+  Object.keys(issuesByYear.value).sort((a, b) => b - a)
+);
 
 const handleClickYear = (year) => {
   activeYear.value = year;
@@ -77,12 +65,6 @@ const filteredYears = computed(() => {
   } else {
     return years.value;
   }
-});
-
-onMounted(() => {
-  getYears();
-  document.title = API_CONFIG.siteTitle;
-  loadIssueYear();
 });
 </script>
 
