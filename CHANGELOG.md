@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.3.0](https://github.com/ReCentGlobe/ojs_comparativ/compare/v1.2.0...v1.3.0) (2026-10-27)
+
+
+### Features
+
+* Add OJS Comparativ Theme Development Guide ([ff0abdb](https://github.com/ReCentGlobe/ojs_comparativ/commit/ff0abdb6f54e1462a4c310e98812da80ce062edc))
+* OJS 3.5 compatibility ([ca0e9c5](https://github.com/ReCentGlobe/ojs_comparativ/commit/ca0e9c508d41cd3ffbeba19647df229bd4c2d9b3))
+* style OpenID sign-in and account linking pages ([b0e7b06](https://github.com/ReCentGlobe/ojs_comparativ/commit/b0e7b06012f838f96dc1e48515981a05c0ccd679))
+
+
+### Bug Fixes
+
+* **deps:** update dependency uikit to v3.23.7 ([#117](https://github.com/ReCentGlobe/ojs_comparativ/issues/117)) ([980ddd3](https://github.com/ReCentGlobe/ojs_comparativ/commit/980ddd31155ebd9c3cbf4c1af7c425264599184f))
+* render archive issues server-side and drop hardcoded URLs ([e499a21](https://github.com/ReCentGlobe/ojs_comparativ/commit/e499a21a19bebdc8b4ba52d31de019bb267e2cfb))
+* render archive issues server-side and drop hardcoded URLs ([#147](https://github.com/ReCentGlobe/ojs_comparativ/issues/147)) ([5a519fd](https://github.com/ReCentGlobe/ojs_comparativ/commit/5a519fd59262f155f5890f9ae190bd24e6722181))
+
 ## [1.2.1](https://github.com/ReCentGlobe/ojs_comparativ/compare/v1.2.0...v1.2.1) (2025-05-10)
 
 
