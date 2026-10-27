@@ -37,7 +37,7 @@
 						All articles are published under the open access policy of the journal. All issues of Comparativ are fully available to its subscribers and after 36 months, issues and articles become open access to all readers. Authors are allowed to post the published version on their personal/departmental website as well as place it in their institution’s official repository by connecting to the journal’s website and indicating the original place of publication.
 					</p>
 					<p>
-						Before submitting an article, please have a look at the <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" target="_blank" href="https://www.comparativ.net/public/downloads/comparativ_english_styleguide.pdf">guidelines</a>
+						Before submitting an article, please have a look at the <a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" target="_blank" href="{$baseUrl}/public/downloads/comparativ_english_styleguide.pdf">guidelines</a>
 					</p>
 					<p>
 						Article Submissions are considered all time of the year, and the review process is organized accordingly.
@@ -96,7 +96,7 @@
 						Suggestions for reviews are considered throughout the year, please email us: comparativ@uni-leipzig.de
 					</p>
 					<p>
-						<a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" target="_blank" href="https://www.comparativ.net/public/downloads/comparativ_english_styleguide_reviews.pdf">Styleguide (PDF) (Style Guide for reviews)</a>
+						<a class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition" target="_blank" href="{$baseUrl}/public/downloads/comparativ_english_styleguide_reviews.pdf">Styleguide (PDF) (Style Guide for reviews)</a>
 					</p>
 
 				</div>

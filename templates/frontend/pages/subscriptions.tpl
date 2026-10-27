@@ -32,8 +32,8 @@
                     <h4 class="text-lg font-bold border-b border-gray-200 pb-2">{translate key="about.subscriptions.individual"}</h4>
                     <p class="text-red-600">{translate key="subscriptions.individualDescription"}
                         {if !$isUserLoggedIn}
-                            <a href="/v2/user/register" class="inline-block px-3 py-1 border border-primary text-primary rounded hover:bg-primary hover:text-white transition ml-2">Register</a>
-                            <a href="/v2/login" class="inline-block px-3 py-1 border border-primary text-primary rounded hover:bg-primary hover:text-white transition ml-2">Login</a>
+                            <a href="{url page="user" op="register"}" class="inline-block px-3 py-1 border border-primary text-primary rounded hover:bg-primary hover:text-white transition ml-2">Register</a>
+                            <a href="{url page="login"}" class="inline-block px-3 py-1 border border-primary text-primary rounded hover:bg-primary hover:text-white transition ml-2">Login</a>
                         {/if}
                     </p>
 
@@ -78,8 +78,8 @@
                     <h4 class="text-lg font-bold border-b border-gray-200 pb-2">{translate key="about.subscriptions.institutional"}</h4>
                     <p>{translate key="subscriptions.institutionalDescription"}
                         {if !$isUserLoggedIn}
-                            <a href="/v2/user/register" class="inline-block px-3 py-1 border border-primary text-primary rounded hover:bg-primary hover:text-white transition ml-2">Register</a>
-                            <a href="/v2/login" class="inline-block px-3 py-1 border border-primary text-primary rounded hover:bg-primary hover:text-white transition ml-2">Login</a>
+                            <a href="{url page="user" op="register"}" class="inline-block px-3 py-1 border border-primary text-primary rounded hover:bg-primary hover:text-white transition ml-2">Register</a>
+                            <a href="{url page="login"}" class="inline-block px-3 py-1 border border-primary text-primary rounded hover:bg-primary hover:text-white transition ml-2">Login</a>
                         {/if}
                     </p>
                     <div class="overflow-x-auto">

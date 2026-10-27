@@ -1,5 +1,6 @@
 <?php
 
+use APP\core\Application;
 use APP\facades\Repo;
 use APP\issue\Collector;
 use APP\services\NavigationMenuService;
@@ -150,7 +151,50 @@ class ComparativChildThemePlugin extends ThemePlugin
         $myCustomData = $this->jsPreloadImports('main.js');
         $templateMgr->assign('comparativImports', $myCustomData);
 
+        if ($args[1] === 'frontend/pages/issueArchive.tpl') {
+            $templateMgr->assign('comparativIssues', json_encode($this->getPublishedIssues()));
+        }
+
         return false;
+    }
+
+    /**
+     * Published issues of the current journal for the Vue issue timeline.
+     * Rendered into the page so the archive needs no API call or API token.
+     *
+     * @return array
+     */
+    public function getPublishedIssues()
+    {
+        $request = Application::get()->getRequest();
+        $context = $request->getContext();
+        if (!$context) {
+            return [];
+        }
+
+        $issues = Repo::issue()->getCollector()
+            ->filterByContextIds([$context->getId()])
+            ->filterByPublished(true)
+            ->orderBy(Collector::ORDERBY_PUBLISHED_ISSUES)
+            ->getMany();
+
+        $dispatcher = $request->getDispatcher();
+        $result = [];
+        foreach ($issues as $issue) {
+            $doi = $issue->getData('doiObject');
+            $result[] = [
+                'id' => $issue->getId(),
+                'volume' => $issue->getVolume(),
+                'number' => $issue->getNumber(),
+                'year' => $issue->getYear(),
+                'title' => $issue->getLocalizedTitle(),
+                'identification' => $issue->getIssueIdentification(),
+                'publishedUrl' => $dispatcher->url($request, Application::ROUTE_PAGE, $context->getPath(), 'issue', 'view', [$issue->getBestIssueId()]),
+                'doi' => $doi ? $doi->getData('doi') : null,
+                'doiUrl' => $doi ? $doi->getResolvingUrl() : null,
+            ];
+        }
+        return $result;
     }
 
 }
