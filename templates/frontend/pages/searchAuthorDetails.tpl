@@ -30,7 +30,7 @@
 		<span class="font-semibold">{$article->getLocalizedTitle()|strip_unsafe_html}</span><br/>
 		<a href="{url journal=$journal->getPath() page="article" op="view" path=$article->getBestId()}" class="file text-accent hover:underline">{if $article->getLocalizedAbstract()}{translate key="article.abstract"}{else}{translate key="article.details"}{/if}</a>
 
-		{if (!$issueUnavailable || $article->getAccessStatus() == $smarty.const.ARTICLE_ACCESS_OPEN)}
+		{if (!$issueUnavailable || $article->getAccessStatus() == APP\submission\Submission::ARTICLE_ACCESS_OPEN)}
 
 		{foreach from=$article->getGalleys() item=galley name=galleyList}
 			&nbsp;<a href="{url journal=$journal->getPath() page="article" op="view" path=$article->getBestId()|to_array:$galley->getBestGalleyId()}" class="file text-xs text-primary hover:underline">{$galley->getGalleyLabel()|escape}</a>

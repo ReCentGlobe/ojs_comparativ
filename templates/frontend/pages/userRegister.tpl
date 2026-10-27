@@ -26,6 +26,11 @@
 			{/if}
 
 			{include file="common/formErrors.tpl"}
+
+			{if $orcidEnabled}
+				{include file="form/orcidProfile.tpl"}
+			{/if}
+
 			{include file="frontend/components/registrationForm.tpl"}
 
 			{if $currentContext}
@@ -48,20 +53,20 @@
 				</div>
 				{assign var=contextId value=$currentContext->getId()}
 				{foreach from=$readerUserGroups[$contextId] item=userGroup}
-					{if in_array($userGroup->getId(), $userGroupIds)}
-						{assign var="userGroupId" value=$userGroup->getId()}
+					{if in_array($userGroup->id, $userGroupIds)}
+						{assign var="userGroupId" value=$userGroup->id}
 						<input type="hidden" name="readerGroup[{$userGroupId}]" value="1">
 					{/if}
 				{/foreach}
 				{foreach from=$authorUserGroups[$contextId] item=userGroup}
-					{if in_array($userGroup->getId(), $userGroupIds)}
-						{assign var="userGroupId" value=$userGroup->getId()}
+					{if in_array($userGroup->id, $userGroupIds)}
+						{assign var="userGroupId" value=$userGroup->id}
 						<input type="hidden" name="authorGroup[{$userGroupId}]" value="1">
 					{/if}
 				{/foreach}
 				{assign var=userCanRegisterReviewer value=0}
 				{foreach from=$reviewerUserGroups[$contextId] item=userGroup}
-					{if $userGroup->getPermitSelfRegistration()}
+					{if $userGroup->permitSelfRegistration}
 						{assign var=userCanRegisterReviewer value=$userCanRegisterReviewer+1}
 					{/if}
 				{/foreach}
@@ -71,11 +76,11 @@
 						<div>
 							<div id="reviewerOptinGroup" class="optin mb-2">
 								{foreach from=$reviewerUserGroups[$contextId] item=userGroup}
-									{if $userGroup->getPermitSelfRegistration()}
+									{if $userGroup->permitSelfRegistration}
 										<label class="inline-flex items-center mr-4">
-											{assign var="userGroupId" value=$userGroup->getId()}
+											{assign var="userGroupId" value=$userGroup->id}
 											<input class="mr-2" type="checkbox" name="reviewerGroup[{$userGroupId}]" value="1"{if in_array($userGroupId, $userGroupIds)} checked="checked"{/if}>
-											{translate key="user.reviewerPrompt.userGroup" userGroup=$userGroup->getLocalizedName()}
+											{translate key="user.reviewerPrompt.userGroup" userGroup=$userGroup->getLocalizedData('name')}
 										</label>
 									{/if}
 								{/foreach}
@@ -114,6 +119,15 @@
 				<fieldset class="recaptcha_wrapper mb-4">
 					<div class="fields">
 						<div class="recaptcha">{$reCaptchaHtml}</div>
+					</div>
+				</fieldset>
+			{/if}
+
+			{* altcha spam blocker *}
+			{if $altchaEnabled}
+				<fieldset class="altcha_wrapper mb-4">
+					<div class="fields">
+						<altcha-widget challengejson='{$altchaChallenge|@json_encode}' floating></altcha-widget>
 					</div>
 				</fieldset>
 			{/if}

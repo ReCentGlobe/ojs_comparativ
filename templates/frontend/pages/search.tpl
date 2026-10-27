@@ -35,7 +35,7 @@
             <div class="md:col-span-2">
                 {* Search results, finally! *}
                 <div class="search_results">
-                    {if !$results|@count}
+                    {if $results->wasEmpty()}
                         {* No results found *}
                         {if $error}
                             {include file="frontend/components/notification.tpl" type="error" message=$error|escape}
@@ -63,7 +63,7 @@
                     <h4 class="text-lg font-semibold mb-4 border-b border-gray-200 pb-2 text-primary">{translate key="plugins.themes.comparativ.search.filter"}</h4>
                     {capture name="searchFormUrl"}{url escape=false}{/capture}
                     {assign var=formUrlParameters value=[]}{* Prevent Smarty warning *}
-                    {$smarty.capture.searchFormUrl|parse_url:$smarty.const.PHP_URL_QUERY|parse_str:$formUrlParameters}
+                    {$smarty.capture.searchFormUrl|parse_url:$smarty.const.PHP_URL_QUERY|default:""|parse_str:$formUrlParameters}
                     <form class="space-y-6" method="get"
                         action="{$smarty.capture.searchFormUrl|strtok:"?"|escape}">
                         {foreach from=$formUrlParameters key=paramKey item=paramValue}
@@ -123,7 +123,7 @@
             {call_hook name="Templates::Search::SearchResults::PreResults"}
 
             <div class="md:col-span-3">
-                {if !$results|@count}
+                {if $results->wasEmpty()}
                     {* No results found *}
 
 

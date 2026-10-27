@@ -20,7 +20,7 @@
 	{assign var="heading" value="h2"}
 {/if}
 
-{if (!$section.hideAuthor && $publication->getData('hideAuthor') == \APP\submission\Submission::AUTHOR_TOC_DEFAULT) || $publication->getData('hideAuthor') == \APP\submission\Submission::AUTHOR_TOC_SHOW}
+{if (!$section.hideAuthor && $publication->getData('hideAuthor') == APP\submission\Submission::AUTHOR_TOC_DEFAULT) || $publication->getData('hideAuthor') == APP\submission\Submission::AUTHOR_TOC_SHOW}
 	{assign var="showAuthor" value=true}
 {/if}
 
@@ -92,16 +92,16 @@
 	{if !$hideGalleys}
 		<div class="flex justify-between items-center mt-4 gap-2">
 			<ul class="galleys_links flex flex-wrap gap-2">
-				{foreach from=$article->getGalleys() item=galley}
+				{foreach from=$publication->getData('galleys') item=galley}
 					{if $primaryGenreIds}
 						{assign var="file" value=$galley->getFile()}
-						{if !$galley->getRemoteUrl() && !($file && in_array($file->getGenreId(), $primaryGenreIds))}
+						{if !$galley->getData('urlRemote') && !($file && in_array($file->getGenreId(), $primaryGenreIds))}
 							{continue}
 						{/if}
 					{/if}
 					<li>
 						{assign var="hasArticleAccess" value=$hasAccess}
-						{if $currentContext->getSetting('publishingMode') == \APP\journal\Journal::PUBLISHING_MODE_OPEN || $publication->getData('accessStatus') == \APP\submission\Submission::ARTICLE_ACCESS_OPEN}
+						{if $currentContext->getSetting('publishingMode') == APP\journal\Journal::PUBLISHING_MODE_OPEN || $publication->getData('accessStatus') == APP\submission\Submission::ARTICLE_ACCESS_OPEN}
 							{assign var="hasArticleAccess" value=1}
 						{/if}
 						{assign var="id" value="article-{$article->getId()}-galley-{$galley->getId()}"}

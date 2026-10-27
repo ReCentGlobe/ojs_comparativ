@@ -20,7 +20,7 @@
 	{assign var=articlePath value=$article->getBestId()}
 {/if}
 
-{if (!$section.hideAuthor && $article->getHideAuthor() == $smarty.const.AUTHOR_TOC_DEFAULT) || $article->getHideAuthor() == $smarty.const.AUTHOR_TOC_SHOW}
+{if (!$section.hideAuthor && $article->getCurrentPublication()->getData('hideAuthor') == APP\submission\Submission::AUTHOR_TOC_DEFAULT) || $article->getCurrentPublication()->getData('hideAuthor') == APP\submission\Submission::AUTHOR_TOC_SHOW}
 	{assign var="showAuthor" value=true}
 {/if}
 
@@ -58,20 +58,20 @@
 	<h2 class="title text-2xl font-sans font-bold text-gray-900 mb-1 leading-tight">
 		<a id="article-{$article->getId()}" {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if} class="text-black hover:underline">
 			{if $section.title|escape ne "Book Review"}
-				{$article->getLocalizedTitle()|strip_unsafe_html}
-				{if $article->getLocalizedSubtitle()}
-					<span class="subtitle block text-base text-gray-500 font-serif mt-1">{$article->getLocalizedSubtitle()|strip_unsafe_html}</span>
+				{$publication->getLocalizedTitle(null, 'html')|strip_unsafe_html}
+				{if $publication->getLocalizedSubTitle(null, 'html')}
+					<span class="subtitle block text-base text-gray-500 font-serif mt-1">{$publication->getLocalizedSubTitle(null, 'html')|strip_unsafe_html}</span>
 				{/if}
 			{else}
-				{$article->getLocalizedTitle()|strip_unsafe_html} {$article->getLocalizedSubtitle()|strip_unsafe_html}
+				{$publication->getLocalizedTitle(null, 'html')|strip_unsafe_html} {$publication->getLocalizedSubTitle(null, 'html')|strip_unsafe_html}
 			{/if}
 		</a>
 	</h2>
 
 	<hr class="my-3 border-gray-100">
 
-	{assign var=submissionPages value=$article->getPages()}
-	{assign var=submissionDatePublished value=$article->getDatePublished()}
+	{assign var=submissionPages value=$publication->getData('pages')}
+	{assign var=submissionDatePublished value=$publication->getData('datePublished')}
 	{if $showAuthor || $submissionPages || ($submissionDatePublished && $showDatePublished)}
 	<div class="meta flex flex-wrap gap-4 text-sm text-gray-500 font-serif mb-1">
 		{if $showAuthor}
@@ -86,9 +86,9 @@
 			<a class="text-xs text-accent hover:underline" href="{url page="issue" op="view" path=$issue->getBestIssueId()}">
 				{$issue->getIssueIdentification()}
 			</a>
-			{if $article->getPages()}
+			{if $publication->getData('pages')}
 				<div class="text-xs text-primary font-serif bg-primary-lightest px-2 py-1 rounded whitespace-nowrap">
-					{$article->getPages()|escape}
+					{$publication->getData('pages')|escape}
 				</div>
 			{/if}
 	</div>

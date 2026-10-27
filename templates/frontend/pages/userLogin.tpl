@@ -60,6 +60,12 @@
 					<input class="mr-2" type="checkbox" name="remember" id="remember" value="1" checked="$remember">
 					<label for="remember" class="text-sm">{translate key="user.login.rememberUsernameAndPassword"}</label>
 				</div>
+				{* altcha spam blocker *}
+				{if $altchaEnabled}
+					<div class="altcha_wrapper mb-4">
+						<altcha-widget challengejson='{$altchaChallenge|@json_encode}' floating></altcha-widget>
+					</div>
+				{/if}
 				<div class="flex gap-4 mt-6">
 					<button class="inline-block px-4 py-2 border border-primary text-primary rounded hover:bg-primary hover:text-white transition w-1/2" type="submit">
 						{translate key="user.login"}

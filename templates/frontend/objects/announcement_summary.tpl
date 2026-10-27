@@ -16,22 +16,22 @@
 
 <div class="announcement w-full md:w-1/3 text-center p-4">
 	<{$heading} class="text-lg font-bold mb-2">
-		<a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}" class="text-primary hover:underline">
-			{$announcement->getLocalizedTitle()|escape}
+		<a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->id}" class="text-primary hover:underline">
+			{$announcement->getLocalizedData('title')|escape}
 		</a>
 	</{$heading}>
 	<div class="date text-xs text-gray-500 mb-2">
-		{$announcement->getDatePosted()|date_format:"%d. %B %Y"}
+		{$announcement->datePosted|date_format:"%d. %B %Y"}
 	</div>
 	<div class="summary text-gray-700">
-		{$announcement->getLocalizedDescriptionShort()|strip_unsafe_html}
+		{$announcement->getLocalizedData('descriptionShort')|strip_unsafe_html}
 		<div class="text-left mt-2">
-			<a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}" class="block w-full border border-primary text-primary rounded px-4 py-2 hover:bg-primary hover:text-white transition-colors">
+			<a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->id}" class="block w-full border border-primary text-primary rounded px-4 py-2 hover:bg-primary hover:text-white transition-colors">
 			<span aria-hidden="true" role="presentation">
 				{translate key="common.readMore"}
 			</span>
 				<span class="sr-only">
-				{translate key="common.readMoreWithTitle" title=$announcement->getLocalizedTitle()|escape}
+				{translate key="common.readMoreWithTitle" title=$announcement->getLocalizedData('title')|escape}
 			</span>
 			</a>
 		</div>

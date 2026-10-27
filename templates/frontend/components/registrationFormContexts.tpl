@@ -40,29 +40,29 @@
 									{translate key="user.register.otherContextRoles"}
 								</legend>
 								{foreach from=$readerUserGroups[$contextId] item=userGroup}
-									{if $userGroup->getPermitSelfRegistration()}
-										{assign var="userGroupId" value=$userGroup->getId()}
+									{if $userGroup->permitSelfRegistration}
+										{assign var="userGroupId" value=$userGroup->id}
 											<label class="flex items-center gap-2 mb-1">
 												<input type="checkbox" name="readerGroup[{$userGroupId}]"{if in_array($userGroupId, $userGroupIds)} checked="checked"{/if}>
-												{$userGroup->getLocalizedName()}
+												{$userGroup->getLocalizedData('name')}
 											</label>
 									{/if}
 								{/foreach}
 								{foreach from=$authorUserGroups[$contextId] item=userGroup}
-									{if $userGroup->getPermitSelfRegistration()}
-										{assign var="userGroupId" value=$userGroup->getId()}
+									{if $userGroup->permitSelfRegistration}
+										{assign var="userGroupId" value=$userGroup->id}
 											<label class="flex items-center gap-2 mb-1">
 												<input type="checkbox" name="authorGroup[{$userGroupId}]"{if in_array($userGroupId, $userGroupIds)} checked="checked"{/if}>
-												{$userGroup->getLocalizedName()}
+												{$userGroup->getLocalizedData('name')}
 											</label>
 									{/if}
 								{/foreach}
 								{foreach from=$reviewerUserGroups[$contextId] item=userGroup}
-									{if $userGroup->getPermitSelfRegistration()}
-										{assign var="userGroupId" value=$userGroup->getId()}
+									{if $userGroup->permitSelfRegistration}
+										{assign var="userGroupId" value=$userGroup->id}
 											<label class="flex items-center gap-2 mb-1">
 												<input type="checkbox" name="reviewerGroup[{$userGroupId}]"{if in_array($userGroupId, $userGroupIds)} checked="checked"{/if}>
-												{$userGroup->getLocalizedName()}
+												{$userGroup->getLocalizedData('name')}
 											</label>
 									{/if}
 								{/foreach}

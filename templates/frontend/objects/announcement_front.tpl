@@ -16,15 +16,15 @@
 
 <div class="w-full md:w-1/3 p-2">
   <div class="mb-4 bg-white rounded shadow p-6 flex flex-col h-full">
-      <div class="text-xs text-gray-500 mb-2">{$announcement->getDatePosted()|date_format:"%d. %B %Y"}</div>
+      <div class="text-xs text-gray-500 mb-2">{$announcement->datePosted|date_format:"%d. %B %Y"}</div>
       <h3 class="text-lg font-bold mb-2">
-            <a class="text-primary hover:underline" href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}">
-              {$announcement->getLocalizedTitle()|escape}
+            <a class="text-primary hover:underline" href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->id}">
+              {$announcement->getLocalizedData('title')|escape}
             </a>
           </h3>
       <div class="mb-4">
-        <p class="mb-4 text-gray-700">{$announcement->getLocalizedDescriptionShort()|strip_unsafe_html}</p>
+        <p class="mb-4 text-gray-700">{$announcement->getLocalizedData('descriptionShort')|strip_unsafe_html}</p>
       </div>
-      <a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}" class="text-accent hover:underline font-medium">Read More</a>
+      <a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->id}" class="text-accent hover:underline font-medium">Read More</a>
   </div>
 </div><!-- .obj_announcement_summary -->

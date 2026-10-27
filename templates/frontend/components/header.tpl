@@ -14,7 +14,7 @@
 {strip}
 	{* Determine whether a logo or title string is being displayed *}
 	{assign var="showingLogo" value=true}
-	{if $displayPageHeaderTitle && !$displayPageHeaderLogo && is_string($displayPageHeaderTitle)}
+	{if $displayPageHeaderTitle && !$displayPageHeaderLogo}
 		{assign var="showingLogo" value=false}
 	{/if}
 {/strip}
@@ -50,7 +50,7 @@
 							<a href="{$homeUrl}" class="block">
 								<img src="{$publicFilesDir}/{$displayPageHeaderLogo.uploadName|escape:'url'}" width="{$displayPageHeaderLogo.width|escape}" height="{$displayPageHeaderLogo.height|escape}" {if $displayPageHeaderLogo.altText != ''}alt="{$displayPageHeaderLogo.altText|escape}"{else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} class="h-12 w-auto"/>
 							</a>
-						{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo && is_string($displayPageHeaderTitle)}
+						{elseif $displayPageHeaderTitle && !$displayPageHeaderLogo}
 							<a href="{$homeUrl}" class="block">
 								<img src="{$publicFilesDir}/LogoCompInv.png" alt="Comparativ Logo" class="h-12 w-auto"/>
 							</a>

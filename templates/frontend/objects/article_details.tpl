@@ -71,9 +71,9 @@
 <article class="obj_article_details bg-white border border-gray-200 md:border-l-4 md:border-l-primary-light rounded-md md:rounded-md p-2 sm:p-4 md:p-8 my-8 md:my-12">
 
 	{* Indicate if this is only a preview *}
-	{if $publication->getData('status') !== \PKP\submission\PKPSubmission::STATUS_PUBLISHED}
+	{if $publication->getData('status') !== PKP\submission\PKPSubmission::STATUS_PUBLISHED}
 	<div class="cmp_notification notice">
-		{capture assign="submissionUrl"}{url page="workflow" op="access" path=$article->getId()}{/capture}
+		{capture assign="submissionUrl"}{url page="dashboard" op="editorial" workflowSubmissionId=$article->getId()}{/capture}
 		{translate key="submission.viewingPreview" url=$submissionUrl}
 	</div>
 	{elseif $currentPublication->getId() !== $publication->getId()}
@@ -120,7 +120,7 @@
 				</h2>
 				<span class="value">
 					{foreach name="keywords" from=$publication->getLocalizedData('keywords') item="keyword"}
-						{$keyword|escape}{if !$smarty.foreach.keywords.last}{translate key="common.commaListSeparator"}{/if}
+						{$keyword.name|escape}{if !$smarty.foreach.keywords.last}{translate key="common.commaListSeparator"}{/if}
 					{/foreach}
 				</span>
 			</section>
@@ -157,9 +157,9 @@
 						{if $author->getLocalizedBiography()}
 							<li class="sub_item mb-2">
 								<div class="label">
-									{if $author->getLocalizedAffiliation()}
+									{if $author->getLocalizedAffiliationNamesAsString()}
 										{capture assign="authorName"}{$author->getFullName()|escape}{/capture}
-										{capture assign="authorAffiliation"} {$author->getLocalizedAffiliation()|escape} {/capture}
+										{capture assign="authorAffiliation"} {$author->getLocalizedAffiliationNamesAsString(null, ', ')|escape} {/capture}
 										{translate key="submission.authorWithAffiliation" name=$authorName affiliation=$authorAffiliation}
 									{else}
 										{$author->getFullName()|escape}
@@ -176,13 +176,13 @@
 			{/if}
 
 			{* References *}
-			{if $parsedCitations || $publication->getData('citationsRaw')}
+			{if count($parsedCitations) || (string) $publication->getData('citationsRaw')}
 				<section class="item references mb-6">
 					<h2 class="label">
 						{translate key="submission.citations"}
 					</h2>
 					<div class="value">
-						{if $parsedCitations}
+						{if count($parsedCitations)}
 							{foreach from=$parsedCitations item="parsedCitation"}
 								<p>{$parsedCitation->getCitationWithLinks()|strip_unsafe_html} {call_hook name="Templates::Article::Details::Reference" citation=$parsedCitation}</p>
 							{/foreach}
@@ -335,7 +335,7 @@
 								<div class="value text-sm text-gray-700">
 									<ul class="categories flex flex-wrap gap-2 mt-1">
 										{foreach from=$categories item=category}
-											<li><a href="{url router=\PKP\core\PKPApplication::ROUTE_PAGE page="catalog" op="category" path=$category->getPath()|escape}">{$category->getLocalizedTitle()|escape}</a></li>
+											<li><a href="{url router=PKP\core\PKPApplication::ROUTE_PAGE page="catalog" op="category" path=$category->getPath()|escape}">{$category->getLocalizedTitle()|escape}</a></li>
 										{/foreach}
 									</ul>
 								</div>
@@ -349,7 +349,7 @@
 					  {if $pubIdPlugin->getPubIdType() == 'doi'}
 					    {continue}
 					  {/if}
-					  {assign var=pubId value=$article->getStoredPubId($pubIdPlugin->getPubIdType())}
+					  {assign var=pubId value=$publication->getStoredPubId($pubIdPlugin->getPubIdType())}
 					  {if $pubId}
 					    <section class="item pubid mb-4">
 					      <h2 class="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
