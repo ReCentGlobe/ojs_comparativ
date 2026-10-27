@@ -17,8 +17,9 @@
  *}
 
 {assign var=articlePath value=$article->getBestId()}
+{assign var=publication value=$article->getCurrentPublication()}
 
-{if (!$section.hideAuthor && $article->getHideAuthor() == $smarty.const.AUTHOR_TOC_DEFAULT) || $article->getHideAuthor() == $smarty.const.AUTHOR_TOC_SHOW}
+{if (!$section.hideAuthor && $publication->getData('hideAuthor') == APP\submission\Submission::AUTHOR_TOC_DEFAULT) || $publication->getData('hideAuthor') == APP\submission\Submission::AUTHOR_TOC_SHOW}
 	{assign var="showAuthor" value=true}
 {/if}
 
@@ -34,10 +35,10 @@
 	<div class="col-span-1">
 		<a class="text-primary hover:underline font-semibold" {if $journal}href="{url journal=$journal->getPath() page="article" op="view" path=$articlePath}"{else}href="{url page="article" op="view" path=$articlePath}"{/if}>
 			{if $section.title|escape ne "Book Review"}
-				{$article->getLocalizedTitle()|strip_unsafe_html}<br>
-				{$article->getLocalizedSubtitle()|strip_unsafe_html}
+				{$publication->getLocalizedTitle(null, 'html')|strip_unsafe_html}<br>
+				{$publication->getLocalizedSubTitle(null, 'html')|strip_unsafe_html}
 			{else}
-				{$article->getLocalizedTitle()|strip_unsafe_html} {$article->getLocalizedSubtitle()|strip_unsafe_html}
+				{$publication->getLocalizedTitle(null, 'html')|strip_unsafe_html} {$publication->getLocalizedSubTitle(null, 'html')|strip_unsafe_html}
 			{/if}
 		</a>
 	</div>

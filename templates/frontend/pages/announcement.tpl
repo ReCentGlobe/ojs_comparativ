@@ -9,11 +9,11 @@
  *
  * @uses $announcement Announcement The announcement to display
  *}
-{include file="frontend/components/header.tpl" pageTitleTranslated=$announcement->getLocalizedTitle()}
+{include file="frontend/components/header.tpl" pageTitleTranslated=$announcement->getLocalizedData('title')}
 
 <section class="bg-primary py-8">
 	<div class="container max-w-7xl mx-auto">
-		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$announcement->getLocalizedTitle()}
+		{include file="frontend/components/breadcrumbs.tpl" currentTitleKey=$announcement->getLocalizedData('title')}
 		<h1 class="text-2xl font-light text-white mt-0">Press</h1>
 	</div>
 </section>

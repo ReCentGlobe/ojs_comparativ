@@ -7,6 +7,7 @@ use APP\services\NavigationMenuService;
 use PKP\config\Config;
 use PKP\navigationMenu\NavigationMenuItem;
 use APP\template\TemplateManager;
+use PKP\plugins\Hook;
 use PKP\plugins\ThemePlugin;
 
 class ComparativChildThemePlugin extends ThemePlugin
@@ -115,7 +116,7 @@ class ComparativChildThemePlugin extends ThemePlugin
         $this->addMenuArea(array('primary', 'user', 'footer4'));
 
 
-        HookRegistry::register ('TemplateManager::display', array($this, 'loadTemplateData'));
+        Hook::add('TemplateManager::display', array($this, 'loadTemplateData'));
     }
 
     /**

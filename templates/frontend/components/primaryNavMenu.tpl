@@ -47,13 +47,11 @@
 							{translate key="about.aboutContext"}
 						</a>
 					</li>
-					{if $currentJournal->getLocalizedSetting('masthead')}
-						<li>
-							<a href="{url router=$smarty.const.ROUTE_PAGE page="about" op="editorialTeam"}" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-accent">
-								{translate key="about.editorialTeam"}
-							</a>
-						</li>
-					{/if}
+					<li>
+						<a href="{url router=$smarty.const.ROUTE_PAGE page="about" op="editorialMasthead"}" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-accent">
+							{translate key="common.editorialMasthead"}
+						</a>
+					</li>
 					<li>
 						<a href="{url router=$smarty.const.ROUTE_PAGE page="about" op="submissions"}" class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-accent">
 							{translate key="about.submissions"}

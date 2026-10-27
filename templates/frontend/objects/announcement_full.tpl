@@ -13,16 +13,16 @@
 
 <article class="obj_announcement_full max-w-2xl mx-auto bg-white rounded shadow p-8 my-8">
 	<h1 class="text-2xl font-bold mb-2">
-		{$announcement->getLocalizedTitle()}
+		{$announcement->getLocalizedData('title')}
 	</h1>
 	<div class="date text-sm text-gray-500 mb-4">
-		{$announcement->getDatePosted()|date_format:$dateFormatShort}
+		{$announcement->datePosted|date_format:$dateFormatShort}
 	</div>
 	<div class="description text-gray-700">
-		{if $announcement->getLocalizedDescription()}
-			{$announcement->getLocalizedDescription()|strip_unsafe_html}
+		{if $announcement->getLocalizedData('description')}
+			{$announcement->getLocalizedData('description')|strip_unsafe_html}
 		{else}
-			{$announcement->getLocalizedDescriptionShort()|strip_unsafe_html}
+			{$announcement->getLocalizedData('descriptionShort')|strip_unsafe_html}
 		{/if}
 	</div>
 </article><!-- .obj_announcement_full -->

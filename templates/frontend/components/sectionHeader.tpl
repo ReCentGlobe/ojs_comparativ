@@ -33,8 +33,8 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 1024 1024"><path fill="currentColor" d="M271.653 1023.192c-8.685 0-17.573-3.432-24.238-10.097c-13.33-13.33-13.33-35.144 0-48.474L703.67 508.163L254.08 58.573c-13.33-13.331-13.33-35.145 0-48.475s35.143-13.33 48.473 0L776.38 483.925c13.33 13.33 13.33 35.143 0 48.473l-480.492 480.694c-6.665 6.665-15.551 10.099-24.236 10.099z"/></svg>
             </span>
             <span class="name font-medium text-white">{$author->getFullName()|escape}</span>
-            {if $author->getLocalizedAffiliation()}
-              <span class="affiliation text-xs text-blue-100 ml-2">{$author->getLocalizedAffiliation()|escape}</span>
+            {if $author->getLocalizedAffiliationNamesAsString(null, ', ')}
+              <span class="affiliation text-xs text-blue-100 ml-2">{$author->getLocalizedAffiliationNamesAsString(null, ', ')|escape}</span>
             {/if}
             {if $author->getOrcid()}
               <span class="orcid text-xs ml-2">
